@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Такт — сценарий превращается в ролик за минуту</title>
+<meta name="description" content="Такт разбивает текст на сцены, подбирает кадры, движение камеры и титры, собирает вертикальный ролик для Reels, Shorts и VK Клипов. Раскадровка прямо в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23070708'/><rect x='6' y='9' width='20' height='14' rx='2' fill='none' stroke='%23f5b041' stroke-width='2.5'/><path d='M14 13v6l5-3z' fill='%23f5b041'/></svg>">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="logo" href="#">Такт<span>.</span></a>
+  <nav><a href="#studio">Студия</a><a href="#how">Процесс</a><a href="#examples">Примеры</a><a href="#pricing">Тарифы</a></nav>
+  <a class="btn btn-amber" href="#studio">Собрать ролик</a>
+</header>
+
+<main>
+<section class="hero">
+  <div class="screen reveal">
+    <canvas id="hero-reel" width="1280" height="720"></canvas>
+    <div class="screen-overlay">
+      <p class="eyebrow">Текст → сцены → ролик</p>
+      <h1>Сценарий становится <em>роликом</em> за минуту</h1>
+      <p class="lead">Напишите, что хотите показать. Такт разобьёт текст на сцены, подберёт кадры и движение камеры, добавит титры и соберёт вертикальное видео для Reels, Shorts и VK Клипов.</p>
+      <div class="actions"><a class="btn btn-amber btn-lg" href="#studio">Попробовать бесплатно</a><a class="btn btn-outline btn-lg" href="#how">Как это работает</a></div>
+    </div>
+    <div class="screen-caption"><span id="hero-caption">Сцена 1 · Общий план</span><span class="rec">● REC</span></div>
+  </div>
+</section>
+
+<div class="marquee reveal" aria-hidden="true"><div class="track"><span>Reels</span><span>Shorts</span><span>VK Клипы</span><span>TikTok</span><span>Telegram Ads</span><span>YouTube</span><span>Дзен</span><span>Reels</span><span>Shorts</span><span>VK Клипы</span><span>TikTok</span><span>Telegram Ads</span><span>YouTube</span><span>Дзен</span></div></div>
+
+<section id="how" class="how">
+  <div class="section-head reveal"><h2>Три шага от текста до публикации</h2></div>
+  <div class="frames">
+    <article class="frame reveal"><span class="frame-n">01</span><h3>Сценарий</h3><p>Пишете, как рассказали бы другу. Или вставляете описание товара. Такт сам поймёт, где сцена, где титр, где пауза.</p></article>
+    <article class="frame reveal"><span class="frame-n">02</span><h3>Раскадровка</h3><p>Каждой сцене подбирается тип кадра, движение камеры, длительность и настроение. Всё можно поменять одной кнопкой.</p></article>
+    <article class="frame reveal"><span class="frame-n">03</span><h3>Рендер</h3><p>Ролик в 1080p с титрами, озвучкой и музыкой, подогнанный под вертикальный формат. Экспорт в MP4 за секунды.</p></article>
+  </div>
+</section>
+
+<section id="studio" class="studio">
+  <div class="section-head reveal"><h2>Студия</h2><p>Работает прямо здесь: сцены рисуются процедурно, видео собирается в браузере и скачивается файлом.</p></div>
+  <div class="studio-grid">
+    <div class="script reveal">
+      <label class="label" for="script">Сценарий</label>
+      <textarea id="script" rows="9">Ночной город засыпает, а мы только начинаем.
+Кофе, который будит быстрее будильника.
+Зёрна с плантаций в горах Колумбии, обжарка в тот же день.
+Чашка в руках, первый глоток, и утро становится проще.
+Друзья собираются в кафе, разговоры тянутся до вечера.
+Кофе «Ранний». Попробуйте завтра утром.</textarea>
+      <div class="row">
+        <div><span class="label">Настроение</span><div class="chips" id="moods"></div></div>
+        <div><span class="label">Формат</span><div class="chips" id="aspects"></div></div>
+      </div>
+      <div class="row-actions">
+        <button class="btn btn-amber" id="build">Собрать раскадровку</button>
+        <button class="btn btn-outline" id="play" disabled>▶ Смотреть</button>
+        <button class="btn btn-outline" id="export" disabled>Скачать видео</button>
+      </div>
+      <p class="hint" id="status">Нажмите «Собрать раскадровку».</p>
+    </div>
+    <div class="player reveal">
+      <div class="player-frame" id="player-frame"><canvas id="player" width="1080" height="1920"></canvas><div class="player-badge" id="player-badge">0:00</div></div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+  <ol class="board" id="board"></ol>
+</section>
+
+<section id="examples" class="examples">
+  <div class="section-head reveal"><h2>Готовые сценарии</h2><p>Нажмите, чтобы загрузить в студию.</p></div>
+  <div class="example-grid" id="examples-grid"></div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="section-head reveal"><h2>Тарифы</h2><p>Платите за ролики, а не за минуты рендера.</p></div>
+  <div class="plans">
+    <article class="plan reveal"><h3>Проба</h3><p class="price">0 ₽</p><ul><li>3 ролика в месяц</li><li>720p, водяной знак</li><li>Базовые сцены и титры</li></ul><a class="btn btn-outline btn-wide" href="#studio">Начать</a></article>
+    <article class="plan plan-hot reveal"><span class="tag">Для креаторов</span><h3>Креатор</h3><p class="price">1 990 ₽<small>/мес</small></p><ul><li>60 роликов, 1080p</li><li>Озвучка 12 голосами</li><li>Музыка без авторских прав</li><li>Свои шрифты и цвета</li></ul><a class="btn btn-amber btn-wide" href="#studio">7 дней бесплатно</a></article>
+    <article class="plan reveal"><h3>Студия</h3><p class="price">7 900 ₽<small>/мес</small></p><ul><li>Безлимит, 4K</li><li>Бренд-кит и шаблоны</li><li>API и 5 рабочих мест</li><li>Генерация из каталога товаров</li></ul><a class="btn btn-outline btn-wide" href="#studio">Связаться</a></article>
+  </div>
+  <p class="hint center reveal">Себестоимость ролика с озвучкой ≈ 14 ₽. При полной выработке «Креатора» маржа выше 55%, в среднем выше 80%.</p>
+</section>
+
+<section class="faq">
+  <div class="section-head reveal"><h2>Вопросы</h2></div>
+  <details class="reveal"><summary>Это стоковые видео?</summary><p>Нет. Сцены генерируются под ваш текст: освещение, цвет, ракурс и движение камеры подбираются к каждому предложению. Два одинаковых ролика не получатся даже у двух пользователей с одним сценарием.</p></details>
+  <details class="reveal"><summary>Можно вставить свои фото и видео?</summary><p>Да. Загрузите материалы, и Такт встроит их в раскадровку: подберёт кадрирование и переходы, добавит титры в вашем стиле.</p></details>
+  <details class="reveal"><summary>Кому принадлежат права?</summary><p>Вам. Музыка и голоса лицензированы для коммерческого использования без ограничений по площадкам.</p></details>
+</section>
+
+<section class="cta reveal">
+  <h2>Первый ролик бесплатно, <em>прямо сейчас</em></h2>
+  <a class="btn btn-amber btn-lg" href="#studio">Открыть студию</a>
+</section>
+</main>
+<footer class="footer"><span>© 2026 Такт</span><nav><a href="#">Оферта</a><a href="#">Лицензии</a><a href="#">API</a></nav></footer>
+<script src="app.js"></script>
+</body>
+</html>
