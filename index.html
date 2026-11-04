@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шесть AI-продуктов — витрина</title>
+<meta name="description" content="Шесть сайтов-продуктов с рабочими демо в браузере: карточки товаров, калории по фото, ревью кода, видео из сценария, AI-портреты, логотипы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#101113;--panel:#17181b;--line:#26282d;--text:#f0efec;--muted:#8d8f96;--accent:#ff5a2d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Onest",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+header{padding:clamp(40px,8vw,96px) clamp(16px,5vw,72px) 24px;max-width:1320px;margin:auto}
+h1{font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin:0 0 .4em;max-width:16ch}
+.lead{color:var(--muted);font-size:1.15rem;max-width:60ch;margin:0}
+.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:.85rem;color:var(--muted)}.meta b{color:var(--text)}
+main{padding:0 clamp(16px,5vw,72px) 80px;max-width:1320px;margin:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:20px}
+@media(max-width:440px){main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s;text-decoration:none;color:inherit}
+.card:hover{transform:translateY(-6px);border-color:#3a3d45}
+.preview{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
+.preview iframe{position:absolute;left:0;top:0;width:1280px;height:800px;border:0;transform-origin:0 0;pointer-events:none}
+.preview .tag{position:absolute;top:12px;left:12px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+.body{padding:20px 22px 22px;display:grid;gap:8px}
+.body h2{margin:0;font-size:1.35rem;font-weight:800;letter-spacing:-.02em}.body h2 span{color:var(--muted);font-weight:500;font-size:.95rem;margin-left:8px}
+.body p{margin:0;color:var(--muted);font-size:.95rem}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.chips span{font-size:.75rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.chips span.money{color:#c8f04d;border-color:rgba(200,240,77,.3)}
+.open{margin-top:10px;font-weight:600;color:var(--accent)}
+footer{padding:24px clamp(16px,5vw,72px);color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Шесть AI-продуктов, которые работают прямо в браузере</h1>
+  <p class="lead">Каждый сайт — отдельный бизнес с лендингом, рабочим демо, тарифами и юнит-экономикой. Без бэкенда и сборки: откройте папку и всё запустится.</p>
+  <div class="meta"><span><b>6</b> продуктов</span><span><b>0</b> зависимостей</span><span><b>HTML · CSS · JS</b> и Canvas</span><span>Превью ниже живые, наведите и откройте</span></div>
+</header>
+<main id="cards"></main>
+<footer>Запуск: <code>python3 -m http.server 8080</code> в корне репозитория, затем откройте http://localhost:8080</footer>
+<script>
+const SITES = [
+  { dir: 'kadr', name: 'Kadr', tag: 'Генерация карточек', pitch: 'Один текст — продающие карточки для Wildberries и Ozon, посты и 6-секундные видео. Экспорт PNG и MP4/WebM.', chips: ['Canvas-движок', '5 композиций · 12 стилей', 'Видео через MediaRecorder'], money: '1 490 ₽/мес, маржа 70%+' },
+  { dir: 'tarelka', name: 'Тарелка', tag: 'Калории по фото', pitch: 'Сканер тарелки с разметкой блюд, калькулятор нормы по Миффлину и дневник с кольцом прогресса и БЖУ.', chips: ['Детекция на canvas', 'База 50 продуктов', 'localStorage-дневник'], money: '299 ₽/мес, маржа 85%+' },
+  { dir: 'patch', name: 'Patch', tag: 'AI-ревью кода', pitch: 'Анализатор JavaScript и Python в браузере: уязвимости, баги, стиль. Стриминг находок, счёт качества и автофикс одной кнопкой.', chips: ['30 правил JS/PY', 'Diff-подсказки', 'Терминал-анимация'], money: '1 490 ₽/разраб., маржа 90%+' },
+  { dir: 'takt', name: 'Такт', tag: 'Сценарий → видео', pitch: 'Текст разбивается на сцены, каждая рисуется процедурно: город, природа, продукт, кафе, техно. Движение камеры, титры, экспорт видео.', chips: ['6 художников сцен', 'Раскадровка и таймлайн', '9:16 · 1:1 · 16:9'], money: '1 990 ₽/мес, маржа 80%' },
+  { dir: 'portret', name: 'Портрет', tag: 'AI-фотосессия', pitch: 'Селфи превращается в студийные портреты: 8 стилей на пикселях, слайдер «до/после», свои фото обрабатываются локально.', chips: ['Пиксельные фильтры', 'Иллюстрированные демо', 'Before/After'], money: '1 990 ₽ разово, маржа 95%' },
+  { dir: 'znak', name: 'Знак', tag: 'Логотипы и айдентика', pitch: 'Название и сфера → 12 логотипов из правил: знак, шрифт, палитра. Мокапы визитки, вывески, иконки. Экспорт SVG.', chips: ['9 типов знаков', '8 сфер · 4 характера', 'SVG-экспорт'], money: '1 990 ₽ разово, маржа 97%' },
+];
+const cards = document.getElementById('cards');
+SITES.forEach(s => { const a = document.createElement('a'); a.className = 'card'; a.href = `sites/${s.dir}/`; a.innerHTML = `<div class="preview"><iframe loading="lazy" src="sites/${s.dir}/" title="${s.name}" tabindex="-1"></iframe><span class="tag">${s.tag}</span></div><div class="body"><h2>${s.name}</h2><p>${s.pitch}</p><div class="chips">${s.chips.map(c => `<span>${c}</span>`).join('')}<span class="money">${s.money}</span></div><span class="open">Открыть →</span></div>`; cards.appendChild(a); });
+function scale() { document.querySelectorAll('.preview').forEach(p => { p.querySelector('iframe').style.transform = `scale(${p.clientWidth / 1280})`; }); }
+addEventListener('resize', scale); scale(); setTimeout(scale, 300);
+</script>
+</body>
+</html>
