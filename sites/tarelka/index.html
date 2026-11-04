@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тарелка — калории по фото за секунду</title>
+<meta name="description" content="Тарелка распознаёт еду на фото и считает калории, белки, жиры и углеводы. Дневник, норма, рецепты. Попробуйте сканер прямо в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%2315402e'/><circle cx='16' cy='16' r='9' fill='none' stroke='%23c8f04d' stroke-width='3'/></svg>">
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div>
+
+<header class="nav">
+  <a class="logo" href="#"><span class="logo-ring"></span>Тарелка</a>
+  <nav><a href="#scan">Сканер</a><a href="#calc">Норма</a><a href="#diary">Дневник</a><a href="#pricing">Тарифы</a></nav>
+  <a class="btn btn-dark" href="#scan">Попробовать</a>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy reveal">
+    <p class="eyebrow">ИИ-дневник питания</p>
+    <h1>Сфоткал — <em>посчитал</em>.<br>Без весов и таблиц</h1>
+    <p class="lead">Тарелка узнаёт блюда на фото, оценивает порцию и записывает калории и БЖУ в дневник. Три секунды вместо трёх минут на каждый приём пищи.</p>
+    <div class="actions">
+      <a class="btn btn-lime" href="#scan">Сканировать тарелку</a>
+      <a class="btn btn-ghost" href="#calc">Узнать свою норму</a>
+    </div>
+    <div class="stats">
+      <div><strong data-count="1200">0</strong><span>блюд в базе</span></div>
+      <div><strong data-count="94">0</strong><span>% точность порции</span></div>
+      <div><strong data-count="3">0</strong><span>секунды на запись</span></div>
+    </div>
+  </div>
+  <div class="hero-phone reveal">
+    <div class="phone">
+      <div class="phone-top"><span>9:41</span><span>●●●</span></div>
+      <canvas id="hero-plate" width="600" height="600"></canvas>
+      <div class="phone-result">
+        <div class="pr-row"><span>Лосось на гриле</span><b>374</b></div>
+        <div class="pr-row"><span>Киноа</span><b>222</b></div>
+        <div class="pr-row"><span>Брокколи</span><b>51</b></div>
+        <div class="pr-total"><span>Итого</span><b>647 ккал</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="how-grid">
+    <article class="reveal"><span class="n">1</span><h3>Фото</h3><p>Снимите тарелку сверху или под углом. Подойдёт и фото из доставки.</p></article>
+    <article class="reveal"><span class="n">2</span><h3>Распознавание</h3><p>Модель находит каждое блюдо, оценивает объём по размеру тарелки и приборов.</p></article>
+    <article class="reveal"><span class="n">3</span><h3>Запись</h3><p>Калории и БЖУ сразу в дневнике. Поправьте граммы, если надо, одним движением.</p></article>
+  </div>
+</section>
+
+<section id="scan" class="scan">
+  <div class="section-head reveal">
+    <h2>Сканер работает прямо здесь</h2>
+    <p>Соберите тарелку из блюд и нажмите «Сканировать». Это тот же алгоритм разметки, что в приложении.</p>
+  </div>
+  <div class="scan-grid">
+    <div class="scan-stage reveal">
+      <canvas id="plate" width="720" height="720"></canvas>
+      <div class="scan-line" id="scan-line"></div>
+      <div class="boxes" id="boxes"></div>
+    </div>
+    <div class="scan-panel reveal">
+      <p class="label">Что на тарелке</p>
+      <div class="chips" id="food-chips"></div>
+      <button class="btn btn-dark btn-wide" id="scan-btn">Сканировать</button>
+      <div class="scan-result" id="scan-result" hidden>
+        <ul id="scan-list"></ul>
+        <div class="scan-total"><span>Итого</span><b><span id="scan-kcal">0</span> ккал</b></div>
+        <div class="macros" id="scan-macros"></div>
+        <button class="btn btn-lime btn-wide" id="scan-add">Добавить в дневник</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calc" class="calc">
+  <div class="calc-card reveal">
+    <div class="calc-form">
+      <h2>Ваша норма</h2>
+      <p class="muted">Формула Миффлина-Сан Жеора, коэффициент активности и цель.</p>
+      <div class="seg" id="sex"><button data-v="m" aria-pressed="true">Мужчина</button><button data-v="f" aria-pressed="false">Женщина</button></div>
+      <div class="ranges">
+        <label><span>Возраст <b id="age-v">29</b></span><input type="range" id="age" min="14" max="80" value="29"></label>
+        <label><span>Рост <b id="height-v">178</b> см</span><input type="range" id="height" min="140" max="210" value="178"></label>
+        <label><span>Вес <b id="weight-v">76</b> кг</span><input type="range" id="weight" min="40" max="160" value="76"></label>
+      </div>
+      <p class="label">Активность</p>
+      <div class="seg" id="activity">
+        <button data-v="1.2">Сидячая</button><button data-v="1.375" aria-pressed="true">Лёгкая</button><button data-v="1.55">Средняя</button><button data-v="1.725">Высокая</button>
+      </div>
+      <p class="label">Цель</p>
+      <div class="seg" id="goal">
+        <button data-v="-0.18">Похудеть</button><button data-v="0" aria-pressed="true">Держать</button><button data-v="0.12">Набрать</button>
+      </div>
+    </div>
+    <div class="calc-out">
+      <div class="big"><span id="kcal-out">0</span><small>ккал / день</small></div>
+      <div class="macro-rings">
+        <div class="ring" data-ring="p"><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="42"/><circle class="bar" cx="50" cy="50" r="42"/></svg><b id="p-out">0</b><span>белки, г</span></div>
+        <div class="ring" data-ring="f"><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="42"/><circle class="bar" cx="50" cy="50" r="42"/></svg><b id="f-out">0</b><span>жиры, г</span></div>
+        <div class="ring" data-ring="c"><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="42"/><circle class="bar" cx="50" cy="50" r="42"/></svg><b id="c-out">0</b><span>углеводы, г</span></div>
+      </div>
+      <p class="muted small">Базовый обмен: <b id="bmr-out">0</b> ккал. Норма сохраняется в дневник.</p>
+    </div>
+  </div>
+</section>
+
+<section id="diary" class="diary">
+  <div class="section-head reveal">
+    <h2>Дневник на сегодня</h2>
+    <p>Ищите продукт, укажите граммы. Кольцо заполняется по мере дня. Данные хранятся у вас в браузере.</p>
+  </div>
+  <div class="diary-grid">
+    <div class="diary-ring reveal">
+      <svg viewBox="0 0 200 200" class="day-ring">
+        <circle class="track" cx="100" cy="100" r="86"/>
+        <circle class="bar" id="day-bar" cx="100" cy="100" r="86"/>
+      </svg>
+      <div class="day-center"><b id="day-kcal">0</b><span>из <span id="day-goal">2000</span> ккал</span></div>
+      <div class="day-macros">
+        <div><span>Белки</span><div class="mbar"><i id="mb-p"></i></div><b id="mv-p">0 г</b></div>
+        <div><span>Жиры</span><div class="mbar"><i id="mb-f"></i></div><b id="mv-f">0 г</b></div>
+        <div><span>Углеводы</span><div class="mbar"><i id="mb-c"></i></div><b id="mv-c">0 г</b></div>
+      </div>
+    </div>
+    <div class="diary-list reveal">
+      <div class="search">
+        <input id="q" type="search" placeholder="Найти продукт: гречка, творог, банан…" autocomplete="off">
+        <input id="grams" type="number" min="1" max="2000" value="100"><span class="unit">г</span>
+        <div class="suggest" id="suggest" hidden></div>
+      </div>
+      <ul id="entries" class="entries"></ul>
+      <p class="muted small" id="empty">Пока пусто. Добавьте первый приём пищи или отсканируйте тарелку выше.</p>
+      <button class="btn btn-ghost" id="clear" hidden>Очистить день</button>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="section-head reveal"><h2>Тарифы</h2><p>Бесплатно для ручного дневника. Платно за фото-распознавание и аналитику.</p></div>
+  <div class="plans">
+    <article class="plan reveal"><h3>Бесплатно</h3><p class="price">0 ₽</p><ul><li>Ручной дневник</li><li>5 фото в день</li><li>База 1 200 блюд</li></ul><a class="btn btn-ghost btn-wide" href="#scan">Начать</a></article>
+    <article class="plan plan-hot reveal"><span class="tag">Выбор 80% пользователей</span><h3>Про</h3><p class="price">299 ₽<small>/мес</small></p><ul><li>Безлимит фото</li><li>Штрих-коды и рестораны</li><li>Тренды веса и микроэлементы</li><li>Экспорт для врача</li></ul><a class="btn btn-lime btn-wide" href="#scan">7 дней бесплатно</a></article>
+    <article class="plan reveal"><h3>Семья</h3><p class="price">499 ₽<small>/мес</small></p><ul><li>До 5 профилей</li><li>Общие рецепты и список покупок</li><li>Детские нормы</li></ul><a class="btn btn-ghost btn-wide" href="#scan">Выбрать</a></article>
+  </div>
+  <p class="muted small center">Себестоимость распознавания одного фото ≈ 0,4 ₽. При 20 фото в день маржа тарифа «Про» выше 85%.</p>
+</section>
+
+<section class="cta reveal">
+  <h2>Первая неделя — бесплатно</h2>
+  <p>Скачайте приложение или пользуйтесь веб-версией. Данные синхронизируются.</p>
+  <div class="actions center"><a class="btn btn-lime" href="#scan">App Store</a><a class="btn btn-ghost-light" href="#scan">Google Play</a></div>
+</section>
+</main>
+<footer class="footer"><span>© 2026 Тарелка</span><nav><a href="#">Оферта</a><a href="#">Конфиденциальность</a><a href="#">Для врачей</a></nav></footer>
+<script src="app.js"></script>
+</body>
+</html>
