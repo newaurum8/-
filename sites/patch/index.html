@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patch — AI-ревью кода, которое чинит, а не только находит</title>
+<meta name="description" content="Patch читает каждый pull request, находит уязвимости, баги и запахи кода и предлагает готовые правки. Попробуйте анализатор прямо в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c10'/><path d='M8 16h16M16 8v16' stroke='%233ddc84' stroke-width='4' stroke-linecap='round'/></svg>">
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+
+<header class="nav">
+  <a class="logo" href="#"><span class="logo-mark">+</span>Patch</a>
+  <nav><a href="#demo">Демо</a><a href="#how">Как работает</a><a href="#pricing">Цены</a><a href="#faq">FAQ</a></nav>
+  <div class="nav-cta"><a class="btn btn-ghost" href="#demo">Войти</a><a class="btn btn-primary" href="#demo">Подключить репозиторий</a></div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy reveal">
+    <p class="eyebrow"><span class="dot"></span>Работает с GitHub, GitLab и Bitbucket</p>
+    <h1>Ревью кода за <span class="grad">40 секунд</span>, а не за два дня</h1>
+    <p class="lead">Patch читает каждый pull request, находит уязвимости, баги и запахи кода, объясняет их по-человечески и предлагает готовый коммит с исправлениями.</p>
+    <div class="actions">
+      <a class="btn btn-primary btn-lg" href="#demo">Попробовать на своём коде</a>
+      <a class="btn btn-ghost btn-lg" href="#how">Смотреть, как работает</a>
+    </div>
+    <ul class="proof">
+      <li><b data-count="2400000">0</b><span>строк в день</span></li>
+      <li><b data-count="38">0</b><span>% быстрее мерж</span></li>
+      <li><b data-count="91">0</b><span>% правок принимают</span></li>
+    </ul>
+  </div>
+  <div class="terminal reveal" aria-hidden="true">
+    <div class="term-bar"><i></i><i></i><i></i><span>patch — zsh</span></div>
+    <pre id="term"></pre>
+  </div>
+</section>
+
+<section class="logos reveal">
+  <span>Доверяют команды из</span>
+  <div class="logo-row"><b>fintech</b><b>e-commerce</b><b>gamedev</b><b>edtech</b><b>SaaS</b><b>open source</b></div>
+</section>
+
+<section id="demo" class="demo">
+  <div class="section-head reveal">
+    <h2>Анализатор прямо здесь</h2>
+    <p>Вставьте свой JavaScript или Python, или возьмите пример. Движок правил работает в браузере, код никуда не отправляется.</p>
+  </div>
+  <div class="demo-grid">
+    <div class="editor reveal">
+      <div class="editor-bar">
+        <div class="tabs" id="samples"></div>
+        <span class="lang" id="lang">JS</span>
+      </div>
+      <div class="editor-body">
+        <pre class="gutter" id="gutter"></pre>
+        <textarea id="code" spellcheck="false" wrap="off"></textarea>
+      </div>
+      <div class="editor-actions">
+        <button class="btn btn-primary" id="run">▶ Запустить ревью</button>
+        <button class="btn btn-ghost" id="fix" disabled>Применить правки</button>
+        <span class="muted" id="run-status"></span>
+      </div>
+    </div>
+    <div class="review reveal">
+      <div class="score">
+        <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="bar" id="score-bar" cx="60" cy="60" r="52"/></svg>
+        <div class="score-val"><b id="score">—</b><span>качество</span></div>
+        <div class="score-legend" id="legend"></div>
+      </div>
+      <ol class="findings" id="findings"><li class="placeholder">Нажмите «Запустить ревью». Находки появятся здесь с объяснением и готовым исправлением.</li></ol>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="how">
+  <div class="section-head reveal"><h2>Как Patch встраивается в процесс</h2><p>Ничего не меняется для разработчиков. Patch приходит в PR как ещё один ревьюер, только быстрый.</p></div>
+  <svg class="pipeline reveal" viewBox="0 0 1000 260" aria-labelledby="pl-title"><title id="pl-title">PR → Patch → комментарии → мерж</title>
+    <defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#8b7cff"/><stop offset="1" stop-color="#3ddc84"/></linearGradient></defs>
+    <path class="wire" d="M190 130 H310"/><path class="wire" d="M510 90 C560 90 560 60 610 60 H690"/><path class="wire" d="M510 130 H690"/><path class="wire" d="M510 170 C560 170 560 200 610 200 H690"/><path class="wire" d="M810 130 H870"/>
+    <g class="node"><rect x="40" y="90" width="150" height="80" rx="16"/><text x="115" y="124">Pull request</text><text x="115" y="146" class="sub">git push</text></g>
+    <g class="node core"><rect x="310" y="60" width="200" height="140" rx="20"/><text x="410" y="118" class="big">Patch</text><text x="410" y="144" class="sub">безопасность · баги · стиль</text><text x="410" y="166" class="sub">контекст всего репозитория</text></g>
+    <g class="node"><rect x="690" y="30" width="120" height="60" rx="14"/><text x="750" y="66">Комментарии</text></g>
+    <g class="node"><rect x="690" y="100" width="120" height="60" rx="14"/><text x="750" y="136">Коммит-фикс</text></g>
+    <g class="node"><rect x="690" y="170" width="120" height="60" rx="14"/><text x="750" y="206">Отчёт в Slack</text></g>
+    <g class="node ok"><rect x="870" y="90" width="110" height="80" rx="16"/><text x="925" y="124">Мерж</text><text x="925" y="146" class="sub">через 40 с</text></g>
+  </svg>
+  <div class="features">
+    <article class="reveal"><h3>Понимает проект целиком</h3><p>Индексирует репозиторий и знает, что функция из PR вызывается в 14 местах. Поэтому не ругается на «неиспользуемую» переменную, которая нужна соседнему модулю.</p></article>
+    <article class="reveal"><h3>Правит, а не ноет</h3><p>К каждой находке готовый diff. Нажали «Применить», Patch закоммитил в ту же ветку и прогнал тесты.</p></article>
+    <article class="reveal"><h3>Учится на ваших ревью</h3><p>Замечания, которые команда отклоняет, Patch перестаёт повторять. Через месяц он говорит на языке вашего стайлгайда.</p></article>
+    <article class="reveal"><h3>Безопасность по умолчанию</h3><p>OWASP Top 10, секреты в коде, зависимости с CVE. Критичные находки блокируют мерж, если вы так настроите.</p></article>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="section-head reveal"><h2>Цена за разработчика</h2><p>Один ревьюер стоит как чашка кофе в день. Публичные репозитории бесплатно навсегда.</p></div>
+  <div class="plans">
+    <article class="plan reveal"><h3>Open Source</h3><p class="price">0 ₽</p><ul><li>Публичные репозитории</li><li>Безлимит PR</li><li>Комментарии и фиксы</li></ul><a class="btn btn-ghost btn-wide" href="#demo">Подключить</a></article>
+    <article class="plan plan-hot reveal"><span class="tag">Команды до 50</span><h3>Team</h3><p class="price">1 490 ₽<small>/разраб./мес</small></p><ul><li>Приватные репозитории</li><li>Контекст всего репозитория</li><li>Автофикс и запуск тестов</li><li>Slack, Jira, Linear</li></ul><a class="btn btn-primary btn-wide" href="#demo">14 дней бесплатно</a></article>
+    <article class="plan reveal"><h3>Enterprise</h3><p class="price">по запросу</p><ul><li>Self-hosted или VPC</li><li>SSO, аудит, SLA 99,9%</li><li>Свои правила и модели</li></ul><a class="btn btn-ghost btn-wide" href="#demo">Связаться</a></article>
+  </div>
+  <p class="muted small center reveal">Юнит-экономика: ≈ 90 ₽ инференса на разработчика в месяц при 40 PR. Маржа Team выше 90%.</p>
+</section>
+
+<section id="faq" class="faq">
+  <div class="section-head reveal"><h2>Вопросы</h2></div>
+  <details class="reveal"><summary>Код уходит на сторону?</summary><p>В облачной версии анализ идёт в изолированном окружении и не используется для обучения. Для Enterprise есть self-hosted, код не покидает вашу сеть.</p></details>
+  <details class="reveal"><summary>Чем Patch отличается от линтера?</summary><p>Линтер проверяет синтаксис по правилам. Patch понимает намерение: видит, что вы считаете деньги во float, что токен попадёт в логи, что цикл сделает 400 запросов вместо одного.</p></details>
+  <details class="reveal"><summary>Какие языки?</summary><p>TypeScript, JavaScript, Python, Go, Java, Kotlin, C#, PHP, Ruby, Rust. Остальные в бете.</p></details>
+  <details class="reveal"><summary>Будет ли спамить комментариями?</summary><p>Нет. По умолчанию Patch оставляет не больше 5 комментариев на PR, остальное сворачивает в отчёт. Порог настраивается.</p></details>
+</section>
+
+<section class="cta reveal">
+  <h2>Подключите репозиторий, первое ревью придёт через минуту</h2>
+  <div class="actions center"><a class="btn btn-primary btn-lg" href="#demo">Подключить GitHub</a><a class="btn btn-ghost btn-lg" href="#demo">GitLab</a></div>
+</section>
+</main>
+<footer class="footer"><span>© 2026 Patch</span><nav><a href="#">Документация</a><a href="#">Статус</a><a href="#">Безопасность</a><a href="#">Оферта</a></nav></footer>
+<script src="app.js"></script>
+</body>
+</html>
