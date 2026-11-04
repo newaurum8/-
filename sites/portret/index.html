@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Портрет — студийные фото из одного селфи</title>
+<meta name="description" content="Портрет превращает обычное селфи в 40 студийных портретов для резюме, LinkedIn, сайта и соцсетей. Восемь стилей, готово за 20 минут. Примерьте стили прямо в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231b1917'/><circle cx='16' cy='12' r='6' fill='%23f4f1ec'/><path d='M5 30c0-7 5-10 11-10s11 3 11 10z' fill='%23f4f1ec'/></svg>">
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="#">Портрет</a>
+  <nav><a href="#studio">Примерить</a><a href="#styles">Стили</a><a href="#how">Как это работает</a><a href="#pricing">Цены</a></nav>
+  <a class="btn btn-ink" href="#studio">Загрузить селфи</a>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy reveal">
+    <p class="eyebrow">Фотосессия без фотографа</p>
+    <h1>Одно селфи. <em>Сорок</em> студийных портретов</h1>
+    <p class="lead">Для резюме, LinkedIn, сайта компании и соцсетей. Загрузите селфи, выберите стили, через 20 минут получите портреты, которые не отличить от снятых в студии.</p>
+    <div class="actions"><a class="btn btn-ink btn-lg" href="#studio">Примерить стили бесплатно</a><a class="btn btn-line btn-lg" href="#styles">Смотреть стили</a></div>
+    <ul class="proof"><li><b>20 мин</b><span>до готовых фото</span></li><li><b>8</b><span>стилей в пакете</span></li><li><b>990 ₽</b><span>за 40 портретов</span></li></ul>
+  </div>
+  <div class="hero-stage reveal">
+    <div class="polaroid p1"><canvas width="420" height="520"></canvas><span>Студия</span></div>
+    <div class="polaroid p2"><canvas width="420" height="520"></canvas><span>Кино</span></div>
+    <div class="polaroid p3"><canvas width="420" height="520"></canvas><span>Ч/Б</span></div>
+  </div>
+</section>
+
+<section id="studio" class="studio">
+  <div class="section-head reveal"><h2>Примерьте стили на себе</h2><p>Фото обрабатывается прямо в браузере и никуда не отправляется. Или возьмите один из портретов для примера.</p></div>
+  <div class="studio-grid">
+    <aside class="source reveal">
+      <label class="drop" id="drop"><input type="file" id="file" accept="image/*" hidden><b>Загрузить селфи</b><span>JPG или PNG, лучше при дневном свете</span></label>
+      <p class="label">Или пример</p>
+      <div class="demos" id="demos"></div>
+      <p class="label">Стиль</p>
+      <div class="style-list" id="style-list"></div>
+      <button class="btn btn-ink btn-wide" id="download">Скачать выбранный</button>
+    </aside>
+    <div class="compare-wrap reveal">
+      <div class="compare" id="compare">
+        <canvas id="before"></canvas>
+        <canvas id="after"></canvas>
+        <div class="handle" id="handle"><i></i></div>
+        <span class="tag tag-l">До</span><span class="tag tag-r" id="after-tag">После</span>
+      </div>
+      <input type="range" id="split" min="0" max="100" value="55" aria-label="Положение разделителя">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+</section>
+
+<section id="styles" class="styles">
+  <div class="section-head reveal"><h2>Восемь стилей в каждом пакете</h2><p>Свет, фон и цветокоррекция подбираются под задачу: от строгого резюме до обложки интервью.</p></div>
+  <div class="styles-grid" id="styles-grid"></div>
+</section>
+
+<section id="how" class="how">
+  <div class="how-grid">
+    <article class="reveal"><span class="n">I</span><h3>Загрузите 5–10 селфи</h3><p>Разный свет и ракурсы помогают модели понять, как вы выглядите на самом деле, а не на одном удачном кадре.</p></article>
+    <article class="reveal"><span class="n">II</span><h3>Выберите стили и одежду</h3><p>Деловой костюм, кэжуал, творческий. Фон студии, офис, улица. Можно указать свои цвета бренда.</p></article>
+    <article class="reveal"><span class="n">III</span><h3>Получите 40 портретов</h3><p>Через 20 минут, в разрешении 2048×2560, с правами на любое использование. Не понравилось, пересняем бесплатно.</p></article>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="section-head reveal"><h2>Цены</h2><p>Разовая оплата. Без подписки и скрытых доплат.</p></div>
+  <div class="plans">
+    <article class="plan reveal"><h3>Базовый</h3><p class="price">990 ₽</p><ul><li>40 портретов, 4 стиля</li><li>Готово за 2 часа</li><li>2048×2560</li></ul><a class="btn btn-line btn-wide" href="#studio">Выбрать</a></article>
+    <article class="plan plan-hot reveal"><span class="tag-hot">Чаще всего</span><h3>Профи</h3><p class="price">1 990 ₽</p><ul><li>120 портретов, 8 стилей</li><li>Готово за 20 минут</li><li>Ретушь и смена одежды</li><li>Бесплатная пересъёмка</li></ul><a class="btn btn-ink btn-wide" href="#studio">Выбрать</a></article>
+    <article class="plan reveal"><h3>Команда</h3><p class="price">590 ₽<small>/чел. от 10</small></p><ul><li>Единый стиль для всех</li><li>Фон и цвета бренда</li><li>Страница сотрудников</li></ul><a class="btn btn-line btn-wide" href="#studio">Запросить</a></article>
+  </div>
+  <p class="muted center small reveal">Себестоимость генерации пакета ≈ 60 ₽. Маржа пакета «Профи» выше 95%, возвраты по гарантии ниже 3%.</p>
+</section>
+
+<section class="faq">
+  <div class="section-head reveal"><h2>Вопросы</h2></div>
+  <details class="reveal"><summary>Это буду я или «похожий человек»?</summary><p>Модель обучается на ваших селфи и сохраняет черты лица, родинки и форму улыбки. Для спорных кадров есть бесплатная пересъёмка.</p></details>
+  <details class="reveal"><summary>Что происходит с моими фото?</summary><p>Селфи удаляются через 7 дней после генерации. Модель не используется для обучения общих нейросетей.</p></details>
+  <details class="reveal"><summary>Можно для всей команды?</summary><p>Да. Загрузите фото сотрудников, выберите единый стиль, и получите согласованную галерею для сайта и подписей в письмах.</p></details>
+</section>
+
+<section class="cta reveal"><h2>Портреты будут готовы быстрее, чем вы выберете, что надеть</h2><a class="btn btn-paper btn-lg" href="#studio">Загрузить селфи</a></section>
+</main>
+<footer class="footer"><span>© 2026 Портрет</span><nav><a href="#">Оферта</a><a href="#">Конфиденциальность</a><a href="#">Для компаний</a></nav></footer>
+<script src="app.js"></script>
+</body>
+</html>
