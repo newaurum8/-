@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Знак — логотип и фирменный стиль за 10 секунд</title>
+<meta name="description" content="Знак генерирует логотипы, цветовые палитры и мокапы под вашу сферу и характер бренда. Сразу в SVG. Попробуйте генератор прямо в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;800;900&family=JetBrains+Mono:wght@500;700&family=Unbounded:wght@700;900&family=Playfair+Display:wght@600&family=Cormorant+Garamond:ital,wght@1,600&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a0a'/><rect x='6' y='6' width='9' height='9' fill='%23ff2d20'/><rect x='17' y='17' width='9' height='9' fill='%23fff'/><rect x='6' y='17' width='9' height='9' fill='%23fff'/></svg>">
+</head>
+<body>
+<div class="grid-bg" aria-hidden="true"></div>
+<header class="nav">
+  <a class="logo" href="#"><i></i>Знак</a>
+  <nav><a href="#gen">Генератор</a><a href="#mock">Мокапы</a><a href="#pricing">Цены</a></nav>
+  <a class="btn btn-red" href="#gen">Создать логотип</a>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy reveal">
+    <p class="mono">01 — Генератор айдентики</p>
+    <h1>Логотип за<br>10 секунд.<br><span class="red">Серьёзно.</span></h1>
+    <p class="lead">Введите название и сферу. Знак подберёт форму знака, шрифт, палитру и сразу покажет, как это выглядит на визитке, вывеске и иконке приложения. Экспорт в SVG.</p>
+    <div class="actions"><a class="btn btn-black btn-lg" href="#gen">Сгенерировать</a><a class="btn btn-line btn-lg" href="#mock">Смотреть мокапы</a></div>
+  </div>
+  <div class="wall reveal" id="wall" aria-hidden="true"></div>
+</section>
+
+<section id="gen" class="gen">
+  <div class="gen-head reveal">
+    <p class="mono">02 — Генератор</p>
+    <h2>Название, сфера, характер</h2>
+  </div>
+  <form class="gen-form reveal" onsubmit="return false">
+    <label class="name"><span class="mono">Название</span><input id="name" type="text" maxlength="18" value="Vektor" autocomplete="off"></label>
+    <div><span class="mono">Сфера</span><div class="chips" id="industries"></div></div>
+    <div><span class="mono">Характер</span><div class="chips" id="vibes"></div></div>
+    <button class="btn btn-red" id="generate" type="button">↻ Сгенерировать 12 вариантов</button>
+  </form>
+  <div class="logos reveal" id="logos"></div>
+  <p class="mono hint">Нажмите на вариант, чтобы открыть мокапы. SVG скачивается кнопкой на карточке.</p>
+</section>
+
+<section id="mock" class="mock">
+  <div class="gen-head reveal"><p class="mono">03 — Мокапы</p><h2 id="mock-title">Как это выглядит в жизни</h2></div>
+  <div class="mock-grid">
+    <div class="m-card reveal"><div class="bcard" id="bcard"><div class="bcard-logo" id="bc-logo"></div><div class="bcard-text"><b id="bc-name">Анна Егорова</b><span id="bc-role">основатель</span><span id="bc-site">vektor.ru</span></div></div><p class="mono">Визитка 90×50</p></div>
+    <div class="m-card reveal"><div class="icons"><div class="app-icon" id="app-icon"></div><div class="favicon-row"><span class="favicon" id="favicon"></span><span class="mono" id="fav-url">vektor.ru</span></div></div><p class="mono">Иконка приложения и фавикон</p></div>
+    <div class="m-card wide reveal"><svg class="sign" viewBox="0 0 800 300" id="sign"><rect width="800" height="300" fill="#d9d4cc"/><rect x="0" y="230" width="800" height="70" fill="#8a847b"/><rect x="60" y="40" width="680" height="190" fill="#efece6"/><g id="sign-bricks"></g><rect x="100" y="150" width="130" height="80" fill="#3a3a3a"/><rect x="570" y="150" width="130" height="80" fill="#3a3a3a"/><rect x="330" y="130" width="140" height="100" fill="#2a2a2a"/><rect x="200" y="60" width="400" height="60" id="sign-board" fill="#0a0a0a"/><foreignObject x="200" y="60" width="400" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="sign-logo" id="sign-logo"></div></foreignObject><rect x="60" y="40" width="680" height="190" fill="url(#shade)"/><defs><linearGradient id="shade" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".3" stop-color="#000" stop-opacity="0"/></linearGradient></defs></svg><p class="mono">Вывеска</p></div>
+    <div class="m-card reveal"><div class="social" id="social"><div class="avatar" id="avatar"></div><div><b id="soc-name">Vektor</b><span class="mono">@vektor · 12,4 тыс.</span></div></div><div class="palette" id="palette"></div><p class="mono">Аватар и палитра</p></div>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="gen-head reveal"><p class="mono">04 — Цены</p><h2>Платите один раз</h2></div>
+  <div class="plans">
+    <article class="plan reveal"><h3>Проба</h3><p class="price">0 ₽</p><ul><li>PNG 512 px с водяным знаком</li><li>3 генерации в день</li></ul><a class="btn btn-line btn-wide" href="#gen">Попробовать</a></article>
+    <article class="plan plan-hot reveal"><span class="tag">Хит</span><h3>Логотип</h3><p class="price">1 990 ₽</p><ul><li>SVG, PNG, фавикон</li><li>Все 12 вариантов</li><li>Чёрно-белая и инверсная версии</li><li>Права на коммерческое использование</li></ul><a class="btn btn-red btn-wide" href="#gen">Купить</a></article>
+    <article class="plan reveal"><h3>Бренд</h3><p class="price">4 990 ₽</p><ul><li>Всё из «Логотип»</li><li>Визитки, бланки, соцсети</li><li>Гайдлайн на 12 страниц</li><li>Шрифты с лицензией</li></ul><a class="btn btn-line btn-wide" href="#gen">Купить</a></article>
+    <article class="plan reveal"><h3>Студия</h3><p class="price">9 900 ₽<small>/мес</small></p><ul><li>Безлимит для клиентов</li><li>Белая этикетка и API</li><li>Свои шрифты и палитры</li></ul><a class="btn btn-line btn-wide" href="#gen">Связаться</a></article>
+  </div>
+  <p class="mono hint reveal">Себестоимость генерации ≈ 0 ₽: знаки строятся из правил, без тяжёлых моделей. Маржа «Логотипа» около 97%.</p>
+</section>
+
+<section class="cta reveal"><h2>Название уже есть? <span class="red">Остальное за 10 секунд.</span></h2><a class="btn btn-red btn-lg" href="#gen">Создать логотип</a></section>
+</main>
+<footer class="footer"><span class="mono">© 2026 Знак</span><nav class="mono"><a href="#">Оферта</a><a href="#">Лицензии шрифтов</a><a href="#">API</a></nav></footer>
+<script src="app.js"></script>
+</body>
+</html>
