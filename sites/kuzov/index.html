@@ -26,8 +26,8 @@
 <section class="hero" id="hero">
   <canvas id="hero-canvas" role="img" aria-label="Анимированная изометрическая схема: еврофура 13 600 × 2 450 × 2 700 мм заполняется паллетами, бочками и мебелью; внизу шкала объёма и индикаторы нагрузки на оси"></canvas>
   <div class="hero-copy reveal">
-    <p class="eyebrow">Кузов · расчёт загрузки · меньше секунды</p>
-    <h1>Схема загрузки фуры до&nbsp;того, как она приехала</h1>
+    <p class="eyebrow">Кузов · расчёт загрузки<span class="eb-x"> · меньше секунды</span></p>
+    <h1>Схема загрузки фуры до&nbsp;того, как&nbsp;она&nbsp;приехала</h1>
     <p class="lead">Кузов укладывает ваш груз в Газель, фуру или контейнер прямо в браузере: 3D-схема в изометрии, заполнение объёма, масса и нагрузка на оси, лист для грузчиков с порядком погрузки. Один лишний рейс стоит 30–80 тысяч ₽. Схема стоит 290 ₽.</p>
     <div class="actions"><a class="btn btn-lg" href="#demo">Уложить мой груз</a><button class="btn btn-line btn-lg" id="example" type="button">Посмотреть пример</button></div>
   </div>
@@ -38,8 +38,8 @@
 <section class="stats" id="cost">
   <div class="sec-head reveal"><p class="eyebrow">01 · Цена недогруза</p><h2>Влезет или нет — вопрос на 60&nbsp;000&nbsp;₽</h2></div>
   <div class="ind-grid">
-    <div class="ind frame reveal"><span class="ind-label">Объёма теряется при укладке на глаз</span><strong class="ind-num"><span data-count="15">15</span>–<span data-count="25">25</span>%</strong><span class="ind-note">Воздух под потолком и между паллетами: груз в 13,6 м фуре занимает место, как в 11-метровой.</span></div>
-    <div class="ind frame reveal"><span class="ind-label">Стоит лишний рейс</span><strong class="ind-num"><span data-count="30">30</span>–<span data-count="80">80</span> тыс.&nbsp;₽</strong><span class="ind-note">Когда остаток «не влез» и поехал второй машиной. По тарифам межгорода 2026 года, еврофура 1 000–1 500 км.</span></div>
+    <div class="ind frame reveal"><span class="ind-label">Объёма теряется при укладке на глаз</span><strong class="ind-num"><span data-count="15">15</span>–<span data-count="25">25</span>%</strong><span class="ind-note">Воздух под потолком и между паллетами: груз в 13,6-метровой фуре занимает место, как в 11-метровой.</span></div>
+    <div class="ind frame reveal"><span class="ind-label">Стоит лишний рейс</span><strong class="ind-num"><span data-count="30">30</span>–<span data-count="80">80</span> тыс.&nbsp;₽</strong><span class="ind-note">Когда остаток «не влез» и поехал второй машиной. По тарифам межгорода 2026 года, еврофура 1&nbsp;000–1&nbsp;500&nbsp;км.</span></div>
     <div class="ind frame reveal"><span class="ind-label">Штраф за перегруз оси</span><strong class="ind-num">от <span data-count="150000">150 000</span>&nbsp;₽</strong><span class="ind-note">Перевозчику-юрлицу на весовом контроле. Кузов показывает нагрузку на оси до того, как фура выехала.</span></div>
   </div>
 </section>
@@ -54,9 +54,13 @@
         <button type="button" data-t="0"><i style="background:#5CC8FF"></i>+ Европаллета 1200×800</button><button type="button" data-t="1"><i style="background:#FFC857"></i>+ Коробка 600×400</button><button type="button" data-t="2"><i style="background:#9BE564"></i>+ Бочка 585×585</button><button type="button" data-t="3"><i style="background:#C792EA"></i>+ Диван 2200×900</button><button type="button" data-t="4"><i style="background:#FF9E7A"></i>+ Рулон 1000×1000</button><button type="button" data-t="5"><i style="background:#5CC8FF"></i>+ Мешок 800×500</button>
       </div>
       <div class="rows" id="rows"></div>
+      <template id="row-tpl"><div class="row"><button type="button" class="sw" aria-label="Цвет груза"><i></i></button><input type="text" aria-label="Название груза" data-k="n"><button type="button" class="del" aria-label="Удалить">×</button>
+        <div class="l2"><input type="number" min="0" max="30000" aria-label="Длина, мм" data-k="l"><span class="x">×</span><input type="number" min="0" max="30000" aria-label="Ширина, мм" data-k="w"><span class="x">×</span><input type="number" min="0" max="30000" aria-label="Высота, мм" data-k="h"><span class="u">мм</span><span class="kg"><input type="number" min="0" max="50000" aria-label="Вес, кг" data-k="kg"><span class="u">кг</span></span></div>
+        <div class="l3"><input type="number" min="0" max="2000" aria-label="Количество" data-k="qty"><span class="u">шт</span><button type="button" class="tog" data-k="st">Штаб.</button><button type="button" class="tog" data-k="ti">Кант.</button></div></div></template>
       <div class="body-sel">
-        <label class="field"><span>Кузов</span><select id="body"><option value="gazel">Газель · 3 000×1 800×1 800</option><option value="t5">5-тонник · 6 000×2 400×2 400</option><option value="euro" selected>Еврофура · 13 600×2 450×2 700</option><option value="c20">Контейнер 20′ · 5 900×2 350×2 390</option><option value="c40">Контейнер 40′ · 12 030×2 350×2 390</option><option value="custom">Свой кузов</option></select></label>
-        <label class="field"><span>Зазор между местами, мм</span><input id="gap" type="number" min="0" max="300" step="10" value="0" inputmode="numeric"></label>
+        <label class="field"><span>Кузов</span><select id="body"><option value="gazel">Газель</option><option value="t5">5-тонник</option><option value="euro" selected>Еврофура</option><option value="c20">Контейнер 20′</option><option value="c40">Контейнер 40′</option><option value="custom">Свой кузов</option></select></label>
+        <label class="field"><span>Зазор, мм</span><input id="gap" type="number" min="0" max="300" step="10" value="0" inputmode="numeric"></label>
+        <p class="mono muted body-dims" id="body-dims">13&nbsp;600 × 2&nbsp;450 × 2&nbsp;700 мм · лимит 20&nbsp;000 кг</p>
       </div>
       <div class="custom" id="custom" hidden>
         <label class="field"><span>Длина, мм</span><input id="cL" type="number" min="500" max="30000" step="10" value="8000"></label>
@@ -69,13 +73,13 @@
         <label class="field"><span>Лимит зад, кг</span><input id="cLr" type="number" min="100" max="100000" step="100" value="10000"></label>
       </div>
       <div class="pane-actions"><button class="btn" id="run" type="button">Рассчитать укладку</button><button class="btn btn-line" id="clear" type="button">Очистить</button></div>
-      <div class="io"><button class="link" id="csv-out" type="button">Экспорт CSV</button><label class="link" for="csv-in">Импорт CSV<input type="file" id="csv-in" accept=".csv,.tsv,.txt" hidden></label></div>
+      <div class="io"><button class="link" id="csv-out" type="button">Экспорт CSV</button><button class="link" id="csv-in-btn" type="button">Импорт CSV</button><input type="file" id="csv-in" class="visually-hidden" accept=".csv,.tsv,.txt" tabindex="-1" aria-label="Файл CSV с таблицей груза"></div>
     </div>
 
     <div class="pane pane-scene frame">
       <div class="scene-bar">
-        <div class="seg" role="group" aria-label="Вид схемы"><button type="button" data-view="iso" aria-pressed="true">Изометрия</button><button type="button" data-view="top" aria-pressed="false">Сверху</button><button type="button" data-view="side" aria-pressed="false">Сбоку</button></div>
-        <span class="mono scene-hint">колесо — масштаб · перетаскивание — панорама · клик по месту — строка в таблице</span>
+        <div class="seg" role="group" aria-label="Вид схемы"><button type="button" data-view="iso" aria-pressed="true">Изометрия</button><button type="button" data-view="ortho" aria-pressed="false">Сверху + сбоку</button></div>
+        <span class="mono scene-hint"><span class="nw">Ctrl + колесо — масштаб</span> · <span class="nw">drag — панорама</span> · <span class="nw">клик по месту — строка таблицы</span></span>
       </div>
       <canvas id="scene" role="img" aria-label="Схема укладки груза в кузове"></canvas>
       <div class="step-ctl">
@@ -89,8 +93,8 @@
       <div class="metric"><span class="ind-label">Заполнение объёма</span><strong class="ind-num" id="m-fill">0%</strong><div class="bar"><i id="m-fill-bar"></i></div><span class="mono muted" id="m-vol">0 из 0 м³</span></div>
       <div class="metric"><span class="ind-label">Масса / лимит</span><strong class="ind-num sm" id="m-mass">0 кг</strong><div class="bar"><i id="m-mass-bar"></i></div><span class="mono muted" id="m-mass-note">лимит 0 кг</span></div>
       <div class="gauges">
-        <div><canvas class="gauge" id="g-front" role="img" aria-label="Нагрузка на переднюю ось"></canvas><span class="mono" id="g-front-t">перед — / — кг</span></div>
-        <div><canvas class="gauge" id="g-rear" role="img" aria-label="Нагрузка на заднюю тележку"></canvas><span class="mono" id="g-rear-t">зад — / — кг</span></div>
+        <div><canvas class="gauge" id="g-front" role="img" aria-label="Нагрузка на переднюю ось"></canvas><span class="mono" id="g-front-t">перед —<br>из — кг</span></div>
+        <div><canvas class="gauge" id="g-rear" role="img" aria-label="Нагрузка на заднюю тележку"></canvas><span class="mono" id="g-rear-t">зад —<br>из — кг</span></div>
       </div>
       <div class="metric"><span class="ind-label">Не влезло</span><strong class="ind-num sm" id="m-left">0 мест</strong><ul class="left-list mono" id="left-list"></ul></div>
       <p class="mono muted" id="m-time">расчёт: —</p>
@@ -116,7 +120,7 @@
       <p>Каждое поставленное место открывает три новые точки: справа, сзади и сверху. Следующее место пробует их по порядку: сначала ниже, затем ближе к передней стенке. Занятые точки стираются. 500 коробок — меньше 300 мс.</p>
     </article>
     <article class="card frame reveal">
-      <svg viewBox="0 0 240 160" aria-hidden="true"><g fill="none" stroke="#8FD3FF" stroke-width="1.5"><path d="M40 130h180V40H40z" stroke-dasharray="5 3"/><path d="M40 130H14l-6-20v-30l10-10h22"/></g><circle cx="30" cy="136" r="7" fill="none" stroke="#8FD3FF" stroke-width="1.5"/><circle cx="190" cy="136" r="7" fill="none" stroke="#8FD3FF" stroke-width="1.5"/><g stroke="#081A3A" stroke-width="1"><rect x="42" y="92" width="44" height="37" fill="#5CC8FF"/><rect x="88" y="92" width="44" height="37" fill="#5CC8FF"/><rect x="134" y="92" width="44" height="37" fill="#5CC8FF"/><rect x="180" y="100" width="38" height="29" fill="#C792EA"/><rect x="42" y="64" width="30" height="26" fill="#FFC857"/><rect x="74" y="64" width="30" height="26" fill="#FFC857"/><rect x="106" y="64" width="30" height="26" fill="#FFC857"/><rect x="140" y="70" width="22" height="20" fill="#9BE564"/><rect x="164" y="70" width="22" height="20" fill="#9BE564"/></g><g font-family="JetBrains Mono,monospace" font-size="9" fill="#8FD3FF"><text x="44" y="118" fill="#081A3A">600 кг</text><text x="44" y="80" fill="#081A3A">120 кг</text><text x="8" y="26">перед</text><text x="196" y="26">зад</text></g><path d="M60 22h110" stroke="#FF7A1A" stroke-width="1.5"/><path d="M66 17l-8 5 8 5" fill="none" stroke="#FF7A1A" stroke-width="1.5"/></svg>
+      <svg viewBox="0 0 240 160" aria-hidden="true"><g fill="none" stroke="#8FD3FF" stroke-width="1.5"><path d="M40 130h180V40H40z" stroke-dasharray="5 3"/><path d="M40 130H14l-6-20v-30l10-10h22"/></g><circle cx="30" cy="136" r="7" fill="none" stroke="#8FD3FF" stroke-width="1.5"/><circle cx="190" cy="136" r="7" fill="none" stroke="#8FD3FF" stroke-width="1.5"/><g stroke="#081A3A" stroke-width="1"><rect x="42" y="92" width="44" height="37" fill="#5CC8FF"/><rect x="88" y="92" width="44" height="37" fill="#5CC8FF"/><rect x="134" y="92" width="44" height="37" fill="#5CC8FF"/><rect x="180" y="100" width="38" height="29" fill="#C792EA"/><rect x="42" y="64" width="38" height="26" fill="#FFC857"/><rect x="82" y="64" width="30" height="26" fill="#FFC857"/><rect x="114" y="64" width="26" height="26" fill="#FFC857"/><rect x="142" y="70" width="22" height="20" fill="#9BE564"/><rect x="166" y="70" width="22" height="20" fill="#9BE564"/></g><g font-family="JetBrains Mono,monospace" font-size="9" fill="#8FD3FF"><text x="44" y="118" fill="#081A3A">600 кг</text><text x="44" y="80" fill="#081A3A">120 кг</text><text x="8" y="26">перед</text><text x="196" y="26">зад</text></g><path d="M60 22h110" stroke="#FF7A1A" stroke-width="1.5"/><path d="M66 17l-8 5 8 5" fill="none" stroke="#FF7A1A" stroke-width="1.5"/></svg>
       <h3>Тяжёлое вниз и вперёд — всегда</h3>
       <p>Нештабелируемые и тяжёлые места идут первыми: на пол и к передней стенке. Лёгкое и штабелируемое — сверху и сзади. Так груз не продавит нижний ряд и не перегрузит заднюю тележку.</p>
     </article>
@@ -128,7 +132,7 @@
     <article class="card frame reveal">
       <svg viewBox="0 0 240 160" aria-hidden="true"><path d="M30 96h190" stroke="#8FD3FF" stroke-width="2"/><g fill="none" stroke="#8FD3FF" stroke-width="1.5"><path d="M60 96l-10 18h20zM180 96l-10 18h20z"/></g><g stroke="#081A3A" stroke-width="1"><rect x="36" y="66" width="46" height="30" fill="#5CC8FF"/><rect x="84" y="66" width="46" height="30" fill="#5CC8FF"/><rect x="132" y="74" width="30" height="22" fill="#9BE564"/><rect x="164" y="74" width="30" height="22" fill="#9BE564"/></g><g stroke="#FF7A1A" stroke-width="1.5" fill="none"><path d="M59 40v22M55 56l4 6 4-6M107 40v22M103 56l4 6 4-6M147 50v20M143 64l4 6 4-6"/><path d="M60 146v-26M56 126l4-6 4 6M180 146v-26M176 126l4-6 4 6"/></g><g font-family="JetBrains Mono,monospace" font-size="9" fill="#8FD3FF"><text x="40" y="34">m₁</text><text x="100" y="34">m₂</text><text x="140" y="46">m₃</text><text x="18" y="156">F перед</text><text x="160" y="156">F зад</text><text x="68" y="128">x перед</text><text x="188" y="128">x зад</text></g><path d="M60 140h120" stroke="#8FD3FF" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/></svg>
       <h3>Модель рычага для осей</h3>
-      <p class="mono formula">F<sub>зад</sub> = Σ m<sub>i</sub>·(x<sub>i</sub> − x<sub>перед</sub>) / (x<sub>зад</sub> − x<sub>перед</sub>), F<sub>перед</sub> = M − F<sub>зад</sub></p>
+      <p class="mono formula">F<sub>зад</sub> = Σ m<sub>i</sub>·(x<sub>i</sub> − x<sub>перед</sub>) /<br>(x<sub>зад</sub> − x<sub>перед</sub>)<br>F<sub>перед</sub> = M − F<sub>зад</sub></p>
       <p>Зелёная зона до 90% лимита оси, жёлтая до 100%, красная выше. Оценка ориентировочная: без массы тягача и полуприцепа, для полной картины нужны паспортные данные автопоезда.</p>
     </article>
   </div>
@@ -151,7 +155,14 @@
 <!-- 05 Кузова -->
 <section class="bodies" id="bodies">
   <div class="sec-head reveal"><p class="eyebrow">05 · Кузова и пресеты</p><h2>Пять типовых кузовов и свой</h2><p class="sub">Внутренние размеры и лимиты массы. Колонка «Европаллет» — сколько паллет 1 200 × 800 × 1 450 укладывает алгоритм Кузова в этот кузов прямо сейчас, в вашем браузере.</p></div>
-  <div class="tbl-scroll reveal"><table class="grid-table bodies-table"><thead><tr><th>Кузов</th><th>Внутри Д × Ш × В, мм</th><th>Объём, м³</th><th>Лимит, кг</th><th>Оси x перед / зад, м</th><th>Европаллет</th><th></th></tr></thead><tbody id="bodies-rows"></tbody></table></div>
+  <p class="mono muted tbl-hint">Таблица прокручивается вбок →</p>
+  <div class="tbl-scroll reveal"><table class="grid-table bodies-table"><thead><tr><th>Кузов</th><th>Внутри Д × Ш × В, мм</th><th>Объём, м³</th><th>Лимит, кг</th><th>Оси x перед / зад, м</th><th>Европаллет</th><th></th></tr></thead><tbody id="bodies-rows">
+    <tr><td>Газель</td><td class="mono">3&nbsp;000 × 1&nbsp;800 × 1&nbsp;800</td><td class="num">9,7</td><td class="num">1&nbsp;500</td><td>−1,0 / 2,1 м · 900 / 1&nbsp;400 кг</td><td class="num" data-pal="gazel">4</td><td><button type="button" class="btn btn-sm btn-line" data-body="gazel">В демо</button></td></tr>
+    <tr><td>5-тонник</td><td class="mono">6&nbsp;000 × 2&nbsp;400 × 2&nbsp;400</td><td class="num">34,6</td><td class="num">5&nbsp;000</td><td>−1,2 / 4,3 м · 2&nbsp;200 / 4&nbsp;500 кг</td><td class="num" data-pal="t5">15</td><td><button type="button" class="btn btn-sm btn-line" data-body="t5">В демо</button></td></tr>
+    <tr><td>Еврофура</td><td class="mono">13&nbsp;600 × 2&nbsp;450 × 2&nbsp;700</td><td class="num">90,0</td><td class="num">20&nbsp;000</td><td>1,5 / 10,5 м · 10&nbsp;000 / 24&nbsp;000 кг</td><td class="num" data-pal="euro">34</td><td><button type="button" class="btn btn-sm btn-line" data-body="euro">В демо</button></td></tr>
+    <tr><td>Контейнер 20′</td><td class="mono">5&nbsp;900 × 2&nbsp;350 × 2&nbsp;390</td><td class="num">33,1</td><td class="num">21&nbsp;700</td><td>0,4 / 5,2 м · 12&nbsp;000 / 18&nbsp;000 кг</td><td class="num" data-pal="c20">11</td><td><button type="button" class="btn btn-sm btn-line" data-body="c20">В демо</button></td></tr>
+    <tr><td>Контейнер 40′</td><td class="mono">12&nbsp;030 × 2&nbsp;350 × 2&nbsp;390</td><td class="num">67,6</td><td class="num">26&nbsp;500</td><td>1,2 / 9,8 м · 14&nbsp;000 / 24&nbsp;000 кг</td><td class="num" data-pal="c40">25</td><td><button type="button" class="btn btn-sm btn-line" data-body="c40">В демо</button></td></tr>
+  </tbody></table></div>
 </section>
 
 <!-- 06 Тарифы -->
@@ -159,7 +170,7 @@
   <div class="sec-head reveal"><p class="eyebrow">06 · Тарифы</p><h2>Схема дешевле одного звонка водителю</h2></div>
   <div class="plans">
     <article class="plan frame reveal"><h3>Разовая схема</h3><p class="price">290 ₽</p><p class="per">без регистрации</p><ul><li>Один расчёт, любой кузов</li><li>PNG-схема и лист для грузчиков</li><li>Ссылка коллеге на 30 дней</li></ul><button class="btn btn-line btn-wide" type="button" data-plan="Разовая схема">Посчитать за 290 ₽</button></article>
-    <article class="plan frame reveal"><h3>Логист</h3><p class="price">2 490 ₽</p><p class="per">в месяц · одно рабочее место</p><ul><li>Безлимит схем</li><li>PNG и печать A4</li><li>История расчётов</li><li>CSV-импорт таблицы груза</li></ul><button class="btn btn-wide" type="button" data-plan="Логист">Выбрать «Логист»</button></article>
+    <article class="plan frame reveal"><h3>Логист</h3><p class="price">2 490 ₽</p><p class="per">в месяц · одно рабочее место</p><ul><li>Безлимит схем</li><li>PNG и печать A4</li><li>История расчётов</li><li>CSV-импорт таблицы груза</li></ul><button class="btn btn-line btn-wide" type="button" data-plan="Логист">Выбрать «Логист»</button></article>
     <article class="plan plan-hot frame reveal"><span class="tag mono">Чаще всего</span><h3>Отдел</h3><p class="price">7 900 ₽</p><p class="per">в месяц · до 5 мест</p><ul><li>Всё из «Логиста»</li><li>База своего автопарка</li><li>Типовые паллеты и тара компании</li><li>Общие расчёты в отделе</li></ul><button class="btn btn-wide" type="button" data-plan="Отдел">Выбрать «Отдел»</button></article>
     <article class="plan frame reveal"><h3>Производство</h3><p class="price">19 900 ₽</p><p class="per">в месяц · без ограничений</p><ul><li>Всё из «Отдела»</li><li>Брендированный лист для грузчиков</li><li>Импорт заявок из Excel</li><li>Выделенная поддержка</li></ul><button class="btn btn-line btn-wide" type="button" data-plan="Производство">Выбрать «Производство»</button></article>
   </div>
@@ -175,7 +186,7 @@
       <div><dt>LTV</dt><dd>≈ <span data-count="59000">59 000</span> ₽</dd></div>
       <div><dt>LTV / CAC</dt><dd>≈ <span data-count="17">17</span></dd></div>
     </dl>
-    <p class="muted">Запросы «расчёт загрузки фуры» и «калькулятор паллет в еврофуру» ведут на разовую схему за 290 ₽, 12% разовых клиентов переходят на подписку. LTV = 3 200 × 0,93 / 0,05 ≈ 59 000 ₽, окупаемость привлечения — на втором месяце.</p>
+    <p class="muted">Запросы «расчёт загрузки фуры» и «калькулятор паллет в еврофуру» ведут на разовую схему за 290 ₽, 12% разовых клиентов переходят на подписку. LTV = 3&nbsp;200 × 0,93&nbsp;/&nbsp;0,05 ≈ 59&nbsp;000&nbsp;₽, окупаемость привлечения — на втором месяце.</p>
   </div>
 </section>
 
@@ -183,12 +194,12 @@
 <section class="faq" id="faq">
   <div class="sec-head reveal"><p class="eyebrow">07 · Вопросы</p><h2>Что спрашивают логисты</h2></div>
   <div class="faq-list reveal">
-    <details class="frame"><summary>Насколько точна укладка?</summary><p>Алгоритм экстремальных точек даёт 85–95% от теоретического максимума по объёму и 100% корректную геометрию: места не пересекаются, не висят в воздухе, не выходят за стенки. Укладка повторяема: один и тот же список груза всегда даёт одну схему.</p></details>
-    <details class="frame"><summary>Учитываете ли крепление и зазоры?</summary><p>Зазор между местами настраивается в миллиметрах (по умолчанию 0). Ремни, распорки и прокладки Кузов не считает — он показывает, что и куда ставить. Крепление по правилам перевозчика остаётся за ним.</p></details>
-    <details class="frame"><summary>Что с нештабелируемым грузом?</summary><p>Снимите флаг «Штаб.» в строке: на такое место ничего не поставят, а само оно пойдёт первым — на пол, ближе к передней стенке. Если флага «Кант.» тоже нет, место поворачивается только вокруг вертикали.</p></details>
-    <details class="frame"><summary>Можно ли загрузить таблицу из Excel?</summary><p>Да, через CSV: сохраните лист как CSV с колонками «название; длина; ширина; высота; кг; шт; штабелируемый; кантовать» и нажмите «Импорт CSV». Разделитель — точка с запятой, запятая или табуляция. Экспорт обратно — одной кнопкой.</p></details>
-    <details class="frame"><summary>Как считаются оси?</summary><p>По модели рычага: F<sub>зад</sub> = Σ m<sub>i</sub>·(x<sub>i</sub> − x<sub>перед</sub>) / (x<sub>зад</sub> − x<sub>перед</sub>), F<sub>перед</sub> = M − F<sub>зад</sub>. Для еврофуры: передняя тележка x = 1,5 м с лимитом 10 т, задняя x = 10,5 м с лимитом 24 т суммарно для трёхосного полуприцепа — упрощённо, без массы тягача и прицепа. Координаты и лимиты своего автопоезда задаются в кузове «Свой».</p></details>
-    <details class="frame"><summary>Работает ли без интернета после загрузки?</summary><p>Да. Страница, алгоритм и схема — три файла, которые уже у вас в браузере. Расчёты сохраняются в localStorage, ссылка коллеге несёт все параметры в адресе страницы.</p></details>
+    <details><summary>Насколько точна укладка?</summary><p>На уровне ручной раскладки опытного логиста: 34 европаллеты в еврофуру, 11 в 20-футовый и 25 в 40-футовый контейнер — столько же, сколько в отраслевых справочниках. Геометрия корректна на 100%: места не пересекаются, не висят в воздухе, не выходят за стенки. Укладка повторяема: один и тот же список груза всегда даёт одну схему.</p></details>
+    <details><summary>Учитываете ли крепление и зазоры?</summary><p>Зазор между местами настраивается в миллиметрах (по умолчанию 0). Ремни, распорки и прокладки Кузов не считает — он показывает, что и куда ставить. Крепление по правилам перевозчика остаётся за ним.</p></details>
+    <details><summary>Что с нештабелируемым грузом?</summary><p>Снимите флаг «Штаб.» в строке: на такое место ничего не поставят, а само оно пойдёт первым — на пол, ближе к передней стенке. Если флага «Кант.» тоже нет, место поворачивается только вокруг вертикали.</p></details>
+    <details><summary>Можно ли загрузить таблицу из Excel?</summary><p>Да, через CSV: сохраните лист как CSV с колонками «название; длина; ширина; высота; кг; шт; штабелируемый; кантовать» и нажмите «Импорт CSV». Разделитель — точка с запятой, запятая или табуляция. Экспорт обратно — одной кнопкой.</p></details>
+    <details><summary>Как считаются оси?</summary><p>По модели рычага: F<sub>зад</sub> = <span class="nw">Σ m<sub>i</sub>·(x<sub>i</sub> − x<sub>перед</sub>)</span> / <span class="nw">(x<sub>зад</sub> − x<sub>перед</sub>)</span>, F<sub>перед</sub> = M − F<sub>зад</sub>. Для еврофуры: передняя тележка x = 1,5 м с лимитом 10 т, задняя x = 10,5 м с лимитом 24 т суммарно для трёхосного полуприцепа — упрощённо, без массы тягача и прицепа. Координаты и лимиты своего автопоезда задаются в кузове «Свой».</p></details>
+    <details><summary>Работает ли без интернета после загрузки?</summary><p>Да. Страница, алгоритм и схема — три файла, которые уже у вас в браузере. Расчёты сохраняются в localStorage, ссылка коллеге несёт все параметры в адресе страницы.</p></details>
   </div>
 </section>
 
