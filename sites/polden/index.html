@@ -49,6 +49,7 @@
         <label class="label" for="hero-date">Дата</label>
         <input type="range" id="hero-date" min="1" max="365" value="81" step="1">
         <output class="readout" id="hero-date-label" for="hero-date">22 марта</output>
+        <div class="scene-counter"><p class="label">Время</p><output id="hero-clock" for="hero-time">12:00</output><output id="hero-hours" for="hero-compass hero-date">2 ч 40 мин</output><p>прямого солнца в окне за день</p></div>
       </div>
       <div class="scene-foot">
         <div class="timeline">
@@ -56,7 +57,6 @@
           <input type="range" id="hero-time" min="300" max="1260" step="10" value="720">
           <div class="ticks" aria-hidden="true"><span>05:00</span><span>07</span><span>09</span><span>11</span><span>13</span><span>15</span><span>17</span><span>19</span><span>21:00</span></div>
         </div>
-        <div class="scene-counter"><output id="hero-clock" for="hero-time">12:00</output><p><output id="hero-hours" for="hero-compass hero-date">2 ч 40 мин</output> прямого солнца в окне</p></div>
       </div>
     </div>
   </div>
@@ -68,7 +68,7 @@
     <p class="eyebrow reveal">Почему это важно</p>
     <h2 id="pain-h" class="reveal">Ошибка стоит миллионы рублей и&nbsp;годы в&nbsp;сумраке</h2>
     <div class="cards3">
-      <article class="card reveal"><p class="big"><span class="num" data-count="25">25</span><span class="unit">этажей напротив</span></p><h3>Окна на юг ничего не значат, если напротив 25 этажей</h3><p>Башня в 40 метрах накрывает тенью нижние десять этажей с октября по март. На плане ЖК это один прямоугольник, в жизни — тёмная гостиная.</p></article>
+      <article class="card reveal"><p class="big"><span class="num" data-count="25">25</span><span class="unit">этажей напротив</span></p><h3>Окна на юг ничего не значат, если напротив 25 этажей</h3><p>Башня в 40&nbsp;метрах накрывает тенью нижние десять этажей с октября по март. На плане ЖК это один прямоугольник, в жизни — тёмная гостиная.</p></article>
       <article class="card reveal"><p class="big"><span class="num" data-count="0">0</span><span class="unit">цифр в договоре</span></p><h3>Застройщик отвечает общими словами</h3><p>«Светлая», «видовая», «солнечная сторона». Часов солнца в договоре нет, и спросить за них после сдачи дома не с кого.</p></article>
       <article class="card reveal"><p class="big"><span class="num">2,5</span><span class="unit">часа — норма</span></p><h3>Норма инсоляции проверяется только судом</h3><p>После покупки, после ремонта, по экспертизе за 60 тысяч рублей. Полдень проверяет ту же норму до договора — за 10 секунд.</p></article>
     </div>
@@ -96,7 +96,7 @@
         <h3><span>02</span>Этаж и соседние дома</h3><p>Укажите этаж и нарисуйте на мини-карте дома вокруг: прямоугольник, этажность, расстояние. План ЖК есть на сайте застройщика.</p>
       </li>
       <li class="step reveal">
-        <svg viewBox="0 0 240 160" aria-hidden="true"><path d="M30 130h180"/><g class="fill-soft"><rect x="40" y="110" width="10" height="20"/><rect x="54" y="96" width="10" height="34"/><rect x="68" y="78" width="10" height="52"/><rect x="82" y="60" width="10" height="70"/><rect x="96" y="48" width="10" height="82"/><rect x="110" y="40" width="10" height="90"/><rect x="124" y="44" width="10" height="86"/><rect x="138" y="54" width="10" height="76"/><rect x="152" y="70" width="10" height="60"/><rect x="166" y="90" width="10" height="40"/><rect x="180" y="106" width="10" height="24"/><rect x="194" y="116" width="10" height="14"/></g><path d="M30 86h180" class="acc" stroke-dasharray="4 3"/><text x="30" y="80" class="t acc-t">норма 2,5 ч</text><text x="38" y="146" class="t">янв</text><text x="190" y="146" class="t">дек</text><path d="M196 22l6 6 12-14" class="ok" stroke-width="2"/></svg>
+        <svg viewBox="0 0 240 160" aria-hidden="true"><path d="M30 130h180"/><g class="fill-soft"><rect x="40" y="110" width="10" height="20"/><rect x="54" y="96" width="10" height="34"/><rect x="68" y="78" width="10" height="52"/><rect x="82" y="60" width="10" height="70"/><rect x="96" y="48" width="10" height="82"/><rect x="110" y="40" width="10" height="90"/><rect x="124" y="44" width="10" height="86"/><rect x="138" y="54" width="10" height="76"/><rect x="152" y="70" width="10" height="60"/><rect x="166" y="90" width="10" height="40"/><rect x="180" y="106" width="10" height="24"/><rect x="194" y="116" width="10" height="14"/></g><path d="M30 86h180" class="acc" stroke-dasharray="4 3"/><text x="236" y="80" text-anchor="end" class="t acc-t">норма 2,5&nbsp;ч</text><text x="38" y="146" class="t">янв</text><text x="190" y="146" class="t">дек</text><path d="M196 22l6 6 12-14" class="ok" stroke-width="2"/></svg>
         <h3><span>03</span>Календарь и норма</h3><p>Для каждого из 365 дней считаются 96 положений солнца. Вы получаете часы прямого света по месяцам и ответ, выполняется ли норма 2,5 часа.</p>
       </li>
     </ol>
@@ -193,11 +193,11 @@
 
       <div class="panel mapcol">
         <p class="label">Двор сверху · 1 px = 1 м</p>
-        <canvas id="map" width="320" height="320" role="img" aria-label="Мини-карта двора: ваш дом в центре, соседние дома можно перетаскивать и растягивать за углы"></canvas>
+        <canvas id="map" width="320" height="320" role="img" tabindex="0" aria-label="Мини-карта двора: ваш дом в центре, соседние дома можно перетаскивать и растягивать за углы. С клавиатуры: цифры 1–8 выбирают дом, стрелки двигают его, Shift со стрелками меняет размер, Delete удаляет"></canvas>
         <div class="map-tools">
           <button class="btn btn-line" type="button" id="add-house">Добавить дом</button>
           <span class="hint" id="nb-count">0 из 8</span>
-          <label class="field small" for="nb-floors">Этажей</label><input type="number" id="nb-floors" min="1" max="60" step="1" value="9" disabled>
+          <span class="nb-floors"><label class="field small" for="nb-floors">Этажей</label><input type="number" id="nb-floors" min="1" max="60" step="1" value="9" disabled></span>
           <button class="btn btn-ghost" type="button" id="nb-del" disabled>Удалить</button>
         </div>
         <p class="hint">Перетащите дом, потяните за угол — размер. Выделите дом, чтобы задать этажность.</p>
@@ -205,9 +205,10 @@
           <label class="field" for="map-date"><span>Дата: <b id="map-date-label">22 марта</b></span><input type="range" id="map-date" min="1" max="365" step="1" value="81"></label>
           <label class="field" for="map-time"><span>Время: <b id="map-time-label">12:00</b></span><input type="range" id="map-time" min="300" max="1260" step="10" value="720"></label>
         </div>
+        <p class="hint map-status" id="map-status">Полдень 22 марта · окно на солнце</p>
       </div>
 
-      <div class="panel result" id="result" aria-live="polite">
+      <div class="panel result" id="result">
         <p class="label">Солнечный календарь</p>
         <div id="result-body"><p class="hint">Считаем…</p></div>
         <div class="actions">
@@ -216,7 +217,7 @@
           <button class="btn btn-line" type="button" id="share">Скопировать ссылку</button>
           <button class="btn btn-line" type="button" id="compare-toggle" aria-pressed="false" aria-controls="compare">Сравнить две квартиры</button>
         </div>
-        <p class="hint" id="status">Расчёт обновляется при любом изменении.</p>
+        <p class="hint" id="status" aria-live="polite" aria-atomic="true">Расчёт обновляется при любом изменении.</p>
       </div>
     </div>
 
@@ -236,10 +237,10 @@
     <p class="eyebrow reveal">Примеры расчётов</p>
     <h2 id="ex-h" class="reveal">Четыре типичных двора вместо отзывов</h2>
     <div class="cards4" id="examples-grid">
-      <article class="card ex-card reveal" data-preset="0"><h3>Башня через двор</h3><p class="params">Москва · 7 этаж · окно на юго-восток · 25-этажная башня в 40 м</p><div class="ex-out"><p class="hint">Считаем…</p></div><button class="btn btn-line" type="button">Открыть в калькуляторе</button></article>
-      <article class="card ex-card reveal" data-preset="1"><h3>Вечернее солнце у моря</h3><p class="params">Сочи · 3 этаж · окно на запад · пятиэтажка в 60 м</p><div class="ex-out"><p class="hint">Считаем…</p></div><button class="btn btn-line" type="button">Открыть в калькуляторе</button></article>
+      <article class="card ex-card reveal" data-preset="0"><h3>Башня через двор</h3><p class="params">Москва · 7 этаж · окно на юго-восток · 25-этажная башня в&nbsp;40&nbsp;м</p><div class="ex-out"><p class="hint">Считаем…</p></div><button class="btn btn-line" type="button">Открыть в калькуляторе</button></article>
+      <article class="card ex-card reveal" data-preset="1"><h3>Вечернее солнце у моря</h3><p class="params">Сочи · 3 этаж · окно на запад · пятиэтажка в&nbsp;60&nbsp;м</p><div class="ex-out"><p class="hint">Считаем…</p></div><button class="btn btn-line" type="button">Открыть в калькуляторе</button></article>
       <article class="card ex-card reveal" data-preset="2"><h3>Северные окна</h3><p class="params">Петербург · 12 этаж · окно на север · двор свободен</p><div class="ex-out"><p class="hint">Считаем…</p></div><button class="btn btn-line" type="button">Открыть в калькуляторе</button></article>
-      <article class="card ex-card reveal" data-preset="3"><h3>Второй этаж за девятиэтажкой</h3><p class="params">Казань · 2 этаж · окно на юг · 9 этажей в 25 м</p><div class="ex-out"><p class="hint">Считаем…</p></div><button class="btn btn-line" type="button">Открыть в калькуляторе</button></article>
+      <article class="card ex-card reveal" data-preset="3"><h3>Второй этаж за девятиэтажкой</h3><p class="params">Казань · 2 этаж · окно на юг · 9&nbsp;этажей в&nbsp;25&nbsp;м</p><div class="ex-out"><p class="hint">Считаем…</p></div><button class="btn btn-line" type="button">Открыть в калькуляторе</button></article>
     </div>
   </div>
 </section>
@@ -295,8 +296,8 @@
     <p class="eyebrow reveal">Сравните две квартиры</p>
     <h2 id="cmp-h" class="reveal">Две квартиры, один двор, разница в часах</h2>
     <div class="cards2" id="cmp-intro-grid">
-      <article class="card ex-card reveal" data-az="135" data-floor="7"><h3>Квартира А · 7 этаж, окна на юго-восток</h3><p class="params">Москва · башня 25 этажей в 40 м · обеденная сторона</p><div class="ex-out"><p class="hint">Считаем…</p></div></article>
-      <article class="card ex-card reveal" data-az="315" data-floor="12"><h3>Квартира Б · 12 этаж, окна на северо-запад</h3><p class="params">Москва · та же башня · северная сторона, прямого солнца почти нет</p><div class="ex-out"><p class="hint">Считаем…</p></div></article>
+      <article class="card ex-card reveal" data-az="135" data-floor="7"><h3>Квартира А · 7 этаж, окна на юго-восток</h3><p class="params">Москва · башня 25 этажей в&nbsp;40&nbsp;м · обеденная сторона</p><div class="ex-out"><p class="hint">Считаем…</p></div></article>
+      <article class="card ex-card reveal" data-az="0" data-floor="12"><h3>Квартира Б · 12 этаж, окна на север</h3><p class="params">Москва · та же башня · северная сторона, прямого солнца почти нет</p><div class="ex-out"><p class="hint">Считаем…</p></div></article>
       <p class="cmp-diff reveal" id="intro-diff"></p>
     </div>
     <p class="center reveal"><button class="btn btn-lg" type="button" id="open-compare">Открыть сравнение</button></p>
@@ -314,7 +315,8 @@
           <div class="brand-head"><span class="brand-logo">Логотип агентства</span><span>Анна Соколова · +7 900 000-00-00</span></div>
           <p class="brand-title">Отчёт об инсоляции · ЖК «Полярис», 7 этаж</p>
           <div class="mini-cal"><i style="--h:8%;--i:0" class="lo"></i><i style="--h:23%;--i:1" class="lo"></i><i style="--h:49%;--i:2"></i><i style="--h:74%;--i:3"></i><i style="--h:91%;--i:4"></i><i style="--h:100%;--i:5"></i><i style="--h:96%;--i:6"></i><i style="--h:83%;--i:7"></i><i style="--h:58%;--i:8"></i><i style="--h:34%;--i:9" class="lo"></i><i style="--h:13%;--i:10" class="lo"></i><i style="--h:4%;--i:11" class="lo"></i></div>
-          <p class="brand-foot">Норма выполняется · утренняя сторона · 1 240 ч в год</p>
+          <dl class="brand-rows"><div><dt>Зима</dt><dd>1,1 ч в день</dd></div><div><dt>Весна</dt><dd>4,6 ч в день</dd></div><div><dt>Лето</dt><dd>6,2 ч в день</dd></div><div><dt>Осень</dt><dd>2,3 ч в день</dd></div></dl>
+          <p class="brand-foot">Норма выполняется · утренняя сторона · 1&nbsp;240 ч в год</p>
         </div>
         <h3>Брендированные отчёты</h3>
         <p>PDF с вашим логотипом и контактами на каждой странице. Клиент получает цифры, вы — аргумент, который не нужно доказывать словами.</p>
@@ -326,15 +328,15 @@
             <p class="widget-title">Солнце в каждой квартире · Полдень</p>
             <div class="widget-floors" id="widget-floors" role="group" aria-label="Этаж"><button class="chip" type="button" data-f="3" aria-pressed="false">3 этаж</button><button class="chip" type="button" data-f="9" aria-pressed="true">9 этаж</button><button class="chip" type="button" data-f="16" aria-pressed="false">16 этаж</button></div>
             <svg id="widget-plan" viewBox="0 0 320 200" role="img" aria-label="Генплан: две секции, восемь квартир с часами солнца">
-              <text class="lbl" x="120" y="16" text-anchor="middle">север</text><text class="lbl" x="120" y="140" text-anchor="middle">16-этажный дом в 60 м</text><rect class="nb" x="60" y="146" width="120" height="14"/><rect class="nb" x="6" y="40" width="14" height="80"/><text class="lbl" x="13" y="132" text-anchor="middle">9</text>
+              <text class="lbl" x="120" y="16" text-anchor="middle">север</text><text class="lbl" x="120" y="140" text-anchor="middle">16 эт. · 60 м</text><rect class="nb" x="60" y="146" width="120" height="14"/><rect class="nb" x="6" y="40" width="14" height="80"/><text class="lbl" x="13" y="132" text-anchor="middle">9</text>
               <g class="apt" data-az="0"><rect x="40" y="40" width="80" height="40"/><text x="80" y="56" text-anchor="middle">кв. 1</text><text class="v" x="80" y="70" text-anchor="middle">…</text></g>
               <g class="apt" data-az="0"><rect x="120" y="40" width="80" height="40"/><text x="160" y="56" text-anchor="middle">кв. 2</text><text class="v" x="160" y="70" text-anchor="middle">…</text></g>
               <g class="apt" data-az="180"><rect x="40" y="80" width="80" height="40"/><text x="80" y="96" text-anchor="middle">кв. 3</text><text class="v" x="80" y="110" text-anchor="middle">…</text></g>
               <g class="apt" data-az="180"><rect x="120" y="80" width="80" height="40"/><text x="160" y="96" text-anchor="middle">кв. 4</text><text class="v" x="160" y="110" text-anchor="middle">…</text></g>
-              <g class="apt" data-az="270"><rect x="230" y="30" width="40" height="70"/><text x="250" y="61" text-anchor="middle">кв. 5</text><text class="v" x="250" y="75" text-anchor="middle">…</text></g>
-              <g class="apt" data-az="270"><rect x="230" y="100" width="40" height="70"/><text x="250" y="131" text-anchor="middle">кв. 6</text><text class="v" x="250" y="145" text-anchor="middle">…</text></g>
-              <g class="apt" data-az="90"><rect x="270" y="30" width="40" height="70"/><text x="290" y="61" text-anchor="middle">кв. 7</text><text class="v" x="290" y="75" text-anchor="middle">…</text></g>
-              <g class="apt" data-az="90"><rect x="270" y="100" width="40" height="70"/><text x="290" y="131" text-anchor="middle">кв. 8</text><text class="v" x="290" y="145" text-anchor="middle">…</text></g>
+              <g class="apt" data-az="270"><rect x="222" y="30" width="47" height="70"/><text x="245.5" y="61" text-anchor="middle">кв. 5</text><text class="v" x="245.5" y="75" text-anchor="middle">…</text></g>
+              <g class="apt" data-az="270"><rect x="222" y="100" width="47" height="70"/><text x="245.5" y="131" text-anchor="middle">кв. 6</text><text class="v" x="245.5" y="145" text-anchor="middle">…</text></g>
+              <g class="apt" data-az="90"><rect x="269" y="30" width="47" height="70"/><text x="292.5" y="61" text-anchor="middle">кв. 7</text><text class="v" x="292.5" y="75" text-anchor="middle">…</text></g>
+              <g class="apt" data-az="90"><rect x="269" y="100" width="47" height="70"/><text x="292.5" y="131" text-anchor="middle">кв. 8</text><text class="v" x="292.5" y="145" text-anchor="middle">…</text></g>
             </svg>
             <p class="widget-out">Часы прямого солнца летом · зелёные — норма выполняется</p>
           </div>
@@ -352,11 +354,11 @@
     <p class="eyebrow reveal">Тарифы</p>
     <h2 id="price-h" class="reveal">Дешевле одного часа у юриста</h2>
     <div class="cards3 plans">
-      <article class="card plan reveal"><h3>Отчёт</h3><p class="price">490 ₽<small>разово</small></p><ul><li>PDF по одной квартире</li><li>Календарь, часы, норма</li><li>Метка стороны и схема двора</li></ul><a class="btn btn-line" href="#demo">Купить отчёт</a></article>
-      <article class="card plan plan-hot reveal"><span class="tag">Чаще всего</span><h3>Выбор</h3><p class="price">990 ₽<small>разово</small></p><ul><li>До 5 квартир</li><li>Сравнение рядом</li><li>Одна ссылка на все расчёты</li><li>PDF по каждой квартире</li></ul><a class="btn" href="#demo">Сравнить квартиры</a></article>
-      <article class="card plan reveal"><h3>Риелтор</h3><p class="price">1 990 ₽<small>в месяц</small></p><ul><li>Безлимит расчётов</li><li>Брендированные PDF с логотипом и контактами</li><li>Ссылки для клиентов</li></ul><a class="btn btn-line" href="#pro">Подключить</a></article>
+      <article class="card plan reveal"><h3>Отчёт</h3><p class="price">490 ₽<small>разово</small></p><ul><li>PDF по одной квартире без пометки «черновик»</li><li>Календарь, часы, норма</li><li>Метка стороны и схема двора</li></ul><a class="btn btn-line" href="#demo">Начать с черновика</a></article>
+      <article class="card plan plan-hot reveal"><span class="tag">Чаще всего</span><h3>Выбор</h3><p class="price">990 ₽<small>разово</small></p><ul><li>До 5 квартир</li><li>Сравнение рядом</li><li>Одна ссылка на все расчёты</li><li>PDF по каждой квартире</li></ul><a class="btn" href="#compare">Сравнить две квартиры</a></article>
+      <article class="card plan reveal"><h3>Риелтор</h3><p class="price">1 990 ₽<small>в месяц</small></p><ul><li>Безлимит расчётов</li><li>Брендированные PDF с логотипом и контактами</li><li>Ссылки для клиентов</li></ul><a class="btn btn-line" href="mailto:hello@polden.ru?subject=Тариф «Риелтор»">Написать нам</a></article>
     </div>
-    <p class="dev-line reveal">Застройщикам — виджет «Солнце в каждой квартире» для ЖК от <b>29 900 ₽/мес</b> за объект, <a href="mailto:hello@polden.ru">напишите нам</a>.</p>
+    <p class="dev-line reveal">Застройщикам — виджет «Солнце в каждой квартире» для ЖК от <b>29&nbsp;900&nbsp;₽/мес</b> за объект, <a href="mailto:hello@polden.ru">напишите&nbsp;нам</a>.</p>
     <p class="unit reveal">Себестоимость расчёта — 0 ₽: он идёт в браузере покупателя. Хостинг — до 3 000 ₽ в месяц. Поисковый трафик с конверсией 2,5% даёт 100–200 ₽ за платящего при марже отчёта около 90%. LTV: покупатель ≈ 700 ₽, риелтор ≈ 12 000 ₽ за 6 месяцев, застройщик ≈ 360 000 ₽. 20 ЖК на виджете — 600 000 ₽ в месяц.</p>
   </div>
 </section>
@@ -371,7 +373,7 @@
     <details class="reveal"><summary>Учитываются ли деревья и рельеф?</summary><p>Нет. Деревья меняются по сезонам, а рельеф редко влияет на инсоляцию выше второго этажа. Если перед окном холм или лесополоса — нарисуйте их как низкий «дом».</p></details>
     <details class="reveal"><summary>Что значит норма 2,5 часа?</summary><p>Прямое солнце должно попадать в комнату не меньше 2,5 часа подряд каждый день с 22 марта по 22 сентября. Полдень проверяет каждый день периода и показывает худший — с датой и длиной непрерывной серии.</p></details>
     <details class="reveal"><summary>Подойдёт ли отчёт для спора с застройщиком?</summary><p>Как аргумент на переговорах — да: цифры и схема двора говорят сами за себя. Для суда нужна экспертиза аккредитованной организации, и наш отчёт помогает понять, стоит ли её заказывать.</p></details>
-    <details class="reveal"><summary>Можно ли вернуть деньги?</summary><p>Да, в течение 14 дней без объяснения причин. Сам расчёт бесплатный, платные только PDF и сравнение нескольких квартир.</p></details>
+    <details class="reveal"><summary>Можно ли вернуть деньги?</summary><p>Да, в течение 14 дней без объяснения причин. Расчёт, сравнение двух квартир и PDF с пометкой «черновик» бесплатны; платные — чистый PDF, до 5 квартир в одной ссылке и брендирование.</p></details>
   </div>
 </section>
 
@@ -386,18 +388,19 @@
 </main>
 
 <footer class="footer">
+  <div class="wrap foot-notes">
+    <details id="method"><summary>Методика расчёта</summary><p>Положение солнца считается для каждого из 365 дней с шагом 10 минут с 05:00 до 21:00: склонение δ = 23,44° · sin(360/365 · (N − 81)), уравнение времени E = 9,87 sin 2B − 7,53 cos B − 1,5 sin B, солнечное время = местное + 4 · (долгота − 15 · пояс) + E, часовой угол H = 15° · (солнечное время − 12); высота и азимут — по сферической тригонометрии для широты города. Минута засчитывается, если солнце выше 1°, отклонение от оси окна не больше 85° и луч из центра окна (высота (этаж − 1) × 3 + 1,5 м) не упирается ни в один соседний дом: прямоугольник дома проверяется slab-методом, высота луча в точке пересечения сравнивается с высотой дома. Норма — СанПиН 1.2.3685-21 для центральной зоны: 150 минут непрерывно каждый день с 22 марта по 22 сентября. Расчёт ориентировочный, не заменяет экспертизу по инсоляции.</p></details>
+    <details id="policy"><summary>Политика</summary><p>Полдень не собирает персональные данные: расчёт идёт в вашем браузере, на сервер ничего не отправляется. Сохранённые расчёты лежат в localStorage вашего браузера (ключ polden:projects) и удаляются вместе с его данными. Параметры расчёта кодируются в ссылку, которой вы делитесь сами. Cookies и счётчики не используются. Вопросы — hello@polden.ru.</p></details>
+  </div>
   <div class="wrap">
     <span>© <span id="year">2026</span> Полдень</span>
-    <nav aria-label="Футер"><a href="#norm">Методика расчёта</a><a href="#top">Политика</a><a href="mailto:hello@polden.ru">hello@polden.ru</a></nav>
+    <nav aria-label="Футер"><a href="#method">Методика расчёта</a><a href="#policy">Политика</a><a href="mailto:hello@polden.ru">hello@polden.ru</a></nav>
   </div>
 </footer>
 
 <!-- Печатная страница отчёта (видна только при печати) -->
-<section id="print" aria-hidden="true">
-  <h1>Полдень · Отчёт об инсоляции</h1>
-  <p id="print-params"></p>
+<section id="print" aria-hidden="true" data-caveat="Расчёт ориентировочный, не заменяет экспертизу по инсоляции. Дома заданы пользователем, деревья, рельеф и козырьки не учитываются. Норма — СанПиН 1.2.3685-21: 2,5 ч непрерывно каждый день с 22 марта по 22 сентября.">
   <canvas id="print-canvas"></canvas>
-  <p class="caveat">Расчёт ориентировочный, не заменяет экспертизу по инсоляции. Положение солнца рассчитано по астрономическим формулам с шагом 10 минут; соседние дома заданы пользователем; деревья, рельеф, козырьки и лоджии не учитываются. Норма: СанПиН 1.2.3685-21, центральная зона, 2,5 часа непрерывно, 22 марта — 22 сентября.</p>
 </section>
 
 <script src="app.js"></script>

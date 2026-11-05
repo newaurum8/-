@@ -13,7 +13,7 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="spool" viewBox="0 0 44 28"><rect x="2" y="1" width="40" height="26" fill="#6B4F3A"/><rect x="3" y="2" width="38" height="1" fill="#A88C70"/><g style="opacity:var(--wind,1)"><rect x="8" y="4" width="28" height="20" style="fill:var(--c,#C8553D)"/><g fill="rgba(43,38,34,.28)"><rect x="11" y="4" width="1" height="20"/><rect x="15" y="4" width="1" height="20"/><rect x="19" y="4" width="1" height="20"/><rect x="23" y="4" width="1" height="20"/><rect x="27" y="4" width="1" height="20"/><rect x="31" y="4" width="1" height="20"/></g></g><rect x="2" y="1" width="6" height="26" fill="#8C6B50"/><rect x="36" y="1" width="6" height="26" fill="#8C6B50"/><path style="opacity:var(--tick,0)" d="M31 22l4 4 7-8" fill="none" stroke="#2B2622" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="spool" viewBox="0 0 44 28"><rect x="2" y="1" width="40" height="26" fill="#6B4F3A"/><rect x="3" y="2" width="38" height="1" fill="#A88C70"/><g style="transform:scaleY(var(--wind,1));transform-origin:22px 24px"><rect x="8" y="4" width="28" height="20" style="fill:var(--c,#C8553D)"/><g fill="rgba(43,38,34,.28)"><rect x="11" y="4" width="1" height="20"/><rect x="15" y="4" width="1" height="20"/><rect x="19" y="4" width="1" height="20"/><rect x="23" y="4" width="1" height="20"/><rect x="27" y="4" width="1" height="20"/><rect x="31" y="4" width="1" height="20"/></g></g><rect x="2" y="1" width="6" height="26" fill="#8C6B50"/><rect x="36" y="1" width="6" height="26" fill="#8C6B50"/><path style="opacity:var(--tick,0)" d="M31 22l4 4 7-8" fill="none" stroke="#2B2622" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="st-romb" viewBox="0 0 16 16"><path d="M8 1l7 7-7 7-7-7z" fill="currentColor"/></symbol>
   <symbol id="st-krest" viewBox="0 0 16 16"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
   <symbol id="st-zigzag" viewBox="0 0 16 16"><path d="M1 11l4-6 4 6 4-6 2 3" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
@@ -26,7 +26,7 @@
     <span>Ковёр</span>
   </a>
   <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Открыть меню"><i></i><i></i><i></i></button>
-  <nav class="menu" id="menu">
+  <nav class="menu" id="menu" aria-label="Разделы">
     <a href="#demo">Станок</a><a href="#gallery">Узоры</a><a href="#wall">Постер</a><a href="#pricing">Тарифы</a><a href="#faq">Вопросы</a>
     <a class="btn btn-accent nav-cta" href="#demo">Начать ковёр</a>
   </nav>
@@ -54,7 +54,7 @@
     <div class="loom-stage" id="hero-stage">
       <div class="frame"><canvas id="hero-loom" aria-label="Станок: полотно последних месяцев, по ряду на день"></canvas></div>
       <canvas class="ruler" id="hero-ruler" aria-hidden="true"></canvas>
-      <div class="tip" id="hero-tip" role="status" aria-live="polite"></div>
+      <div class="tip" id="hero-tip" role="tooltip"></div>
     </div>
     <div class="loom-caption">
       <span id="hero-note">6 привычек, последние месяцы года. Нажми катушку — вплети сегодняшний ряд.</span>
@@ -72,18 +72,17 @@
 <section id="why" class="why">
   <div class="sec-head reveal"><p class="eyebrow">Почему трекеры умирают</p><h2>Таблицу не жалко. Ковёр — жалко</h2></div>
   <div class="tags">
-    <article class="tag reveal"><span class="tag-n">01</span><h3>Таблица галочек — её не жалко</h3><p>Пропустил неделю, закрыл приложение — и ничего не потерял. Ряд галочек ничего не держит, потому что ничего не весит.</p></article>
+    <article class="tag reveal"><span class="tag-n">01</span><h3>Таблица галочек — её не жалко</h3><p>Пропустишь неделю, закроешь приложение — и ничего не потеряешь. Ряд галочек ничего не держит, потому что ничего не весит.</p></article>
     <article class="tag reveal"><span class="tag-n">02</span><h3>Нечего показать</h3><p>Статистика в настройках — не то, что хочется отправить подруге или повесить над столом. Цифры не висят на стене.</p></article>
     <article class="tag reveal"><span class="tag-n">03</span><h3>Нет артефакта, который страшно испортить</h3><p>Бумажный планер жалко заляпать. Приложение — нет. Пока в нём не появится вещь, которую ты сделала руками.</p></article>
-    <article class="tag tag-yes reveal"><span class="tag-n">→</span><h3>Ковёр — есть</h3><p>Каждая галочка — настоящий стежок на полотне. Пропуск — тоже часть узора, но прореху видно. Поэтому ряды не хочется бросать.</p>
-      <dl class="nums">
-        <div><dt><span data-count="1">0</span></dt><dd>день = ряд</dd></div>
-        <div><dt><span data-count="7">0</span></dt><dd>дней = окантовка</dd></div>
-        <div><dt><span data-count="30">0</span></dt><dd>дней = медальон</dd></div>
-        <div><dt><span data-count="365">0</span></dt><dd>рядов = постер</dd></div>
-      </dl>
-    </article>
+    <article class="tag tag-yes reveal"><span class="tag-n">04</span><h3>Ковёр — есть</h3><p>Каждая галочка — настоящий стежок на полотне. Пропуск — тоже часть узора, но прореху видно. Поэтому ряды не хочется бросать.</p></article>
   </div>
+  <dl class="nums-bar reveal">
+    <div><dt><span data-count="1">0</span></dt><dd>день = ряд</dd></div>
+    <div><dt><span data-count="7">0</span></dt><dd>дней = окантовка</dd></div>
+    <div><dt><span data-count="30">0</span></dt><dd>дней = медальон</dd></div>
+    <div><dt><span data-count="365">0</span></dt><dd>рядов = постер</dd></div>
+  </dl>
 </section>
 
 <div class="orn" data-seed="чтение" aria-hidden="true"></div>
@@ -143,7 +142,7 @@
             <label>Дата старта<input id="start" type="date"></label>
             <label>Название ковра<input id="cname" type="text" maxlength="28" value="Осень-2026"></label>
           </div>
-          <p class="hint">Со старта до сегодня появятся ряды — их можно будет заполнить задним числом не дальше двух дней. Остальное дорисует «Показать год».</p>
+          <p class="hint">Со старта (не раньше чем два года назад) до сегодня появятся ряды. Задним числом отмечаются только вчера и позавчера, остальное останется пустым утком.</p>
           <div class="step-nav"><button class="btn btn-line" id="back2" type="button">Назад</button><button class="btn btn-accent" id="weave" type="button">Соткать</button></div>
         </div>
       </div>
@@ -164,12 +163,13 @@
         <label class="btn btn-line file"><input type="file" id="import" accept="application/json,.json"><span>Импорт JSON</span></label>
         <button class="btn btn-line" id="reset" type="button">Сбросить</button>
       </div>
-      <p class="hint" id="status" role="status" aria-live="polite">Пример: 3 привычки, 3 недели. Отметь сегодня или соткай заново со своими.</p>
+      <p class="hint" id="status" role="status" aria-live="polite">Пример: 3 привычки, 4 недели. Отметь сегодня или соткай заново со своими.</p>
     </div>
 
     <div class="loom-col reveal">
       <div class="loom-bar">
-        <span class="loom-title" id="loom-title">Осень-2026 · 21 ряд</span>
+        <span class="loom-title" id="loom-title">Осень-2026 · 28 рядов</span>
+        <button class="icon-btn" id="unyear" type="button" hidden>вернуть мой ковёр</button>
         <div class="zoom" role="group" aria-label="Масштаб полотна">
           <button class="icon-btn" id="zoom-out" type="button" aria-label="Уменьшить">−</button>
           <span class="zoom-val" id="zoom-val">100%</span>
@@ -180,10 +180,10 @@
       <div class="loom-stage" id="demo-stage">
         <div class="frame"><canvas id="demo-loom" aria-label="Полотно твоего ковра: по ряду на день"></canvas></div>
         <canvas class="ruler" id="demo-ruler" aria-hidden="true"></canvas>
-        <div class="tip" id="demo-tip" role="status" aria-live="polite"></div>
+        <div class="tip" id="demo-tip" role="tooltip"></div>
       </div>
       <dl class="stats" id="stats">
-        <div><dt>рядов</dt><dd id="st-rows">21</dd></div>
+        <div><dt>рядов</dt><dd id="st-rows">28</dd></div>
         <div><dt>соткано</dt><dd id="st-fill">0%</dd></div>
         <div><dt>лучшая серия</dt><dd id="st-streak">0</dd></div>
         <div><dt>медальонов</dt><dd id="st-medals">0</dd></div>
@@ -244,7 +244,7 @@
       <p class="order-price"><span id="order-price">1 990 ₽</span><small id="order-note">печать на бумаге 300 г, тубус, доставка по РФ</small></p>
       <form id="order-form" class="order-form">
         <label>Имя<input id="o-name" type="text" required maxlength="40" autocomplete="name"></label>
-        <label>Телефон<input id="o-phone" type="tel" required inputmode="tel" placeholder="+7 900 000-00-00" autocomplete="tel"></label>
+        <label>Телефон<input id="o-phone" type="tel" required inputmode="tel" placeholder="+7 900 000-00-00" pattern="[0-9+\s\(\)\-]{10,18}" title="Телефон, например +7 900 000-00-00" autocomplete="tel"></label>
         <label>Адрес<input id="o-addr" type="text" required maxlength="120" autocomplete="street-address"></label>
         <button class="btn btn-accent" type="submit" id="order-btn">Заказать</button>
         <p class="hint" id="order-status" role="status" aria-live="polite">Заказ сохраняется в браузере — это демо без оплаты.</p>
@@ -284,7 +284,7 @@
 
 <!-- FAQ -->
 <section id="faq" class="faq">
-  <div class="sec-head reveal"><p class="eyebrow">Вопросы</p><h2>Про пропуски, данные и подарки</h2></div>
+  <div class="sec-head reveal"><p class="eyebrow">Вопросы</p><h2>Про пропуски, данные и&nbsp;подарки</h2></div>
   <div class="qa">
     <details class="reveal"><summary>Что будет, если пропущу день?</summary><p>Ряд останется, но сегмент пропущенной привычки будет соткан пустым утком — светлой нитью. Пропуск — тоже часть узора. Серия прервётся, окантовка начнётся заново через семь дней.</p></details>
     <details class="reveal"><summary>Можно ли отметить вчера?</summary><p>Да, вчера и позавчера: у этих рядов есть кнопка «исправить». Глубже — нельзя, иначе ковёр превратится в таблицу, которую дорисовывают в конце месяца.</p></details>

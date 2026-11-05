@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230F1A14'/><rect x='4' y='4' width='11' height='11' fill='%23F2B134'/><rect x='17' y='4' width='11' height='11' fill='%2386C5F0'/><rect x='4' y='17' width='11' height='11' fill='%23E88A6A'/><rect x='17' y='17' width='11' height='11' fill='%23B59BE0'/></svg>">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%230F1A14'/%3E%3Crect%20x='4'%20y='4'%20width='11'%20height='11'%20fill='%23F2B134'/%3E%3Crect%20x='17'%20y='4'%20width='11'%20height='11'%20fill='%2386C5F0'/%3E%3Crect%20x='4'%20y='17'%20width='11'%20height='11'%20fill='%23E88A6A'/%3E%3Crect%20x='17'%20y='17'%20width='11'%20height='11'%20fill='%23B59BE0'/%3E%3C/svg%3E">
 </head>
 <body>
 <header class="nav" id="nav">
@@ -53,8 +53,8 @@
 
 <section class="pain" aria-label="Почему Excel не справляется">
   <div class="pain-grid">
-    <div class="pain-item reveal"><p class="big"><span data-count="2">2</span>–<span data-count="4">4</span> часа</p><p>уходит у администратора на график в Excel каждый месяц. Смена считает за секунду, вы только правите.</p></div>
-    <div class="pain-item reveal"><p class="big"><span data-count="40">40</span> ч/нед</p><p>норма, которую легко нарушить незаметно. Excel не знает, что Нина в отпуске, и не считает отдых между сменами.</p></div>
+    <div class="pain-item reveal"><p class="big"><span data-count="2">2</span>–<span data-count="4">4</span>&nbsp;часа</p><p>уходит у администратора на график в Excel каждый месяц. Смена считает за секунду, вы только правите.</p></div>
+    <div class="pain-item reveal"><p class="big"><span data-count="40">40</span>&nbsp;ч/нед</p><p>норма, которую легко нарушить незаметно. Excel не знает, что Нина в отпуске, и не считает отдых между сменами.</p></div>
     <div class="pain-item reveal"><p class="big">день смены</p><p>момент, когда обычно находят дыру в покрытии. Здесь дыра видна до дня смены, а не в день смены.</p></div>
   </div>
 </section>
@@ -73,12 +73,23 @@
         <div class="field"><label class="label" for="month">Месяц</label><input type="month" id="month" value="2026-11"></div>
         <div class="field"><span class="label">Часы работы</span><div class="row"><select id="open" aria-label="Час открытия"></select><span class="dash">—</span><select id="close" aria-label="Час закрытия"></select></div></div>
         <div class="field"><span class="label">Длина смены</span><div class="seg" id="len"><button type="button" data-l="8" aria-pressed="false">8 ч</button><button type="button" data-l="10" aria-pressed="true">10 ч</button><button type="button" data-l="12" aria-pressed="false">12 ч</button></div></div>
-        <div class="field"><span class="label">Требуемое покрытие по часам, человек</span><div class="hist" id="hist"></div><p class="hint">Тяните столбики или меняйте стрелками. Каждый час нужен хотя бы один старший: бариста или администратор.</p></div>
+        <div class="field"><span class="label">Покрытие по часам, человек</span><div class="hist" id="hist"></div><p class="hint">Тяните столбики или меняйте стрелками; на телефоне ряд листается вбок. В каждый час нужен старший: бариста или администратор.</p></div>
       </div>
       <div class="people">
         <div class="people-head"><span class="label">Сотрудники · <b id="emp-n">0</b></span><div class="row"><button class="btn btn-sm btn-line" id="add" type="button">+ Сотрудник</button><button class="btn btn-sm btn-amber" id="example" type="button">Заполнить примером</button></div></div>
-        <div class="emp-head" aria-hidden="true"><span>Имя</span><span>Роль</span><span>Норма, ч/нед</span><span>Нежелательные дни</span><span>Отпуск, числа</span><span></span></div>
-        <div class="emp-list" id="emps"></div>
+        <div class="emp-head label" aria-hidden="true"><span>Имя</span><span>Роль</span><span>Норма</span><span>Нежелательные дни</span><span>Отпуск, числа</span><span></span></div>
+        <div class="emp-list" id="emps"><p class="empty-note">Список пуст. Добавьте людей или нажмите «Заполнить примером».</p></div>
+    <template id="emp-t"><div class="emp">
+      <button type="button" class="emp-sum" aria-expanded="false"><b></b><span></span></button>
+      <div class="emp-f">
+        <input class="emp-name" type="text" aria-label="Имя" maxlength="14">
+        <select class="emp-role" aria-label="Роль"><option value="0">бариста</option><option value="1">кассир</option><option value="2">повар</option><option value="3">администратор</option></select>
+        <select class="emp-norm" aria-label="Норма, ч/нед"><option value="20">20 ч</option><option value="30">30 ч</option><option value="40">40 ч</option></select>
+        <div class="days" role="group" aria-label="Нежелательные дни"><button type="button" class="chip" data-k="0" aria-pressed="false">Пн</button><button type="button" class="chip" data-k="1" aria-pressed="false">Вт</button><button type="button" class="chip" data-k="2" aria-pressed="false">Ср</button><button type="button" class="chip" data-k="3" aria-pressed="false">Чт</button><button type="button" class="chip" data-k="4" aria-pressed="false">Пт</button><button type="button" class="chip" data-k="5" aria-pressed="false">Сб</button><button type="button" class="chip" data-k="6" aria-pressed="false">Вс</button></div>
+        <div class="vac"><span>отпуск</span><input class="vac-a" type="number" min="1" max="31" aria-label="Отпуск с" placeholder="с"><span>—</span><input class="vac-b" type="number" min="1" max="31" aria-label="Отпуск по" placeholder="по"></div>
+        <button type="button" class="del" aria-label="Удалить">×</button>
+      </div>
+    </div></template>
       </div>
     </div>
   </div>
@@ -87,7 +98,7 @@
     <div class="panel-head"><span class="num">02</span><h3>Механика</h3><span class="note">жадный проход + отжиг в Web Worker</span></div>
     <div class="run-grid">
       <div class="run-actions"><button class="btn btn-amber btn-lg" id="run" type="button">Составить</button><button class="btn btn-line" id="shuffle" type="button">Перемешать</button><span class="seed">seed <b id="seed">1</b></span></div>
-      <div class="progress"><div class="bar" aria-hidden="true"><i id="pbar"></i></div><p id="pstat" aria-live="polite">Нажмите «Составить»</p></div>
+      <div class="progress"><div class="track" aria-hidden="true"><i id="pbar"></i></div><p id="pstat" aria-live="polite">Нажмите «Составить»</p></div>
       <div class="viol-box">
         <details id="viol-det"><summary>нарушений: <b id="vn">—</b></summary><ul id="vlist"></ul></details>
         <p class="cost" id="cost">стоимость графика появится после расчёта</p>
@@ -102,7 +113,7 @@
       <div class="sel-tools"><span id="sel-name">Щёлкните по ячейке</span><button class="btn btn-sm btn-line" id="freeze" type="button">Заморозить</button><button class="btn btn-sm btn-line" id="shift" type="button">Сдвинуть старт</button><button class="btn btn-sm btn-line" id="remove" type="button">Убрать смену</button></div>
     </div>
     <p class="print-head" aria-hidden="true"><b>Смена</b> · <span id="print-title"></span></p>
-    <div class="grid-wrap" id="grid-wrap"><div class="grid" id="grid"></div></div>
+    <div class="grid-wrap" id="grid-wrap"><div class="grid" id="grid"><p class="empty-note" style="padding:16px 20px">Сетка появится, когда будут сотрудники.</p></div></div>
     <div class="export-row">
       <button class="btn btn-line" id="print" type="button">Печать А4</button>
       <button class="btn btn-line" id="csv" type="button">Скачать CSV</button>
@@ -148,7 +159,7 @@
     <article class="card reveal">
       <svg viewBox="0 0 160 100" aria-hidden="true"><rect x="40" y="8" width="80" height="84" fill="none" stroke="#F1E9D6" stroke-width="2"/><rect x="40" y="8" width="80" height="16" fill="#F1E9D6"/><g fill="#2A3A30"><rect x="48" y="32" width="14" height="10"/><rect x="66" y="32" width="14" height="10"/><rect x="84" y="32" width="14" height="10"/><rect x="102" y="32" width="10" height="10"/><rect x="48" y="48" width="14" height="10"/><rect x="84" y="48" width="14" height="10"/><rect x="48" y="64" width="14" height="10"/><rect x="66" y="64" width="14" height="10"/><rect x="102" y="64" width="10" height="10"/></g><g fill="#F2B134"><rect x="66" y="48" width="14" height="10"/><rect x="102" y="48" width="10" height="10"/><rect x="84" y="64" width="14" height="10"/></g></svg>
       <h3>ICS каждому</h3><p>Файл календаря на каждого сотрудника: каждая смена — событие в телефоне с началом и концом.</p>
-      <button class="btn btn-line" id="x-ics" type="button">Скачать ICS</button>
+      <button class="btn btn-line" id="x-ics" type="button">Скачать ICS · Аня</button>
     </article>
     <article class="card reveal">
       <svg viewBox="0 0 160 100" aria-hidden="true"><rect x="20" y="14" width="120" height="72" fill="none" stroke="#F1E9D6" stroke-width="2"/><text x="80" y="66" text-anchor="middle" font-family="Oswald, Impact, sans-serif" font-size="44" font-weight="600" fill="#F2B134">1С:ЗУП</text></svg>
@@ -164,7 +175,7 @@
     <div class="flapline" id="who" aria-hidden="true"></div>
     <span class="vh">кафе, пекарни, аптеки, салона, клиники, магазина</span>
   </div>
-  <p class="who-sub reveal">От 5 до 50 сменных сотрудников, где график сейчас живёт в Excel или в тетради у кассы. Бариста, кассиры, повара, фармацевты, мастера, врачи — роли переименовываются.</p>
+  <p class="sub who-sub reveal">От 5 до 50 сменных сотрудников, где график сейчас живёт в Excel или в тетради у кассы. В демо четыре роли: бариста, кассир, повар, администратор. Фармацевт, мастер или врач встают в ту же сетку — решателю важно только, кто в смене старший.</p>
 </section>
 
 <section id="pricing" class="pricing" aria-labelledby="h-pricing">
@@ -208,7 +219,7 @@
 
 <footer class="footer">
   <span>© 2026 Смена · решатель работает в браузере, данные остаются у вас</span>
-  <nav aria-label="Футер"><a href="#pricing">Оферта</a><a href="#faq">Данные</a><a href="#export">Печать</a></nav>
+  <nav aria-label="Футер"><a href="#pricing">Тарифы</a><a href="#faq">Данные</a><a href="#export">Печать</a></nav>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="app.js"></script>
