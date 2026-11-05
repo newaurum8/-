@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фудкост — какие блюда вас кормят, а какие разоряют</title>
+<meta name="description" content="Фудкост считает себестоимость каждого блюда по базе закупочных цен в 10 городах, раскладывает меню на матрицу «Звёзды, Лошадки, Загадки, Собаки» и показывает, сколько рублей в месяц даст переоценка. Демо работает в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M5 2h22v27l-3-2.5-3 2.5-3-2.5-3 2.5-3-2.5-3 2.5-3-2.5L5 29z' fill='%23fffdf4' stroke='%23171717' stroke-width='2' stroke-linejoin='round'/><rect x='10' y='8' width='12' height='3' fill='%23171717'/><rect x='10' y='14' width='12' height='3' fill='%23d62828'/><rect x='10' y='20' width='7' height='3' fill='%23171717'/></svg>">
+</head>
+<body>
+<header class="nav" id="top">
+  <a class="logo" href="#top" aria-label="Фудкост — на главную"><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 2h22v27l-3-2.5-3 2.5-3-2.5-3 2.5-3-2.5-3 2.5-3-2.5L5 29z" fill="#fff" stroke="#171717" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="8" width="12" height="3" fill="#171717"/><rect x="10" y="14" width="12" height="3" fill="#D62828"/><rect x="10" y="20" width="7" height="3" fill="#171717"/></svg>Фудкост</a>
+  <nav id="menu" class="menu" aria-label="Разделы">
+    <a href="#demo">Демо</a><a href="#matrix">Матрица</a><a href="#techcard">Техкарта</a><a href="#sim">Симулятор</a><a href="#pricing">Тарифы</a><a href="#faq">Вопросы</a>
+  </nav>
+  <a class="btn btn-red nav-cta" href="#demo">Посчитать меню</a>
+  <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+</header>
+
+<main>
+<!-- HERO: живая матрица демо-кафе + ползунок цены + чековый принтер -->
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-head">
+    <div class="reveal">
+      <p class="eyebrow mono">Экономика меню для кафе, баров, пекарен и кофеен</p>
+      <h1 id="h1">Узнайте, какие блюда вас <em class="g">кормят</em>, а какие <em class="r">разоряют</em></h1>
+    </div>
+    <div class="hero-side reveal">
+      <p class="lead">Фудкост считает себестоимость каждого блюда по локальной базе закупочных цен и раскладывает меню на матрицу «Звёзды, Лошадки, Загадки, Собаки». Подвиньте цену ползунком — и увидите, сколько рублей в месяц это даёт, ещё до переоценки меню.</p>
+      <div class="actions"><a class="btn btn-red btn-lg" href="#demo">Посчитать моё меню</a><button class="btn btn-lg" id="hero-demo" type="button">Открыть демо-кафе</button></div>
+    </div>
+  </div>
+  <div class="stage reveal">
+    <div class="board">
+      <canvas id="hero-matrix" role="img" aria-label="Матрица меню демо-кафе: 24 блюда расставлены по популярности и марже"></canvas>
+      <div class="hero-ctl">
+        <label class="ctl-label" for="hero-price">Цена Карбонары: <span class="mono">520 ₽ → <b id="hero-price-out">520 ₽</b></span></label>
+        <input class="range" type="range" id="hero-price" min="520" max="590" step="5" value="520">
+        <div class="delta"><b id="hero-delta" class="mono">+0 ₽</b><span id="hero-note">/мес к прибыли. Подвиньте ползунок: эластичность −1,2 уже учтена</span></div>
+      </div>
+    </div>
+    <div class="printer" aria-live="polite">
+      <div class="slot" aria-hidden="true"></div>
+      <div class="tape" id="tape">
+        <p class="tape-head mono">ФУДКОСТ · ДЕМО-КАФЕ<br>24 блюда · Москва · рекомендации</p>
+        <ol id="tape-lines" class="mono"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- БОЛЬ: чек-лента -->
+<section class="pain" id="pain">
+  <div class="pain-copy reveal">
+    <p class="eyebrow mono">Почему меню работает в минус</p>
+    <h2>Популярное — не значит прибыльное</h2>
+    <p>Хит продаж тащит выручку и тихо съедает прибыль. Себестоимость считали в прошлом году, с тех пор сыр подорожал на 30%, а цена в меню — нет. Фудкост пересчитывает меню по сегодняшним закупочным ценам за один вечер и говорит прямо: что поднять, что урезать, что убрать.</p>
+    <ul class="proof mono">
+      <li><b data-count="400">0</b><span>продуктов в базе</span></li>
+      <li><b data-count="10">0</b><span>городов с ценами</span></li>
+      <li><b data-count="4">0</b><span>квадранта меню</span></li>
+      <li><b>25–35%</b><span>норма фудкоста</span></li>
+    </ul>
+  </div>
+  <div class="receipt reveal" aria-label="Чек: что не так с меню">
+    <p class="r-head">ЧЕК № 0417 · СМЕНА ЗАКРЫТА 23:40</p>
+    <div class="r-line"><span>Себестоимость считали в прошлом году</span><b>−12% маржи</b></div>
+    <div class="r-line"><span>Популярное блюдо работает в минус</span><b>−18 400 ₽/мес</b></div>
+    <div class="r-line"><span>Автоматизация стоит десятки тысяч</span><b>от 60 000 ₽</b></div>
+    <div class="r-total"><span>ИТОГО · Фудкост</span><b>1 990 ₽/мес</b></div>
+    <p class="r-foot">Окупается одной переоценкой. Спасибо, приходите ещё.</p>
+  </div>
+</section>
+
+<!-- ДЕМО: калькулятор себестоимости и матрица -->
+<section class="demo" id="demo">
+  <div class="sec-head reveal">
+    <p class="eyebrow mono">Демо · считает прямо в браузере</p>
+    <h2>Посчитайте своё меню прямо здесь</h2>
+    <p>Выберите город, соберите блюдо из продуктов базы (в демо — 68 самых ходовых) или вставьте продажи из кассы. На выходе — таблица, матрица и прогноз в рублях за месяц. Данные хранятся только в вашем браузере.</p>
+  </div>
+  <div class="toolbar reveal">
+    <label class="field">Город<select id="city"><option value="1">Москва · k 1,00</option><option value=".97">Санкт-Петербург · k 0,97</option><option value=".93">Новосибирск · k 0,93</option><option value=".92">Екатеринбург · k 0,92</option><option value=".9">Казань · k 0,90</option><option value=".9">Нижний Новгород · k 0,90</option><option value=".89">Самара · k 0,89</option><option value=".89">Ростов-на-Дону · k 0,89</option><option value=".88">Краснодар · k 0,88</option><option value=".88">Уфа · k 0,88</option></select></label>
+    <button class="btn btn-red" id="demo-load" type="button">Открыть демо-кафе</button>
+    <button class="btn" id="paste-toggle" type="button" aria-expanded="false" aria-controls="paste-box">Вставить продажи</button>
+    <button class="btn" id="export-csv" type="button">Экспорт CSV</button>
+    <button class="btn" id="print-audit" type="button">PDF-аудит меню</button>
+    <button class="btn btn-ghost" id="demo-clear" type="button">Очистить меню</button>
+    <span class="scenario mono" id="scenario-badge" hidden>сценарий: сырьё +10%</span>
+  </div>
+  <div class="paste card" id="paste-box" hidden>
+    <label for="paste">Название;цена;продано — по строке на блюдо. Подходит выгрузка из iiko, Poster, r_keeper (CSV или TSV)</label>
+    <textarea id="paste" rows="4" placeholder="Карбонара;520;260&#10;Сырники;320;540"></textarea>
+    <div class="row"><button class="btn" id="paste-apply" type="button">Применить к меню</button><span class="hint mono" id="paste-out"></span></div>
+  </div>
+
+  <div class="demo-grid">
+    <form class="card form reveal" id="dish-form" autocomplete="off" novalidate>
+      <h3 id="form-title">Новое блюдо</h3>
+      <label class="field">Название<input id="d-name" type="text" placeholder="Том-ям" required></label>
+      <div class="ing-head mono" aria-hidden="true"><span>Брутто, г</span><span>Отходы, %</span><span>Цена, ₽/кг</span><span>Нетто</span></div>
+      <div class="ings" id="ings"></div>
+      <button type="button" class="btn btn-sm" id="add-ing">+ ингредиент</button>
+      <div class="grid3">
+        <label class="field">Выход, г<input type="number" id="d-yield" min="0" step="1" placeholder="350"></label>
+        <label class="field">Цена, ₽<input type="number" id="d-price" min="1" step="1" placeholder="590" required></label>
+        <label class="field">Продано/мес<input type="number" id="d-sold" min="0" step="1" placeholder="310" required></label>
+      </div>
+      <p class="calc mono" id="d-calc">Себестоимость: 0 ₽ · фудкост —</p>
+      <div class="row"><button class="btn btn-red" type="submit" id="d-submit">Добавить блюдо</button><button class="btn btn-ghost" type="button" id="d-cancel" hidden>Отмена</button></div>
+      <p class="hint" id="form-msg" aria-live="polite"></p>
+      <datalist id="products"></datalist>
+    </form>
+
+    <div class="results">
+      <div class="kpis reveal" id="kpis">
+        <div class="kpi"><span>Блюд в меню</span><b id="k-n" class="mono">0</b></div>
+        <div class="kpi"><span>Фудкост заведения</span><b id="k-fc" class="mono">0%</b></div>
+        <div class="kpi"><span>Выручка, ₽/мес</span><b id="k-rev" class="mono">0</b></div>
+        <div class="kpi"><span>Прибыль, ₽/мес</span><b id="k-profit" class="mono">0</b></div>
+        <div class="kpi kpi-hot"><span>Если принять рекомендации, ₽/мес</span><b id="k-fore" class="mono">+0 ₽</b></div>
+      </div>
+      <div class="mx-wrap card reveal">
+        <canvas id="demo-matrix" role="img" aria-label="Матрица вашего меню. Нажмите на пузырь, чтобы выбрать блюдо"></canvas>
+        <p class="hint mono">Пузырь — блюдо, размер — выручка. Нажмите на пузырь, чтобы открыть техкарту и симулятор.</p>
+      </div>
+      <div class="recs card reveal">
+        <h3>Рекомендации по правилам матрицы</h3>
+        <ol id="recs" class="rec-list"></ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap card reveal">
+    <table id="table" class="mono">
+      <thead><tr>
+        <th scope="col">Блюдо</th><th scope="col">Квадрант</th>
+        <th scope="col"><button type="button" class="sort" data-sort="price">Цена</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="cost">Себест.</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="fc">Фудкост</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="margin">Маржа</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="sold">Продано</button></th>
+        <th scope="col" class="opt"><button type="button" class="sort" data-sort="rev">Выручка</button></th>
+        <th scope="col" class="opt"><button type="button" class="sort" data-sort="profit">Прибыль</button></th>
+        <th scope="col"><span class="vh">Действия</span></th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>Меню пустое. Добавьте блюдо слева или нажмите «Открыть демо-кафе».</p>
+  </div>
+</section>
+
+<!-- МАТРИЦА: объяснитель -->
+<section class="matrix" id="matrix">
+  <div class="sec-head reveal">
+    <p class="eyebrow mono">Матрица Касаваны–Смита</p>
+    <h2>Четыре квадранта вместо интуиции</h2>
+    <p>Каждое блюдо сравнивается с меню по двум осям: доля продаж и маржа с порции. Порог популярности — 70% от средней доли, порог маржи — средняя маржа, взвешенная по продажам. Квадрант подсказывает, что делать.</p>
+  </div>
+  <div class="quads">
+    <article class="quad reveal q-star"><span class="sticker" style="--c:#F2B541;--i:#171717">Звёзды</span><h3>Популярно и маржинально</h3><p>Держать качество, цену не трогать, место в меню — сверху. Это блюда, которые вас кормят.</p><p class="ex mono" data-q="star"></p></article>
+    <article class="quad reveal q-horse"><span class="sticker" style="--c:#2E8B57;--i:#fff">Лошадки</span><h3>Продаются, но маржа ниже средней</h3><p>+5% к цене. Если продажи просядут меньше чем на 8% — оставить. Урезать на 10% самый дорогой ингредиент.</p><p class="ex mono" data-q="horse"></p></article>
+    <article class="quad reveal q-puzzle"><span class="sticker" style="--c:#3C6E9F;--i:#fff">Загадки</span><h3>Маржа высокая, продаж мало</h3><p>Поднять выше в меню, добавить описание, запустить «блюдо дня». Им не хватает внимания, а не цены.</p><p class="ex mono" data-q="puzzle"></p></article>
+    <article class="quad reveal q-dog"><span class="sticker" style="--c:#8C8C8C;--i:#fff">Собаки</span><h3>Ни продаж, ни маржи</h3><p>Убрать из меню или продавать в комбо с Лошадкой. Каждая строка меню стоит внимания гостя.</p><p class="ex mono" data-q="dog"></p></article>
+  </div>
+</section>
+
+<!-- ТЕХКАРТА -->
+<section class="tech" id="techcard">
+  <div class="tech-copy reveal">
+    <p class="eyebrow mono">Техкарта</p>
+    <h2>Техкарта за секунду, а не за вечер</h2>
+    <p>Брутто, нетто, отходы, выход и себестоимость порции — в форме, к которой привыкли шеф и проверяющий. Печатается на A4 или сохраняется в PDF.</p>
+    <label class="field">Блюдо<select id="tc-dish"></select></label>
+    <button class="btn btn-red" id="print-tc" type="button">Распечатать техкарту</button>
+  </div>
+  <article class="tc card reveal" id="tc" aria-live="polite"></article>
+</section>
+
+<!-- СИМУЛЯТОР ЦЕНЫ -->
+<section class="sim" id="sim">
+  <div class="sec-head reveal">
+    <p class="eyebrow mono">Симулятор цены</p>
+    <h2>Сырьё подорожало на 10%. Что делать с ценой?</h2>
+    <p>Два ползунка: насколько подорожала закупка и на сколько вы меняете цену в меню. Эластичность −1,2 означает: цена +10% → продажи −11%. Подставьте свою.</p>
+  </div>
+  <div class="sim-grid">
+    <div class="card sim-ctl reveal">
+      <label class="field">Блюдо<select id="sim-dish"></select></label>
+      <label class="ctl-label" for="sim-raw">Сырьё подорожало на <b id="sim-raw-out" class="mono">10%</b></label>
+      <input class="range" type="range" id="sim-raw" min="0" max="30" step="1" value="10">
+      <label class="ctl-label" for="sim-price">Цена в меню: <b id="sim-price-out" class="mono">520 ₽ (0%)</b></label>
+      <input class="range" type="range" id="sim-price" min="-30" max="30" step="1" value="0">
+      <label class="field">Эластичность спроса<input type="number" id="sim-el" step="0.1" min="-3" max="0" value="-1.2"></label>
+      <button class="btn" id="sim-apply" type="button" aria-pressed="false">Показать сценарий в таблице</button>
+    </div>
+    <div class="card sim-out reveal">
+      <div class="r-lines" id="sim-out"></div>
+      <h3 id="sim-over-title">Фудкост выше 35% при сырье +10%</h3>
+      <ul id="sim-over" class="mono over"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ДЛЯ КОГО: клавиши кассы -->
+<section class="who" id="who">
+  <div class="sec-head reveal"><p class="eyebrow mono">Для кого</p><h2>Клавиша под ваш формат</h2></div>
+  <div class="keys reveal" id="keys">
+    <button class="key" type="button" aria-pressed="true" data-k="cafe">Кафе</button>
+    <button class="key" type="button" aria-pressed="false" data-k="bar">Бар</button>
+    <button class="key" type="button" aria-pressed="false" data-k="bakery">Пекарня</button>
+    <button class="key" type="button" aria-pressed="false" data-k="coffee">Кофейня</button>
+    <button class="key" type="button" aria-pressed="false" data-k="chain">Сеть</button>
+  </div>
+  <div class="key-out reveal" id="key-out" aria-live="polite">
+    <p data-k="cafe">Кафе на 30–60 блюд: норма фудкоста 28–33%. Обычно две-три Лошадки съедают прибыль пяти Звёзд. Переоценка раз в квартал по ценам своего города — матрица показывает, с какой строки меню начать.</p>
+    <p data-k="bar" hidden>Бар: коктейли с фудкостом 15–20% и кухня с 40%. Пороги считаются по вашему меню, а комбо «Собака + Лошадка» вытаскивает закуски, которые иначе лежат мёртвым грузом.</p>
+    <p data-k="bakery" hidden>Пекарня: маржа в рублях маленькая, объёмы большие. +5 ₽ к круассану при 620 штуках в месяц — это +3 100 ₽, а по витрине из 40 позиций — десятки тысяч. Считаем по граммам муки и масла.</p>
+    <p data-k="coffee" hidden>Кофейня: молоко и зерно — 80% себестоимости. Раф на сливках почти всегда Лошадка. Матрица находит, где поднять цену на 10 ₽ без потери гостей, симулятор показывает рубли до переоценки.</p>
+    <p data-k="chain" hidden>Сеть до 10 точек: разные закупочные цены по городам, общие техкарты, сводный фудкост. Видно, в какой точке Карбонара кормит, а в какой разоряет.</p>
+  </div>
+</section>
+
+<!-- ТАРИФЫ -->
+<section class="pricing" id="pricing">
+  <div class="sec-head reveal"><p class="eyebrow mono">Тарифы</p><h2>1 990 ₽ окупается одной переоценкой</h2><p>Одна Лошадка с +5% к цене возвращает подписку за первую неделю. Остальное — прибыль.</p></div>
+  <div class="plans">
+    <article class="plan card reveal"><h3>10 блюд</h3><p class="price mono">0 ₽<small>навсегда</small></p><ul><li>Себестоимость и матрица для 10 блюд</li><li>Одна точка, один город</li><li>Данные в браузере</li></ul><a class="btn btn-wide" href="#demo">Начать бесплатно</a></article>
+    <article class="plan card plan-hot reveal"><span class="sticker" style="--c:#F2B541;--i:#171717">Хит</span><h3>Заведение</h3><p class="price mono">1 990 ₽<small>/мес</small></p><ul><li>Безлимит блюд</li><li>Матрица и рекомендации</li><li>Техкарты на печать</li><li>PDF-аудит меню</li><li>Симулятор цены</li></ul><a class="btn btn-red btn-wide" href="#demo">Подключить</a></article>
+    <article class="plan card reveal"><h3>Сеть</h3><p class="price mono">7 900 ₽<small>/мес</small></p><ul><li>До 10 точек</li><li>Разные закупочные цены по точкам</li><li>Общие техкарты</li><li>Сводный фудкост сети</li></ul><a class="btn btn-wide" href="#demo">Подключить сеть</a></article>
+    <article class="plan card reveal"><h3>Аудит меню</h3><p class="price mono">2 900 ₽<small>разово</small></p><ul><li>Без подписки</li><li>Матрица, таблица, рекомендации</li><li>Прогноз в рублях</li><li>PDF на 4 страницы</li></ul><button class="btn btn-wide" id="plan-audit" type="button">Заказать аудит</button></article>
+  </div>
+  <div class="receipt unit reveal" aria-label="Юнит-экономика">
+    <p class="r-head">ЮНИТ-ЭКОНОМИКА · ФУДКОСТ</p>
+    <div class="r-line"><span>База цен по 10 городам, редактор</span><b>30 000 ₽/мес на всех</b></div>
+    <div class="r-line"><span>Остальное — статика</span><b>≈ 0 ₽</b></div>
+    <div class="r-line"><span>CAC: Telegram рестораторов, HoReCa-выставки, шефы</span><b>3–5 тыс. ₽</b></div>
+    <div class="r-line"><span>Отток: инструмент встроен в рутину переоценки</span><b>5%/мес</b></div>
+    <div class="r-line"><span>LTV = 20 мес × 1 990 ₽</span><b>≈ 40 000 ₽</b></div>
+    <div class="r-line"><span>LTV/CAC</span><b>8–10</b></div>
+    <div class="r-line"><span>Маржа</span><b>85%</b></div>
+    <div class="r-total"><span>500 заведений</span><b>≈ 1 млн ₽/мес</b></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="sec-head reveal"><p class="eyebrow mono">Вопросы</p><h2>Коротко о том, как это считается</h2></div>
+  <details class="reveal"><summary>Откуда цены на продукты?</summary><p>Из базы средних закупочных цен: Москва — база, остальные девять городов через коэффициент (Петербург 0,97, Казань 0,90, Уфа 0,88). Любую цену можно поправить под чек своего поставщика прямо в строке ингредиента — расчёт пересчитается сразу.</p></details>
+  <details class="reveal"><summary>Что такое матрица меню?</summary><p>Метод Касаваны–Смита: блюда сравниваются по доле продаж и марже с порции. Популярно — доля не ниже 70% от средней. Маржинально — маржа не ниже средней по меню, взвешенной по продажам. Так получаются Звёзды, Лошадки, Загадки и Собаки, и у каждого квадранта своё действие.</p></details>
+  <details class="reveal"><summary>Как учитываются отходы?</summary><p>Брутто — что вы купили, нетто — что попало в тарелку. Себестоимость считается по брутто, выход порции — по нетто. Процент отходов берётся из базы (лук 16%, картофель 25%, креветки 40%) и редактируется в каждой строке техкарты.</p></details>
+  <details class="reveal"><summary>Можно ли вставить продажи из iiko или Poster?</summary><p>Да. Выгрузите отчёт по продажам в CSV, скопируйте колонки «название; цена; продано» и вставьте в окно «Вставить продажи». Фудкост сопоставит блюда по названию, новые добавит без техкарты. Обратно — экспорт CSV одной кнопкой.</p></details>
+  <details class="reveal"><summary>Что такое эластичность −1,2?</summary><p>На сколько процентов упадут продажи при росте цены на 1%. Для кафе −1,2 — рабочее среднее: цена +10% → продажи −11%. У Звёзд обычно около −0,8, у блюд с заменителями до −2. Число редактируется в симуляторе, прогноз пересчитывается сразу.</p></details>
+  <details class="reveal"><summary>Где хранятся данные?</summary><p>В вашем браузере, в localStorage (ключ foodcost:v1). На сервер ничего не уходит, регистрации нет. Очистить — одной кнопкой в демо. Вместо отзывов у нас демо-кафе на 24 блюда: откройте и проверьте расчёт сами.</p></details>
+</section>
+
+<section class="cta reveal">
+  <h2>Подвиньте цену — увидите рубли до того, как перепечатали меню</h2>
+  <p>Сырники кормят, Карбонара разоряет. Проверьте своё меню за вечер.</p>
+  <a class="btn btn-red btn-lg" href="#demo">Посчитать моё меню</a>
+</section>
+</main>
+
+<footer class="footer">
+  <span class="mono">© 2026 Фудкост · себестоимость и матрица меню</span>
+  <nav class="mono" aria-label="Документы"><a href="#top">Оферта</a><a href="#faq">Данные</a><a href="#pricing">Тарифы</a></nav>
+</footer>
+
+<div id="print-root" class="print-root" aria-hidden="true"></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Раскладка — разложите плитку на экране и купите ровно столько</title>
+<meta name="description" content="Раскладка рисует вашу комнату, укладывает плитку любой из 7 схем, считает целые плитки, подрезки и упаковки и находит точку старта без узких обрезков у двери. Расчёт в браузере, PDF-схема для плиточника.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%232A2A2A'/><rect x='2' y='2' width='13' height='13' fill='%231E6F74'/><rect x='17' y='2' width='13' height='13' fill='%23175F64'/><rect x='2' y='17' width='13' height='13' fill='%23175F64'/><rect x='17' y='17' width='8' height='13' fill='%23E3A33C'/></svg>">
+</head>
+<body>
+<header class="nav" id="top">
+  <a class="logo" href="#top" aria-label="Раскладка — на главную">
+    <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#2A2A2A"/><rect x="2" y="2" width="11" height="11" fill="#1E6F74"/><rect x="15" y="2" width="11" height="11" fill="#175F64"/><rect x="2" y="15" width="11" height="11" fill="#175F64"/><rect x="15" y="15" width="7" height="11" fill="#E3A33C"/></svg>
+    <span>Раскладка</span>
+  </a>
+  <nav class="menu" id="menu" aria-label="Разделы">
+    <a href="#demo">Планировщик</a><a href="#smart">Умный старт</a><a href="#formats">Форматы</a><a href="#pro">Мастерам</a><a href="#pricing">Тарифы</a><a href="#faq">Вопросы</a>
+  </nav>
+  <a class="btn btn-sm nav-cta" href="#demo">Рассчитать</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Открыть меню"><i></i><i></i><i></i></button>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-head">
+    <div class="hero-title">
+      <p class="eyebrow">Планировщик плитки, керамогранита и ламината</p>
+      <h1>Разложите плитку на&nbsp;экране и&nbsp;купите ровно столько</h1>
+    </div>
+    <div class="hero-side">
+      <p class="lead">Раскладка рисует вашу комнату и укладывает выбранный формат любой из 7 схем, считает целые плитки, подрезки и упаковки — и сама находит точку старта, при которой у двери не остаётся узких некрасивых обрезков.</p>
+      <div class="actions"><a class="btn btn-lg" href="#demo">Рассчитать мою комнату</a><a class="btn btn-ghost btn-lg" href="#how">Как это работает</a></div>
+    </div>
+  </div>
+  <div class="floor reveal">
+    <div class="floor-frame">
+      <canvas id="hero-floor" role="img" aria-label="Анимированная раскладка плитки 300 × 600 на полу ванной 2,4 × 1,8 метра с дверью внизу: целые плитки сине-зелёные, подрезки янтарные"></canvas>
+      <div class="tip" id="hero-tip" hidden></div>
+    </div>
+    <div class="floor-bar">
+      <div class="bar-cell"><span class="label">Схема</span><div class="chips" id="hero-pats" role="group" aria-label="Схема укладки"></div></div>
+      <label class="bar-cell range-field" for="hero-grout"><span class="label">Шов <b id="hero-grout-v">2 мм</b></span><input type="range" id="hero-grout" min="1" max="8" value="2" aria-label="Ширина шва, миллиметры"></label>
+      <p class="counter bar-cell" id="hero-counter" aria-live="polite"><b data-n="pieces">0</b> плиток · <b data-n="packs">0</b> упаковок · отходы&nbsp;<b data-n="waste">0</b>%</p>
+    </div>
+  </div>
+</section>
+
+<section class="proof" aria-label="Ключевые цифры">
+  <ul class="proof-list" data-stagger>
+    <li class="reveal"><b class="num"><span data-count="7">0</span></b><span>схем укладки — от прямой до ёлочки под 45°</span></li>
+    <li class="reveal"><b class="num"><span data-count="6">0</span></b><span>форматов в каталоге плюс свой размер в миллиметрах</span></li>
+    <li class="reveal"><b class="num"><span data-count="1">0</span> <small>кадр</small></b><span>на пересчёт 2 000 плиток — без кнопки «подождите»</span></li>
+    <li class="reveal"><b class="num"><span data-count="-6">0</span></b><span>плиток даёт умный старт на типовой ванной 155 × 245</span></li>
+    <li class="reveal"><b class="num">⅓</b><span>плитки — правило переиспользования обрезков</span></li>
+  </ul>
+</section>
+
+<section class="questions" id="how">
+  <div class="section-head reveal"><p class="eyebrow">Три вопроса любого ремонта</p><h2>Что вы спросите у плиточника — и что ответит Раскладка</h2></div>
+  <div class="q-grid" data-stagger>
+    <article class="q-card reveal">
+      <svg class="q-pic" viewBox="0 0 96 72" aria-hidden="true"><rect x="2" y="2" width="92" height="68" fill="#2A2A2A"/><rect x="4" y="4" width="28" height="20" fill="#1E6F74"/><rect x="34" y="4" width="28" height="20" fill="#175F64"/><rect x="64" y="4" width="28" height="20" fill="#1E6F74"/><rect x="4" y="26" width="28" height="20" fill="#175F64"/><rect x="34" y="26" width="28" height="20" fill="#1E6F74"/><rect x="64" y="26" width="28" height="20" fill="#175F64"/><rect x="4" y="48" width="28" height="20" fill="#1E6F74"/><rect x="34" y="48" width="28" height="20" fill="#175F64"/><rect x="64" y="48" width="28" height="20" fill="#E3A33C"/><text x="78" y="62" font-family="Nunito,sans-serif" font-weight="800" font-size="12" text-anchor="middle" fill="#2A2A2A">×1</text></svg>
+      <h3>Сколько купить?</h3>
+      <p>Магазин советует +10%. Мы считаем до штуки: целые плитки, подрезки и остатки, которые закроют вторую подрезку того же ряда. Итог сразу в упаковках вашего формата.</p>
+    </article>
+    <article class="q-card reveal">
+      <svg class="q-pic" viewBox="0 0 96 72" aria-hidden="true"><rect x="2" y="2" width="92" height="68" fill="#2A2A2A"/><rect x="4" y="4" width="40" height="30" fill="#1E6F74"/><rect x="46" y="4" width="40" height="30" fill="#175F64"/><rect x="88" y="4" width="4" height="30" fill="#E3A33C"/><rect x="4" y="36" width="40" height="30" fill="#175F64"/><rect x="46" y="36" width="40" height="30" fill="#1E6F74"/><rect x="88" y="36" width="4" height="30" fill="#E3A33C"/><path d="M58 20h36" stroke="#F4ECDD" stroke-width="2" stroke-dasharray="3 3"/><text x="66" y="56" font-family="Nunito,sans-serif" font-weight="800" font-size="11" fill="#F4ECDD">4 см</text></svg>
+      <h3>Где будут подрезки?</h3>
+      <p>Схема показывает каждую подрезку с размером и номером ряда. Полоски уже 5 см подсвечены янтарным — вы видите их до покупки, а не после.</p>
+    </article>
+    <article class="q-card reveal">
+      <svg class="q-pic" viewBox="0 0 96 72" aria-hidden="true"><rect x="2" y="2" width="92" height="68" fill="#2A2A2A"/><rect x="4" y="4" width="20" height="40" fill="#E3A33C"/><rect x="26" y="4" width="30" height="40" fill="#1E6F74"/><rect x="58" y="4" width="30" height="40" fill="#175F64"/><rect x="90" y="4" width="2" height="40" fill="#E3A33C"/><rect x="4" y="46" width="88" height="20" fill="#F4ECDD"/><rect x="28" y="62" width="40" height="8" fill="#B8563B"/><path d="M28 62a40 40 0 0 1 40 0" fill="none" stroke="#B8563B" stroke-width="2"/><text x="48" y="60" font-family="Nunito,sans-serif" font-weight="800" font-size="10" text-anchor="middle" fill="#2A2A2A">вход</text></svg>
+      <h3>Будет ли красиво у входа?</h3>
+      <p>Узкая подрезка у двери видна каждый день. Умный старт перебирает до 144 точек начала и выбирает ту, где у порога целая плитка, а подрезки по краям одинаковые.</p>
+    </article>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="section-head reveal"><p class="eyebrow">Планировщик</p><h2>Нарисуйте комнату — получите список покупки</h2><p>Всё считается в браузере: план, подрезки, упаковки. Параметры живут в ссылке, проекты — в этом браузере.</p></div>
+  <div class="demo-grid">
+    <form class="panel reveal" id="form" autocomplete="off">
+      <div class="field"><span class="label" id="mode-label">Что считаем</span>
+        <div class="seg" role="group" aria-labelledby="mode-label"><button type="button" class="seg-btn" data-mode="floor" aria-pressed="true">Пол</button><button type="button" class="seg-btn" data-mode="walls" aria-pressed="false">Стены ванной</button></div></div>
+      <div class="field row2">
+        <label>Ширина, см<input type="number" id="room-w" value="170" min="60" max="1200" step="1"></label>
+        <label>Длина, см<input type="number" id="room-l" value="240" min="60" max="1200" step="1"></label>
+      </div>
+      <div class="field"><span class="label" id="shape-label">Форма</span>
+        <div class="seg" role="group" aria-labelledby="shape-label"><button type="button" class="seg-btn" data-shape="rect" aria-pressed="true">Прямоугольник</button><button type="button" class="seg-btn" data-shape="l" aria-pressed="false">Г-образная</button></div></div>
+      <div class="field row3" id="l-fields" hidden>
+        <label>Угол выреза<select id="cut-corner"><option value="tl">верхний левый</option><option value="tr">верхний правый</option><option value="br">нижний правый</option><option value="bl">нижний левый</option></select></label>
+        <label>Вырез по ширине<input type="number" id="cut-w" value="60" min="10" step="1"></label>
+        <label>Вырез по длине<input type="number" id="cut-l" value="80" min="10" step="1"></label>
+      </div>
+      <div class="field row2" id="door-fields">
+        <label>Ширина двери, см<input type="number" id="door-w" value="80" min="40" max="200" step="1"></label>
+        <button type="button" class="btn btn-ghost btn-sm self-end" id="door-del">Убрать дверь</button>
+        <p class="hint">Кликните по стене на плане, чтобы поставить дверь. Дверь можно тянуть вдоль стены.</p>
+      </div>
+      <div class="field" id="wall-opts" hidden><span class="label">Вычеты на стенах</span>
+        <div class="checks"><label class="check"><input type="checkbox" id="opt-window"> Окно 80 × 100</label><label class="check"><input type="checkbox" id="opt-bath" checked> Ванна 170 × 58</label></div>
+        <p class="hint">Двери переносятся с плана: проём 210 см высотой. Высота стен 250 см.</p></div>
+      <div class="field"><label>Формат<select id="tile-sel"></select></label>
+        <div class="row3" id="custom-fields" hidden>
+          <label>Ширина, мм<input type="number" id="tile-w" value="600" min="20" max="3000" step="1"></label>
+          <label>Длина, мм<input type="number" id="tile-h" value="600" min="20" max="3000" step="1"></label>
+          <label>Шт. в упаковке<input type="number" id="tile-pack" value="4" min="1" max="200" step="1"></label>
+        </div>
+        <button type="button" class="chip-text" id="tile-rot" aria-pressed="false">Повернуть плитку на 90°</button></div>
+      <label class="field range-field" for="grout"><span class="label">Шов <b id="grout-v">2 мм</b></span><input type="range" id="grout" min="1" max="10" value="2"></label>
+      <div class="field"><span class="label" id="pat-label">Схема укладки · <b id="pat-name">смещение ½</b></span><div class="chips" id="pats" role="group" aria-labelledby="pat-label"></div></div>
+      <div class="field"><span class="label" id="start-label">Точка старта</span>
+        <div class="seg wrap" role="group" aria-labelledby="start-label"><button type="button" class="seg-btn" data-start="center" aria-pressed="true">От центра</button><button type="button" class="seg-btn" data-start="wall" aria-pressed="false">От стены</button><button type="button" class="seg-btn" data-start="door" aria-pressed="false">От двери</button><button type="button" class="seg-btn" data-start="smart" id="start-smart" aria-pressed="false">Умный старт</button></div>
+        <label id="wall-field" hidden>Какая стена<select id="start-wall"><option value="top">верхняя</option><option value="right">правая</option><option value="bottom">нижняя</option><option value="left">левая</option></select></label></div>
+      <div class="field row2">
+        <label class="range-field" for="reserve"><span class="label">Запас на бой <b id="reserve-v">5%</b></span><input type="range" id="reserve" min="0" max="15" value="5"></label>
+        <label>Цена за м², ₽<input type="number" id="price" min="0" step="10" placeholder="например, 1890"></label>
+      </div>
+      <button type="submit" class="btn btn-lg btn-wide" id="run">Рассчитать</button>
+    </form>
+
+    <div class="demo-out reveal">
+      <div class="scene-frame" id="scene-frame">
+        <canvas id="scene" role="img" aria-label="План комнаты с раскладкой плитки: целые плитки сине-зелёные, подрезки янтарные с размерами, номера рядов слева"></canvas>
+        <div class="tip" id="scene-tip" hidden></div>
+      </div>
+      <div class="stats" id="stats" aria-live="polite">
+        <div class="stat"><b id="s-pieces">0</b><span>плиток</span></div>
+        <div class="stat"><b id="s-packs">0</b><span id="s-packs-sub">упаковок</span></div>
+        <div class="stat"><b id="s-area">0</b><span>м² площадь</span></div>
+        <div class="stat"><b id="s-waste">0%</b><span>отходы</span></div>
+        <div class="stat"><b id="s-cost">—</b><span>стоимость</span></div>
+      </div>
+      <p class="smart-note" id="smart-note"></p>
+      <div class="cuts">
+        <h3>Подрезки <span class="muted" id="cuts-sum"></span></h3>
+        <table class="cuts-table"><thead><tr><th>Ряд</th><th>Размер, см</th><th>Шт.</th></tr></thead><tbody id="cuts-body"></tbody></table>
+        <p class="hint">Остаток длиннее ⅓ плитки закрывает вторую подрезку того же ряда — такие пары уже вычтены из количества.</p>
+      </div>
+      <div class="export">
+        <button type="button" class="btn" id="png">Скачать PNG схемы</button>
+        <button type="button" class="btn btn-terra" id="pdf">PDF для мастера</button>
+        <button type="button" class="btn btn-ghost" id="link">Скопировать ссылку</button>
+      </div>
+      <div class="projects">
+        <div class="save-row"><input id="proj-name" placeholder="Название проекта: ванная, кухня…" aria-label="Название проекта" maxlength="40"><button type="button" class="btn btn-ghost" id="save">Сохранить проект</button></div>
+        <ul class="proj-list" id="projects" aria-label="Сохранённые проекты"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="smart" id="smart">
+  <div class="section-head reveal"><p class="eyebrow">Умный старт</p><h2>Одна ванная, два старта</h2><p>Ванная 155 × 245 см, плитка 300 × 600 со смещением в полплитки, дверь внизу. Слева — старт от дальней стены, как кладут по привычке: у порога остаются полоски 4 см. Справа — точка старта, которую подобрала Раскладка.</p></div>
+  <div class="ba" data-stagger>
+    <figure class="ba-card reveal"><canvas id="ba-before" role="img" aria-label="Раскладка от стены: у двери узкие подрезки 4 см"></canvas><figcaption><b>Старт от стены</b><span id="ba-before-txt"></span></figcaption></figure>
+    <div class="ba-delta reveal" aria-live="polite"><b id="ba-delta">−6</b><span>плиток, симметрия у&nbsp;входа</span></div>
+    <figure class="ba-card reveal"><canvas id="ba-after" role="img" aria-label="Умный старт: у двери целые плитки, подрезки по краям одинаковые"></canvas><figcaption><b>Умный старт</b><span id="ba-after-txt"></span></figcaption></figure>
+  </div>
+</section>
+
+<section class="formats" id="formats">
+  <div class="section-head reveal"><p class="eyebrow">Каталог форматов</p><h2>Шесть форматов, которые кладут чаще всего</h2><p>Нажмите «В планировщик» — формат подставится в расчёт вместе с данными упаковки.</p></div>
+  <div class="fmt-grid" id="fmt-grid" data-stagger>
+    <article class="fmt reveal"><svg class="fmt-pic" viewBox="0 0 150 100" aria-hidden="true"><rect width="150" height="100" fill="#2A2A2A"/><polygon points="3.6,0 3.6,5.6 0,5.6 0,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="64,0 64,5.6 4,5.6 4,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="124.4,0 124.4,5.6 64.4,5.6 64.4,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="150,0 150,5.6 124.8,5.6 124.8,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,6 3.6,6 3.6,66 0,66" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,6 64,6 64,66 4,66" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="64.4,6 124.4,6 124.4,66 64.4,66" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="124.8,6 150,6 150,66 124.8,66" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,66.4 3.6,66.4 3.6,100 0,100" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,66.4 64,66.4 64,100 4,100" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="64.4,66.4 124.4,66.4 124.4,100 64.4,100" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="124.8,66.4 150,66.4 150,100 124.8,100" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/></svg><h3>600 × 600</h3><p class="meta">4 шт/уп · 1,44 м²/уп</p><p>Керамогранит для пола и стен. Самый ходовой формат: мало швов, быстро кладётся.</p><button type="button" class="btn btn-ghost btn-sm" data-use="0">В планировщик</button></article>
+    <article class="fmt reveal"><svg class="fmt-pic" viewBox="0 0 150 100" aria-hidden="true"><rect width="150" height="100" fill="#2A2A2A"/><polygon points="33.8,0 33.8,5.6 0,5.6 0,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="94.2,0 94.2,5.6 34.2,5.6 34.2,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="150,0 150,5.6 94.6,5.6 94.6,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,6 3.6,6 3.6,36 0,36" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,6 64,6 64,36 4,36" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="64.4,6 124.4,6 124.4,36 64.4,36" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="124.8,6 150,6 150,36 124.8,36" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,36.4 33.8,36.4 33.8,66.4 0,66.4" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="34.2,36.4 94.2,36.4 94.2,66.4 34.2,66.4" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="94.6,36.4 150,36.4 150,66.4 94.6,66.4" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,66.8 3.6,66.8 3.6,96.8 0,96.8" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,66.8 64,66.8 64,96.8 4,96.8" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="64.4,66.8 124.4,66.8 124.4,96.8 64.4,96.8" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="124.8,66.8 150,66.8 150,96.8 124.8,96.8" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,97.2 33.8,97.2 33.8,100 0,100" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="34.2,97.2 94.2,97.2 94.2,100 34.2,100" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="94.6,97.2 150,97.2 150,100 94.6,100" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/></svg><h3>300 × 600</h3><p class="meta">6 шт/уп · 1,08 м²/уп</p><p>Стены ванной и кухни. Кладут со смещением в полплитки или прямо, швом в шов.</p><button type="button" class="btn btn-ghost btn-sm" data-use="1">В планировщик</button></article>
+    <article class="fmt reveal"><svg class="fmt-pic" viewBox="0 0 150 100" aria-hidden="true"><rect width="150" height="100" fill="#2A2A2A"/><polygon points="83.9,0 83.9,5.6 0,5.6 0,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="150,0 150,5.6 84.3,5.6 84.3,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,6 3.6,6 3.6,26 0,26" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,6 124,6 124,26 4,26" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="124.4,6 150,6 150,26 124.4,26" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,26.4 43.7,26.4 43.7,46.4 0,46.4" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="44.1,26.4 150,26.4 150,46.4 44.1,46.4" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,46.8 83.9,46.8 83.9,66.8 0,66.8" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="84.3,46.8 150,46.8 150,66.8 84.3,66.8" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,67.2 3.6,67.2 3.6,87.2 0,87.2" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,67.2 124,67.2 124,87.2 4,87.2" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="124.4,67.2 150,67.2 150,87.2 124.4,87.2" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,87.6 43.7,87.6 43.7,100 0,100" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="44.1,87.6 150,87.6 150,100 44.1,100" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/></svg><h3>200 × 1200 «под дерево»</h3><p class="meta">5 шт/уп · 1,2 м²/уп</p><p>Планки под доску. Смещение ⅓ — как паркетная доска, ёлочка 90° — как паркет.</p><button type="button" class="btn btn-ghost btn-sm" data-use="2">В планировщик</button></article>
+    <article class="fmt reveal"><svg class="fmt-pic" viewBox="0 0 50 33.3" aria-hidden="true"><rect width="50" height="33.3" fill="#2A2A2A"/><polygon points="1.2,0 1.2,1.9 0,1.9 0,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="11.3,0 11.3,1.9 1.3,1.9 1.3,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="21.5,0 21.5,1.9 11.5,1.9 11.5,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="31.6,0 31.6,1.9 21.6,1.9 21.6,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="41.7,0 41.7,1.9 31.7,1.9 31.7,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="50,0 50,1.9 41.9,1.9 41.9,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="0,2 1.2,2 1.2,12 0,12" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="1.3,2 11.3,2 11.3,12 1.3,12" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="11.5,2 21.5,2 21.5,12 11.5,12" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="21.6,2 31.6,2 31.6,12 21.6,12" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="31.7,2 41.7,2 41.7,12 31.7,12" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="41.9,2 50,2 50,12 41.9,12" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="0,12.1 1.2,12.1 1.2,22.1 0,22.1" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="1.3,12.1 11.3,12.1 11.3,22.1 1.3,22.1" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="11.5,12.1 21.5,12.1 21.5,22.1 11.5,22.1" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="21.6,12.1 31.6,12.1 31.6,22.1 21.6,22.1" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="31.7,12.1 41.7,12.1 41.7,22.1 31.7,22.1" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="41.9,12.1 50,12.1 50,22.1 41.9,22.1" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="0,22.3 1.2,22.3 1.2,32.3 0,32.3" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="1.3,22.3 11.3,22.3 11.3,32.3 1.3,32.3" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="11.5,22.3 21.5,22.3 21.5,32.3 11.5,32.3" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="21.6,22.3 31.6,22.3 31.6,32.3 21.6,32.3" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="31.7,22.3 41.7,22.3 41.7,32.3 31.7,32.3" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="41.9,22.3 50,22.3 50,32.3 41.9,32.3" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="0,32.4 1.2,32.4 1.2,33.3 0,33.3" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="1.3,32.4 11.3,32.4 11.3,33.3 1.3,33.3" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="11.5,32.4 21.5,32.4 21.5,33.3 11.5,33.3" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="21.6,32.4 31.6,32.4 31.6,33.3 21.6,33.3" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="31.7,32.4 41.7,32.4 41.7,33.3 31.7,33.3" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.1"/><polygon points="41.9,32.4 50,32.4 50,33.3 41.9,33.3" fill="#175F64" stroke="#2A2A2A" stroke-width="0.1"/></svg><h3>100 × 100</h3><p class="meta">100 шт/уп · 1 м²/уп</p><p>Мелкий квадрат, метлахская плитка и мозаика на сетке. Много швов, мало отходов.</p><button type="button" class="btn btn-ghost btn-sm" data-use="3">В планировщик</button></article>
+    <article class="fmt reveal"><svg class="fmt-pic" viewBox="0 0 75 50" aria-hidden="true"><rect width="75" height="50" fill="#2A2A2A"/><polygon points="75,0 75,2.2 57.2,2.2 57.2,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="57,0 57,2.2 51,2.2 51,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="51,2.4 75,2.4 75,8.4 51,8.4" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="50.8,0 50.8,8.4 44.8,8.4 44.8,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="44.8,8.6 68.8,8.6 68.8,14.6 44.8,14.6" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="69,8.6 75,8.6 75,32.6 69,32.6" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="69,32.8 75,32.8 75,38.8 69,38.8" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="44.6,0 44.6,14.6 38.6,14.6 38.6,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="38.6,14.8 62.6,14.8 62.6,20.8 38.6,20.8" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="62.8,14.8 68.8,14.8 68.8,38.8 62.8,38.8" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="62.8,39 75,39 75,45 62.8,45" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="32.2,0 32.2,2.8 8.2,2.8 8.2,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="38.4,0 38.4,20.8 32.4,20.8 32.4,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="32.4,21 56.4,21 56.4,27 32.4,27" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="56.6,21 62.6,21 62.6,45 56.6,45" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="56.6,45.2 75,45.2 75,50 56.6,50" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="8,0 8,2.8 2,2.8 2,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="2,3 26,3 26,9 2,9" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="26.2,3 32.2,3 32.2,27 26.2,27" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="26.2,27.2 50.2,27.2 50.2,33.2 26.2,33.2" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="50.4,27.2 56.4,27.2 56.4,50 50.4,50" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="1.8,0 1.8,9 0,9 0,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="0,9.2 19.8,9.2 19.8,15.2 0,15.2" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="20,9.2 26,9.2 26,33.2 20,33.2" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="20,33.4 44,33.4 44,39.4 20,39.4" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="44.2,33.4 50.2,33.4 50.2,50 44.2,50" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="0,15.4 13.6,15.4 13.6,21.4 0,21.4" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="13.8,15.4 19.8,15.4 19.8,39.4 13.8,39.4" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="13.8,39.6 37.8,39.6 37.8,45.6 13.8,45.6" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="38,39.6 44,39.6 44,50 38,50" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="0,21.6 7.4,21.6 7.4,27.6 0,27.6" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="7.6,21.6 13.6,21.6 13.6,45.6 7.6,45.6" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="7.6,45.8 31.6,45.8 31.6,50 7.6,50" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="31.8,45.8 37.8,45.8 37.8,50 31.8,50" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="0,27.8 1.2,27.8 1.2,33.8 0,33.8" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="1.4,27.8 7.4,27.8 7.4,50 1.4,50" fill="#175F64" stroke="#2A2A2A" stroke-width="0.2"/><polygon points="0,34 1.2,34 1.2,50 0,50" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.2"/></svg><h3>Кабанчик 60 × 240</h3><p class="meta">50 шт/уп · 0,72 м²/уп</p><p>Фартук кухни и стены. Смещение в полплитки, ёлочка или вертикальная прямая.</p><button type="button" class="btn btn-ghost btn-sm" data-use="4">В планировщик</button></article>
+    <article class="fmt reveal"><svg class="fmt-pic" viewBox="0 0 150 100" aria-hidden="true"><rect width="150" height="100" fill="#2A2A2A"/><polygon points="89.5,0 89.5,5.6 0,5.6 0,0" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="150,0 150,5.6 89.9,5.6 89.9,0" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,6 3.6,6 3.6,25.2 0,25.2" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,6 132.5,6 132.5,25.2 4,25.2" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="132.9,6 150,6 150,25.2 132.9,25.2" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,25.6 46.6,25.6 46.6,44.8 0,44.8" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="47,25.6 150,25.6 150,44.8 47,44.8" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,45.2 89.5,45.2 89.5,64.4 0,64.4" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="89.9,45.2 150,45.2 150,64.4 89.9,64.4" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,64.8 3.6,64.8 3.6,84 0,84" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="4,64.8 132.5,64.8 132.5,84 4,84" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="132.9,64.8 150,64.8 150,84 132.9,84" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="0,84.4 46.6,84.4 46.6,100 0,100" fill="#175F64" stroke="#2A2A2A" stroke-width="0.4"/><polygon points="47,84.4 150,84.4 150,100 47,100" fill="#1E6F74" stroke="#2A2A2A" stroke-width="0.4"/></svg><h3>Ламинат 1285 × 192</h3><p class="meta">8 шт/уп · 1,97 м²/уп</p><p>Доска с замком. Разбег ⅓ или ½: подрезка в конце ряда начинает следующий.</p><button type="button" class="btn btn-ghost btn-sm" data-use="5">В планировщик</button></article>
+  </div>
+</section>
+
+<section class="pro" id="pro">
+  <div class="section-head reveal"><p class="eyebrow">Мастерам и салонам</p><h2>Покажите схему мастеру — он скажет спасибо</h2></div>
+  <div class="pro-grid" data-stagger>
+    <article class="pro-card reveal">
+      <svg class="pro-pic" viewBox="0 0 120 84" aria-hidden="true"><rect x="22" y="2" width="76" height="80" fill="#FBF6EC" stroke="#2A2A2A" stroke-width="2"/><rect x="30" y="10" width="36" height="4" fill="#2A2A2A"/><g fill="#1E6F74"><rect x="30" y="20" width="14" height="10"/><rect x="46" y="20" width="14" height="10"/><rect x="62" y="20" width="14" height="10"/><rect x="30" y="32" width="14" height="10"/><rect x="46" y="32" width="14" height="10"/><rect x="62" y="32" width="14" height="10"/></g><g fill="#E3A33C"><rect x="78" y="20" width="6" height="10"/><rect x="78" y="32" width="6" height="10"/></g><g fill="#F4ECDD" font-family="Nunito,sans-serif" font-size="6" font-weight="800"><text x="32" y="28">1</text><text x="32" y="40">2</text></g><g fill="#2A2A2A"><rect x="30" y="50" width="40" height="3"/><rect x="30" y="57" width="52" height="3"/><rect x="30" y="64" width="34" height="3"/><rect x="30" y="71" width="46" height="3"/></g></svg>
+      <h3>PDF с нумерацией рядов</h3>
+      <p>Каждый ряд пронумерован, у каждой подрезки размер. Список покупки и подрезок на той же странице A4: плиточник режет по списку, а не по месту.</p>
+      <button type="button" class="btn btn-ghost btn-sm" id="pro-pdf">Собрать PDF текущего проекта</button>
+    </article>
+    <article class="pro-card reveal">
+      <svg class="pro-pic" viewBox="0 0 120 84" aria-hidden="true"><rect x="2" y="12" width="116" height="60" fill="#FBF6EC" stroke="#2A2A2A" stroke-width="2"/><rect x="10" y="22" width="22" height="22" fill="#1E6F74"/><rect x="14" y="26" width="6" height="6" fill="#F4ECDD"/><rect x="22" y="34" width="6" height="6" fill="#E3A33C"/><rect x="40" y="24" width="50" height="6" fill="#2A2A2A"/><rect x="40" y="36" width="34" height="4" fill="#B8563B"/><rect x="10" y="54" width="100" height="2" fill="#2A2A2A" opacity=".3"/><rect x="10" y="60" width="60" height="3" fill="#2A2A2A" opacity=".5"/></svg>
+      <h3>Своё лого в шапке</h3>
+      <p>В тарифе «Мастер» в шапке PDF стоит название вашей студии и телефон — клиент помнит, кто считал и чья схема лежит на полу.</p>
+      <label>Название студии для шапки PDF<input id="brand" placeholder="Плиточник Сергей · +7 900 000-00-00" maxlength="48"></label>
+    </article>
+    <article class="pro-card reveal">
+      <h3>Витрина салонов по городам</h3>
+      <p>Под каждой схемой — «где купить этот формат рядом». Салон платит за город, покупатель приходит с готовым списком.</p>
+      <div class="chips-text" id="cities" role="group" aria-label="Город"></div>
+      <ul class="salon-list" id="salons"></ul>
+      <a class="btn btn-ghost btn-sm" href="#pricing">Разместить салон за 4 900 ₽/мес</a>
+    </article>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="section-head reveal"><p class="eyebrow">Тарифы</p><h2>Расчёт бесплатно. Платите за схему, которую отдадите мастеру</h2></div>
+  <div class="plans" data-stagger>
+    <article class="plan reveal"><h3>Планировщик</h3><p class="price">0 ₽</p><ul><li>Раскладка и расчёт без ограничений</li><li>7 схем, 6 форматов и свой размер</li><li>Умный старт и список подрезок</li><li>PNG схемы с водяным знаком</li></ul><a class="btn btn-ghost btn-wide" href="#demo">Открыть планировщик</a></article>
+    <article class="plan reveal"><h3>PDF-схема</h3><p class="price">390 ₽ <small>разово</small></p><ul><li>Схема с нумерацией рядов</li><li>Размеры всех подрезок</li><li>Список покупки в упаковках</li><li>Без водяного знака</li></ul><button type="button" class="btn btn-wide" id="buy-pdf">Собрать PDF</button></article>
+    <article class="plan plan-hot reveal"><span class="tag">Для плиточников</span><h3>Мастер</h3><p class="price">990 ₽ <small>/мес</small></p><ul><li>Безлимит PDF</li><li>Развёртки стен ванной</li><li>Своё лого в шапке</li><li>История проектов</li></ul><button type="button" class="btn btn-wide" id="buy-pro">7 дней бесплатно</button></article>
+    <article class="plan reveal"><h3>Витрина салонов</h3><p class="price">4 900 ₽ <small>/мес за город</small></p><ul><li>Салон в списке «где купить» под схемой</li><li>Ваши форматы в каталоге</li><li>Переходы из расчёта в ваш каталог</li></ul><a class="btn btn-ghost btn-wide" href="#pro">Разместить салон</a></article>
+  </div>
+  <div class="econ reveal">
+    <h3>Юнит-экономика на 1 000 посетителей</h3>
+    <dl class="econ-grid">
+      <div><dt>Покупок PDF</dt><dd><b><span data-count="25">0</span> × 390 ₽</b> = <span data-count="9750">0</span> ₽</dd></div>
+      <div><dt>Партнёрских заказов в DIY-сетях</dt><dd><b><span data-count="15">0</span> × ~45 000 ₽</b> по CPA 4–6% ≈ <span data-count="30000">0</span> ₽</dd></div>
+      <div><dt>На один визит</dt><dd><b>≈ <span data-count="40">0</span> ₽ выручки</b> при 10 ₽ затрат: CAC 60–120 ₽ из SEO</dd></div>
+      <div><dt>Маржа</dt><dd><b><span data-count="90">0</span>%</b> — переменных затрат нет</dd></div>
+      <div><dt>LTV мастера</dt><dd><b><span data-count="9900">0</span> ₽</b> — подписка держится ~10 месяцев</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="section-head reveal"><p class="eyebrow">Вопросы</p><h2>Что спрашивают перед покупкой</h2></div>
+  <div class="faq-list" data-stagger>
+    <details class="reveal"><summary>Почему вы считаете точнее калькулятора магазина?</summary><p>Калькулятор делит площадь на площадь плитки и добавляет 10%. Он не знает, где стены и дверь. Мы кладём каждую плитку на план, режем её по контуру комнаты и считаем остатки: обрезок длиннее трети плитки закроет вторую подрезку в том же ряду. Поэтому итог — в штуках и упаковках, а не «примерно».</p></details>
+    <details class="reveal"><summary>Что такое умный старт?</summary><p>Точка, откуда начинают класть. Мы перебираем до 144 смещений внутри одной плитки и штрафуем узкие подрезки уже 5 см и неодинаковые края у стены напротив двери. Лучший вариант показываем вместе с разницей в штуках. На ванной 155 × 245 это −6 плиток и целая плитка у порога.</p></details>
+    <details class="reveal"><summary>Учитываете ли бой плитки?</summary><p>Запасом: по умолчанию 5%, ползунок от 0 до 15%. Для диагонали и ёлочки советуем 10% — там больше резов. Запас добавляется к штукам до округления в упаковки, поэтому лишняя упаковка не появляется «на всякий случай».</p></details>
+    <details class="reveal"><summary>Можно ли посчитать стены?</summary><p>Да. Режим «Стены ванной» разворачивает четыре стены высотой 250 см в ряд, вычитает двери, окно и ванну и считает каждую стену тем же алгоритмом. Итог — общий список покупки и подрезки по стенам.</p></details>
+    <details class="reveal"><summary>Подходит ли для ламината и паркета?</summary><p>Да. Ламинат 1285 × 192 есть в каталоге, упаковки по 8 досок. «Смещение ⅓» — обычный разбег ламината, «ёлочка 90°» — для паркета и кабанчика. Свой размер доски вводится в миллиметрах.</p></details>
+    <details class="reveal"><summary>Как передать схему плиточнику?</summary><p>Кнопка «PDF для мастера» печатает лист A4: схема с номерами рядов, размеры подрезок, список покупки. Или скопируйте ссылку — в ней все параметры, план откроется таким же на любом телефоне.</p></details>
+  </div>
+</section>
+
+<section class="cta reveal">
+  <p class="eyebrow">Магазин советует +10%</p>
+  <h2>Мы считаем до штуки</h2>
+  <p class="lead">Семь схем, шесть форматов, умный старт и список подрезок — бесплатно, прямо в браузере.</p>
+  <a class="btn btn-lg" href="#demo">Рассчитать мою комнату</a>
+</section>
+</main>
+
+<footer class="footer">
+  <svg class="azulejo" aria-hidden="true" preserveAspectRatio="none" height="40"><defs><pattern id="az" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#1E6F74"/><path d="M0 0h20v20H0zM20 20h20v20H20z" fill="#175F64"/><circle cx="20" cy="20" r="9" fill="none" stroke="#F4ECDD" stroke-width="2"/><path d="M20 0v8M20 32v8M0 20h8M32 20h8" stroke="#F4ECDD" stroke-width="2"/><rect x="17" y="17" width="6" height="6" fill="#E3A33C"/></pattern></defs><rect width="100%" height="100%" fill="url(#az)"/></svg>
+  <div class="footer-row"><span>© 2026 Раскладка · Расчёт плитки в браузере</span><nav aria-label="Документы"><a href="#pricing">Оферта</a><a href="#pro">Для салонов</a><a href="#faq">Вопросы</a></nav></div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<section class="print-sheet" id="print-sheet" aria-hidden="true"></section>
+<script type="module" src="app.js"></script>
+</body>
+</html>

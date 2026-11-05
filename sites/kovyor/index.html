@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ковёр — трекер привычек, который ткёт узор</title>
+<meta name="description" content="Ковёр превращает привычки в ткань: день — ряд, привычка — нить, 7 дней — окантовка, 30 — медальон, 365 рядов — постер на стену. Станок работает прямо в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23EFE6D8'/><rect x='4' y='4' width='24' height='24' fill='%23C8553D'/><path d='M8 16l8-8 8 8-8 8z' fill='%23EFE6D8'/><path d='M12 16l4-4 4 4-4 4z' fill='%232C3E6B'/></svg>">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="spool" viewBox="0 0 44 28"><rect x="2" y="1" width="40" height="26" fill="#6B4F3A"/><rect x="3" y="2" width="38" height="1" fill="#A88C70"/><g style="opacity:var(--wind,1)"><rect x="8" y="4" width="28" height="20" style="fill:var(--c,#C8553D)"/><g fill="rgba(43,38,34,.28)"><rect x="11" y="4" width="1" height="20"/><rect x="15" y="4" width="1" height="20"/><rect x="19" y="4" width="1" height="20"/><rect x="23" y="4" width="1" height="20"/><rect x="27" y="4" width="1" height="20"/><rect x="31" y="4" width="1" height="20"/></g></g><rect x="2" y="1" width="6" height="26" fill="#8C6B50"/><rect x="36" y="1" width="6" height="26" fill="#8C6B50"/><path style="opacity:var(--tick,0)" d="M31 22l4 4 7-8" fill="none" stroke="#2B2622" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="st-romb" viewBox="0 0 16 16"><path d="M8 1l7 7-7 7-7-7z" fill="currentColor"/></symbol>
+  <symbol id="st-krest" viewBox="0 0 16 16"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+  <symbol id="st-zigzag" viewBox="0 0 16 16"><path d="M1 11l4-6 4 6 4-6 2 3" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+  <symbol id="st-polosa" viewBox="0 0 16 16"><path d="M1 4h14M1 8h14M1 12h14" stroke="currentColor" stroke-width="2"/></symbol>
+</svg>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="Ковёр — на главную">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="2" y="2" width="28" height="28" fill="#C8553D"/><path d="M7 16l9-9 9 9-9 9z" fill="#EFE6D8"/><path d="M12 16l4-4 4 4-4 4z" fill="#2C3E6B"/></svg>
+    <span>Ковёр</span>
+  </a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Открыть меню"><i></i><i></i><i></i></button>
+  <nav class="menu" id="menu">
+    <a href="#demo">Станок</a><a href="#gallery">Узоры</a><a href="#wall">Постер</a><a href="#pricing">Тарифы</a><a href="#faq">Вопросы</a>
+    <a class="btn btn-accent nav-cta" href="#demo">Начать ковёр</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy reveal">
+    <p class="eyebrow">Трекер привычек, который ткёт</p>
+    <h1>Твои привычки ткут узор</h1>
+    <p class="lead">Каждый день — ряд на станке, каждая привычка — нить своего цвета и стежка. Через месяц у тебя ковёр, который жалко бросить и приятно показать. Через год — постер на стену.</p>
+    <div class="actions">
+      <a class="btn btn-accent btn-lg" href="#demo">Начать свой ковёр</a>
+      <a class="link-year" id="hero-year" href="#demo">Показать, как выглядит год</a>
+    </div>
+    <ul class="keys" aria-label="Правила станка">
+      <li><b>1</b> день = 1 ряд</li><li><b>7</b> дней = окантовка</li><li><b>30</b> дней = медальон</li><li><b>365</b> рядов = постер</li>
+    </ul>
+  </div>
+
+  <div class="hero-loom reveal">
+    <div class="spools" id="hero-spools" role="group" aria-label="Сегодняшние привычки"></div>
+    <div class="loom-stage" id="hero-stage">
+      <div class="frame"><canvas id="hero-loom" aria-label="Станок: полотно последних месяцев, по ряду на день"></canvas></div>
+      <canvas class="ruler" id="hero-ruler" aria-hidden="true"></canvas>
+      <div class="tip" id="hero-tip" role="status" aria-live="polite"></div>
+    </div>
+    <div class="loom-caption">
+      <span id="hero-note">6 привычек, последние месяцы года. Нажми катушку — вплети сегодняшний ряд.</span>
+      <button class="icon-btn" id="sound" type="button" aria-pressed="true" aria-label="Звук челнока">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path class="snd-on" d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="snd-off" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span id="sound-label">звук: вкл</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="orn" data-seed="вода" aria-hidden="true"></div>
+
+<!-- WHY -->
+<section id="why" class="why">
+  <div class="sec-head reveal"><p class="eyebrow">Почему трекеры умирают</p><h2>Таблицу не жалко. Ковёр — жалко</h2></div>
+  <div class="tags">
+    <article class="tag reveal"><span class="tag-n">01</span><h3>Таблица галочек — её не жалко</h3><p>Пропустил неделю, закрыл приложение — и ничего не потерял. Ряд галочек ничего не держит, потому что ничего не весит.</p></article>
+    <article class="tag reveal"><span class="tag-n">02</span><h3>Нечего показать</h3><p>Статистика в настройках — не то, что хочется отправить подруге или повесить над столом. Цифры не висят на стене.</p></article>
+    <article class="tag reveal"><span class="tag-n">03</span><h3>Нет артефакта, который страшно испортить</h3><p>Бумажный планер жалко заляпать. Приложение — нет. Пока в нём не появится вещь, которую ты сделала руками.</p></article>
+    <article class="tag tag-yes reveal"><span class="tag-n">→</span><h3>Ковёр — есть</h3><p>Каждая галочка — настоящий стежок на полотне. Пропуск — тоже часть узора, но прореху видно. Поэтому ряды не хочется бросать.</p>
+      <dl class="nums">
+        <div><dt><span data-count="1">0</span></dt><dd>день = ряд</dd></div>
+        <div><dt><span data-count="7">0</span></dt><dd>дней = окантовка</dd></div>
+        <div><dt><span data-count="30">0</span></dt><dd>дней = медальон</dd></div>
+        <div><dt><span data-count="365">0</span></dt><dd>рядов = постер</dd></div>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<div class="orn" data-seed="чтение" aria-hidden="true"></div>
+
+<!-- HOW -->
+<section id="how" class="how">
+  <div class="sec-head reveal"><p class="eyebrow">Как ткётся ковёр</p><h2>Три правила станка</h2></div>
+  <div class="steps3">
+    <article class="step3 reveal">
+      <div class="mini"><canvas id="mini-thread" width="240" height="140" aria-hidden="true"></canvas><span class="mini-cap" id="mini-thread-cap">вода · ромб</span></div>
+      <h3>Привычка → нить</h3>
+      <p>Выбираешь цвет из 24 оттенков шерсти и стежок: ромб, крест, зигзаг или полоса. Узор уникален: он посчитан из названия твоей привычки.</p>
+    </article>
+    <article class="step3 reveal">
+      <div class="mini"><canvas id="mini-row" width="240" height="140" aria-hidden="true"></canvas><span class="mini-cap">челнок укладывает ряд</span></div>
+      <h3>День → ряд</h3>
+      <p>Вечером отмечаешь, что сделано. Челнок проходит слева направо и укладывает ряд: сделанное — цветом нити, пропуск — пустым утком.</p>
+    </article>
+    <article class="step3 reveal">
+      <div class="mini"><canvas id="mini-streak" width="240" height="140" aria-hidden="true"></canvas><span class="mini-cap">7 дней · 30 дней</span></div>
+      <h3>Серия → окантовка и медальон</h3>
+      <p>Семь дней подряд — сегмент получает окантовку. Тридцать — медальон. Триста шестьдесят пять рядов — ковёр, который можно напечатать.</p>
+    </article>
+  </div>
+</section>
+
+<div class="orn" data-seed="зарядка" aria-hidden="true"></div>
+
+<!-- DEMO -->
+<section id="demo" class="demo">
+  <div class="sec-head reveal"><p class="eyebrow">Станок</p><h2>Соткать свой ковёр</h2><p>Работает прямо здесь. Данные живут в твоём браузере, узор считается на лету.</p></div>
+  <div class="demo-grid">
+    <div class="panel reveal" id="panel">
+      <!-- онбординг -->
+      <div id="setup">
+        <ol class="stepper" id="stepper"><li class="cur"><b>1</b><span>Привычки</span></li><li><b>2</b><span>Нити</span></li><li><b>3</b><span>Старт</span></li></ol>
+
+        <div class="step" data-step="1">
+          <p class="hint">Выбери от 2 до 6 привычек. <span id="pick-count">Выбрано 3</span></p>
+          <div class="chips" id="presets" role="group" aria-label="Пресеты привычек"></div>
+          <form class="custom" id="custom-form">
+            <label class="sr" for="custom">Своя привычка</label>
+            <input id="custom" type="text" maxlength="24" placeholder="Своя привычка, например «вязание»" autocomplete="off">
+            <button class="btn btn-line" type="submit">Добавить</button>
+          </form>
+          <div class="step-nav"><button class="btn btn-accent" id="to2" type="button">Дальше: нити</button></div>
+        </div>
+
+        <div class="step" data-step="2" hidden>
+          <p class="hint">Каждой привычке — цвет шерсти и стежок. Слева — её узор.</p>
+          <div class="threads" id="threads"></div>
+          <div class="step-nav"><button class="btn btn-line" id="back1" type="button">Назад</button><button class="btn btn-accent" id="to3" type="button">Дальше: старт</button></div>
+        </div>
+
+        <div class="step" data-step="3" hidden>
+          <div class="fields">
+            <label>Дата старта<input id="start" type="date"></label>
+            <label>Название ковра<input id="cname" type="text" maxlength="28" value="Осень-2026"></label>
+          </div>
+          <p class="hint">Со старта до сегодня появятся ряды — их можно будет заполнить задним числом не дальше двух дней. Остальное дорисует «Показать год».</p>
+          <div class="step-nav"><button class="btn btn-line" id="back2" type="button">Назад</button><button class="btn btn-accent" id="weave" type="button">Соткать</button></div>
+        </div>
+      </div>
+
+      <!-- режим ткачества -->
+      <div id="track" hidden>
+        <div class="summary"><span id="summary-text">3 привычки · с 15 октября</span><button class="btn btn-line btn-sm" id="edit" type="button">Изменить</button></div>
+        <h3 class="today-h" id="today-h">Сегодня</h3>
+        <div class="spools spools-demo" id="demo-spools" role="group" aria-label="Отметить сегодня"></div>
+        <div class="fix" id="fix"></div>
+      </div>
+
+      <div class="tools">
+        <button class="btn btn-ink" id="year" type="button">Показать год</button>
+        <button class="btn btn-line" id="png2" type="button">PNG 2x</button>
+        <button class="btn btn-line" id="png4" type="button">PNG 4x</button>
+        <button class="btn btn-line" id="export" type="button">Экспорт JSON</button>
+        <label class="btn btn-line file"><input type="file" id="import" accept="application/json,.json"><span>Импорт JSON</span></label>
+        <button class="btn btn-line" id="reset" type="button">Сбросить</button>
+      </div>
+      <p class="hint" id="status" role="status" aria-live="polite">Пример: 3 привычки, 3 недели. Отметь сегодня или соткай заново со своими.</p>
+    </div>
+
+    <div class="loom-col reveal">
+      <div class="loom-bar">
+        <span class="loom-title" id="loom-title">Осень-2026 · 21 ряд</span>
+        <div class="zoom" role="group" aria-label="Масштаб полотна">
+          <button class="icon-btn" id="zoom-out" type="button" aria-label="Уменьшить">−</button>
+          <span class="zoom-val" id="zoom-val">100%</span>
+          <button class="icon-btn" id="zoom-in" type="button" aria-label="Увеличить">+</button>
+          <button class="icon-btn" id="zoom-fit" type="button">вписать</button>
+        </div>
+      </div>
+      <div class="loom-stage" id="demo-stage">
+        <div class="frame"><canvas id="demo-loom" aria-label="Полотно твоего ковра: по ряду на день"></canvas></div>
+        <canvas class="ruler" id="demo-ruler" aria-hidden="true"></canvas>
+        <div class="tip" id="demo-tip" role="status" aria-live="polite"></div>
+      </div>
+      <dl class="stats" id="stats">
+        <div><dt>рядов</dt><dd id="st-rows">21</dd></div>
+        <div><dt>соткано</dt><dd id="st-fill">0%</dd></div>
+        <div><dt>лучшая серия</dt><dd id="st-streak">0</dd></div>
+        <div><dt>медальонов</dt><dd id="st-medals">0</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<div class="orn" data-seed="сон до 23:00" aria-hidden="true"></div>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery">
+  <div class="sec-head reveal"><p class="eyebrow">12 узоров из одного года</p><h2>Одна жизнь — двенадцать ковров</h2><p>Все карточки сотканы из одного и того же демо-года: 6 привычек, 365 дней. Меняется только грамматика узора — в «Ковёр+» её выбираешь сама.</p></div>
+  <div class="ggrid" id="ggrid">
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Жаккард»: мотив из названия"></canvas></div><figcaption><b>Жаккард</b><span>мотив из названия</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Килим»: шевроны и просветы"></canvas></div><figcaption><b>Килим</b><span>шевроны и просветы</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Пиксель»: квадраты 6×6"></canvas></div><figcaption><b>Пиксель</b><span>квадраты 6×6</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Бабушкин»: квадраты по неделям"></canvas></div><figcaption><b>Бабушкин</b><span>квадраты по неделям</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Скандинавский»: две нити, крупный тайл"></canvas></div><figcaption><b>Скандинавский</b><span>две нити, крупный тайл</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Икат»: размытые края"></canvas></div><figcaption><b>Икат</b><span>размытые края</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Полоска»: сделанное слева"></canvas></div><figcaption><b>Полоска</b><span>сделанное — слева</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Лоскут»: блоки по 7 дней, мотив вдвое крупнее"></canvas></div><figcaption><b>Лоскут</b><span>блоки 7 дней, мотив 2×</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Крестик»: вышивка по канве"></canvas></div><figcaption><b>Крестик</b><span>вышивка по канве</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Рогожка»: перекрёстные штрихи"></canvas></div><figcaption><b>Рогожка</b><span>перекрёстные штрихи</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Ёлочка»: диагонали по рядам"></canvas></div><figcaption><b>Ёлочка</b><span>диагонали по рядам</span></figcaption></figure>
+    <figure class="gcard"><div class="weave reveal"><canvas width="600" height="504" role="img" aria-label="Узор «Контур»: цвет только у серий"></canvas></div><figcaption><b>Контур</b><span>цвет только у серий</span></figcaption></figure>
+  </div>
+</section>
+
+<div class="orn" data-seed="без сахара" aria-hidden="true"></div>
+
+<!-- WEEK CARD -->
+<section id="week" class="week">
+  <div class="week-grid">
+    <div class="week-copy reveal">
+      <p class="eyebrow">Карточка недели</p>
+      <h2>Семь рядов крупно</h2>
+      <p>Квадрат 1080×1080 для сторис и чатов: последняя неделя во всю ширину, проценты по каждой нити и лучшая серия. Пересобирается из твоего полотна.</p>
+      <ul class="plain" id="week-stats"></ul>
+      <button class="btn btn-accent" id="week-dl" type="button">Скачать PNG 1080×1080</button>
+    </div>
+    <div class="week-preview reveal"><canvas id="week-card" width="1080" height="1080" aria-label="Карточка недели: семь рядов полотна и статистика"></canvas></div>
+  </div>
+</section>
+
+<div class="orn" data-seed="прогулка" aria-hidden="true"></div>
+
+<!-- WALL -->
+<section id="wall" class="wall">
+  <div class="sec-head reveal"><p class="eyebrow">Повесь на стену</p><h2>Через 365 рядов — постер</h2><p>Годовое полотно печатается на плотной бумаге или ткётся на станке. Превью собрано из твоего текущего ковра: чем больше рядов, тем тоньше узор.</p></div>
+  <div class="wall-grid">
+    <div class="room reveal" aria-hidden="true">
+      <div class="poster" id="poster"><canvas id="poster-canvas"></canvas><span class="poster-size" id="poster-size">A3 · 297×420 мм</span></div>
+      <div class="floor"></div>
+    </div>
+    <div class="order reveal">
+      <div class="formats" id="formats" role="group" aria-label="Формат"></div>
+      <p class="order-price"><span id="order-price">1 990 ₽</span><small id="order-note">печать на бумаге 300 г, тубус, доставка по РФ</small></p>
+      <form id="order-form" class="order-form">
+        <label>Имя<input id="o-name" type="text" required maxlength="40" autocomplete="name"></label>
+        <label>Телефон<input id="o-phone" type="tel" required inputmode="tel" placeholder="+7 900 000-00-00" autocomplete="tel"></label>
+        <label>Адрес<input id="o-addr" type="text" required maxlength="120" autocomplete="street-address"></label>
+        <button class="btn btn-accent" type="submit" id="order-btn">Заказать</button>
+        <p class="hint" id="order-status" role="status" aria-live="polite">Заказ сохраняется в браузере — это демо без оплаты.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="orn" data-seed="медитация" aria-hidden="true"></div>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing">
+  <div class="sec-head reveal"><p class="eyebrow">Тарифы</p><h2>Ткать можно бесплатно</h2></div>
+  <div class="period reveal" role="group" aria-label="Период оплаты">
+    <button class="chip" id="per-m" type="button" aria-pressed="true">помесячно</button>
+    <button class="chip" id="per-y" type="button" aria-pressed="false">за год — дешевле на 46%</button>
+  </div>
+  <div class="plans">
+    <article class="plan reveal"><h3>Бесплатно</h3><p class="price">0 ₽</p><ul><li>до 3 привычек</li><li>одно месячное полотно</li><li>PNG 1x</li><li>карточка недели с подписью</li></ul><a class="btn btn-line btn-wide" href="#demo">Начать ткать</a></article>
+    <article class="plan plan-hot reveal"><span class="ribbon">выбирают чаще</span><h3>Ковёр+</h3><p class="price"><span id="plus-price">199 ₽</span><small id="plus-per">/мес</small></p><ul><li>безлимит привычек</li><li>12 узорных грамматик</li><li>архив полотен за все годы</li><li>экспорт 4K и карточка без подписи</li></ul><a class="btn btn-accent btn-wide" href="#demo">Подключить</a></article>
+    <article class="plan reveal"><h3>Постер</h3><p class="price">от 1 990 ₽</p><ul><li>печать годового ковра A3</li><li>A2 — 2 990 ₽</li><li>коврик 60×90 — 1 490 ₽</li><li>плед 130×170 — 7 990 ₽</li></ul><a class="btn btn-line btn-wide" href="#wall">Заказать</a></article>
+  </div>
+  <div class="econ reveal">
+    <h3>Юнит-экономика, если интересно</h3>
+    <div class="econ-grid">
+      <div><b><span data-count="90">0</span>%</b><span>маржа подписки</span></div>
+      <div><b><span data-count="70">0</span>%</b><span>маржа постера A3: себестоимость с тубусом и доставкой ~550 ₽</span></div>
+      <div><b><span data-count="55">0</span>%</b><span>маржа пледа при себестоимости ~3 500 ₽</span></div>
+      <div><b><span data-count="4">0</span>%</b><span>конверсия в подписку; 30% платящих раз в год заказывают постер</span></div>
+      <div><b>≈<span data-count="1800">0</span> ₽</b><span>LTV: 199 × 6 месяцев + 0,3 × 1 990</span></div>
+      <div><b>250–400 ₽</b><span>CAC: Pinterest, Telegram о продуктивности, UGC-скриншоты</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="orn" data-seed="английский" aria-hidden="true"></div>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <div class="sec-head reveal"><p class="eyebrow">Вопросы</p><h2>Про пропуски, данные и подарки</h2></div>
+  <div class="qa">
+    <details class="reveal"><summary>Что будет, если пропущу день?</summary><p>Ряд останется, но сегмент пропущенной привычки будет соткан пустым утком — светлой нитью. Пропуск — тоже часть узора. Серия прервётся, окантовка начнётся заново через семь дней.</p></details>
+    <details class="reveal"><summary>Можно ли отметить вчера?</summary><p>Да, вчера и позавчера: у этих рядов есть кнопка «исправить». Глубже — нельзя, иначе ковёр превратится в таблицу, которую дорисовывают в конце месяца.</p></details>
+    <details class="reveal"><summary>Где хранятся данные?</summary><p>В твоём браузере, в localStorage под ключом kovyor:v1. Кнопка «Экспорт JSON» отдаёт файл со всем полотном, «Импорт JSON» возвращает его на любом устройстве. Серверу мы ничего не отправляем.</p></details>
+    <details class="reveal"><summary>Как выглядит постер?</summary><p>Годовое полотно на бумаге 300 г: 365 рядов по 1,15 мм, 6 нитей — 50 мм на каждую. Окантовки и медальоны печатаются как есть, внизу — название ковра и даты. Рама в комплект не входит, но подходит любая A3 или A2.</p></details>
+    <details class="reveal"><summary>Можно ли подарить?</summary><p>Можно: «Ковёр+» на год оформляется как подарочный код, а постер — по JSON-экспорту человека, которому даришь. Самый частый подарок — плед по ковру года.</p></details>
+    <details class="reveal"><summary>Что входит в бесплатный тариф?</summary><p>До трёх привычек, одно месячное полотно, карточка недели с нашей подписью и PNG в обычном разрешении. Станок, узоры из названия и окантовки — без ограничений.</p></details>
+  </div>
+</section>
+
+<section class="cta reveal">
+  <h2>Первый ряд — сегодня</h2>
+  <p>Две привычки, две нити, одна галочка вечером. Через неделю будет окантовка.</p>
+  <a class="btn btn-accent btn-lg" href="#demo">Начать свой ковёр</a>
+</section>
+</main>
+
+<footer class="footer">
+  <span>© 2026 Ковёр · станок в браузере</span>
+  <nav aria-label="Футер"><a href="#faq">Вопросы</a><a href="#pricing">Тарифы</a><a href="#wall">Постер</a><a href="mailto:hello@kovyor.ru">hello@kovyor.ru</a></nav>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

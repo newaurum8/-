@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фифо — налог с крипты посчитан, 3-НДФЛ готова</title>
+<meta name="description" content="Перетащите выгрузку с биржи — Фифо прямо в браузере разложит сделки по методу FIFO, пересчитает в рубли по курсам ЦБ и покажет налог за год с приложением к декларации 3-НДФЛ. Файл не покидает ваше устройство.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fff'/><rect x='4' y='4' width='24' height='24' fill='%23FFE347' stroke='%230A0A0A' stroke-width='3'/><rect x='4' y='19' width='24' height='9' fill='%23B6FF3B' stroke='%230A0A0A' stroke-width='3'/></svg>">
+</head>
+<body>
+<header class="top" id="top">
+  <a class="logo" href="#top"><span class="cube" aria-hidden="true"></span>Фифо</a>
+  <nav class="menu" id="menu" aria-label="Разделы">
+    <a href="#demo">Демо</a><a href="#method">Как считаем</a><a href="#formats">Форматы</a><a href="#pricing">Тарифы</a><a href="#faq">FAQ</a>
+  </nav>
+  <a class="btn top-cta" href="#demo">Загрузить выгрузку</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Меню"><span></span><span></span><span></span></button>
+</header>
+
+<main>
+<!-- 01 Hero -->
+<section class="hero wrap" id="hero">
+  <div class="reveal">
+    <p class="kicker">01 — Налоговый конвейер для криптосделок</p>
+    <h1>Налог с крипты посчитан, <span class="hl"><span class="nw">3-НДФЛ</span> готова</span></h1>
+  </div>
+  <div class="hero-row">
+    <div class="reveal">
+      <p class="lead">Перетащите выгрузку с биржи — Фифо в браузере разложит сделки по методу FIFO, пересчитает в рубли по курсам ЦБ и покажет налог за год с приложением к декларации. Файл не покидает ваше устройство.</p>
+      <ul class="cubes">
+        <li>Bybit, OKX, Binance, Bitget, HTX, MEXC, P2P и свой CSV</li>
+        <li>Таблица пар «покупка → продажа» для бухгалтера</li>
+        <li>0 байт отправлено на сервер — можно отключить интернет</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="drop" id="drop-hero">
+        <svg class="drop-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="3" y="27" width="18" height="18" fill="#FFE347" stroke="#0A0A0A" stroke-width="2.5"/><rect x="27" y="27" width="18" height="18" fill="#FFE347" stroke="#0A0A0A" stroke-width="2.5"/><rect x="15" y="4" width="18" height="18" fill="#B6FF3B" stroke="#0A0A0A" stroke-width="2.5"/><path d="M24 22v5" stroke="#0A0A0A" stroke-width="2.5"/></svg>
+        <p class="drop-t">Перетащите выгрузку с биржи<br><span>CSV или TSV, до 10 МБ. XLSX — сохраните как CSV</span></p>
+        <label class="btn btn-line">Выбрать файл<input class="vh" type="file" id="file-hero" accept=".csv,.tsv,.txt,.xlsx,.xls,text/csv,text/tab-separated-values"></label>
+      </div>
+      <button class="btn btn-lg btn-wide" id="demo-btn" type="button">Демо-выгрузка на 400 сделок</button>
+    </div>
+  </div>
+  <div class="belt-wrap reveal">
+    <div class="belt-bar">
+      <span class="badge">Конвейер FIFO — первые купленные уходят первыми</span>
+      <label class="speed" for="speed">Скорость года
+        <input type="range" id="speed" min="0.5" max="4" step="0.5" value="1">
+        <output id="speed-out" for="speed">1×</output>
+      </label>
+    </div>
+    <canvas id="belt" role="img" aria-label="Анимация: лоты покупок едут по конвейеру, штамп продажи снимает первые купленные лоты — так работает FIFO; результат каждого лота падает в корзину прибыли или убытка, табло считает налог за 2025 год"></canvas>
+  </div>
+</section>
+
+<!-- Доказательства -->
+<section class="wrap facts-strip reveal" aria-label="Ключевые числа">
+  <div class="ledger six">
+    <div class="cell"><b>FIFO</b><span>метод расчёта расходов</span></div>
+    <div class="cell"><b>13/15&nbsp;%</b><span>ставка по прогрессии</span></div>
+    <div class="cell"><b><span data-count="2.4" data-dec="1">2,4</span>&nbsp;млн&nbsp;₽</b><span>порог ставки 15 %</span></div>
+    <div class="cell"><b><span data-count="8">8</span> форматов</b><span>выгрузок с бирж и P2P</span></div>
+    <div class="cell"><b><span data-count="400">400</span> сделок</b><span>считаем за 2 секунды</span></div>
+    <div class="cell"><b><span data-count="0">0</span> байт</b><span>уходит на сервер</span></div>
+  </div>
+</section>
+
+<!-- 02 Что изменилось -->
+<section class="wrap sec" id="facts">
+  <div class="sec-head reveal"><p class="kicker">02 — Что изменилось</p><h2>Три факта, с которых начинается расчёт</h2></div>
+  <div class="ledger three">
+    <article class="cell fact reveal"><span class="num">1</span><h3>Доход декларируется по НДФЛ</h3><p>Цифровая валюта признаётся имуществом. Доход от её продажи вы указываете в декларации 3-НДФЛ сами: подать до 30 апреля, заплатить до 15 июля следующего года.</p></article>
+    <article class="cell fact reveal"><span class="num">2</span><h3>Расходы считаются по FIFO</h3><p>Первые купленные уходят первыми. Так работает FIFO, так считаем мы: каждая продажа закрывает самые ранние лоты покупки — с их датой, ценой и комиссией.</p></article>
+    <article class="cell fact reveal"><span class="num">3</span><h3>Ставка 13 % и 15 %</h3><p>С 2025 года база до 2,4 млн ₽ в год облагается по 13 %, превышение — по 15 %. Параметры ставок лежат в конфиге расчёта с подписью года. <a href="#method" class="il">Методика расчёта →</a></p></article>
+  </div>
+</section>
+
+<!-- 03 Демо -->
+<section class="wrap sec" id="demo">
+  <div class="sec-head reveal"><p class="kicker">03 — Демо</p><h2>Загрузите выгрузку — итог через 2 секунды</h2></div>
+  <div class="demo-grid">
+    <aside class="panel reveal" aria-label="Источник данных">
+      <h3 class="panel-t">Источник</h3>
+      <div class="drop" id="drop-demo">
+        <p class="drop-t">Перетащите CSV/TSV сюда<br><span>Разделитель и кодировку определим сами</span></p>
+        <label class="btn btn-line">Выбрать файл<input class="vh" type="file" id="file-demo" accept=".csv,.tsv,.txt,.xlsx,.xls,text/csv,text/tab-separated-values"></label>
+      </div>
+      <label class="field">Биржа или шаблон столбцов
+        <select id="preset">
+          <option value="auto">Определить по заголовкам</option>
+          <option value="bybit" data-cols="Symbol,Side,Filled Qty,Avg Price,Fee,Filled Time">Bybit</option>
+          <option value="okx" data-cols="Order Time,Instrument,Side,Filled Qty,Avg Price,Fee">OKX</option>
+          <option value="binance" data-cols="Date(UTC),Pair,Side,Price,Executed,Amount,Fee">Binance</option>
+          <option value="bitget" data-cols="Time,Pair,Direction,Price,Quantity,Fee">Bitget</option>
+          <option value="htx" data-cols="Time,Pair,Type,Price,Amount,Fee">HTX</option>
+          <option value="mexc" data-cols="Time,Pairs,Side,Price,Executed Amount,Fee">MEXC</option>
+          <option value="p2p" data-cols="Дата,Актив,Сторона,Количество,Цена,Валюта,Комиссия" data-quote="RUB">P2P-шаблон</option>
+          <option value="manual" data-cols="date,asset,side,qty,price,quote,fee">Ручной шаблон CSV</option>
+        </select>
+      </label>
+      <button class="btn btn-wide" id="demo-btn2" type="button">Демо-выгрузка на 400 сделок</button>
+      <div class="progress" id="progress" hidden aria-hidden="true"><i></i></div>
+      <p class="status" id="status" aria-live="polite" data-xlsx="{f} — XLSX. Сохраните файл как CSV (UTF-8) в Excel или Numbers: парсер XLSX не входит в сборку, чтобы всё работало офлайн." data-big="Файл больше 10 МБ — разделите выгрузку по годам." data-err="Не удалось прочитать файл." data-empty="В файле нет строк со сделками." data-low="{f} · {n} строк · уверенность в заголовках {c} % — укажите столбцы." data-none="Не удалось разобрать ни одной сделки — проверьте столбцы, формат даты и стороны (Buy/Sell)." data-cleared="Данные удалены из localStorage. Загрузите файл или нажмите «Демо-выгрузка».">Данных пока нет. Загрузите файл или нажмите «Демо-выгрузка».</p>
+      <template id="tpl-status"><b data-k="name"></b> · <span data-k="n"></span> сделок · <span data-k="exs"></span> · <span data-k="years"></span><span data-k="enc"></span><span data-k="conf"></span><span data-k="bad"></span> · посчитано за <span data-k="ms"></span> мс · отправлено 0 байт<span data-k="rest"></span></template>
+      <div class="row">
+        <button class="btn btn-line btn-sm" id="map-btn" type="button" hidden>Сопоставить столбцы</button>
+        <button class="btn btn-line btn-sm" id="clear-btn" type="button">Очистить данные</button>
+      </div>
+      <p class="fine">Сделки и сопоставление столбцов хранятся только в localStorage этого браузера (ключ <code>fifo:datasets</code>). В сеть ничего не отправляется: отправлено 0 байт.</p>
+    </aside>
+
+    <div class="out">
+      <div class="panel mapping reveal" id="mapping" hidden>
+        <h3 class="panel-t">Сопоставьте столбцы <span class="badge" id="map-conf">уверенность 60 %</span></h3>
+        <p class="fine">Мы не уверены в заголовках. Укажите, где что лежит — ниже первые 5 строк файла.</p>
+        <div class="map-grid" id="map-fields" data-fields="date:Дата|pair:Пара или актив|side:Сторона|qty:Количество|price:Цена|fee:Комиссия|quote:Валюта котировки"
+          data-syn-date="date,time,дата,created_at,filled time,date(utc),order time,timestamp,время" data-syn-pair="pair,symbol,market,актив,instrument,pairs,asset,coin,пара,contract" data-syn-side="side,type,direction,buy/sell,сторона,тип,operation" data-syn-qty="filled qty,executed,qty,quantity,filled,executed amount,amount,size,количество,объём,объем" data-syn-price="avg price,price,filled price,average price,цена,unit price" data-syn-fee="fee,commission,комиссия" data-syn-quote="quote,quote currency,валюта,fiat,currency"></div>
+        <div class="scroll"><table class="tbl small" id="map-preview"></table></div>
+        <div class="row"><button class="btn" id="map-apply" type="button">Применить и посчитать</button><button class="btn btn-line" id="map-cancel" type="button">Отмена</button></div>
+      </div>
+
+      <div class="empty reveal" id="empty">
+        <svg viewBox="0 0 320 120" aria-hidden="true"><rect x="2" y="60" width="316" height="3" fill="#0A0A0A"/><rect x="2" y="88" width="316" height="3" fill="#0A0A0A"/><g stroke="#0A0A0A" stroke-width="2" fill="#FFE347"><rect x="20" y="16" width="44" height="44"/><rect x="84" y="16" width="44" height="44"/><rect x="148" y="16" width="44" height="44"/></g><rect x="212" y="16" width="44" height="44" fill="#B6FF3B" stroke="#0A0A0A" stroke-width="2"/><path d="M2 88 l14-25 M34 88 l14-25 M66 88 l14-25 M98 88 l14-25 M130 88 l14-25 M162 88 l14-25 M194 88 l14-25 M226 88 l14-25 M258 88 l14-25 M290 88 l14-25" stroke="#0A0A0A" stroke-width="1.5"/></svg>
+        <p>Здесь появится итог налога за год, таблица пар «покупка → продажа», график по месяцам и сводка по активам.</p>
+        <button class="btn" id="demo-btn3" type="button">Показать на демо-выгрузке</button>
+      </div>
+
+      <div id="result" hidden>
+        <div class="years reveal" id="years" role="group" aria-label="Год расчёта"></div>
+        <div class="total reveal">
+          <div>
+            <p class="kicker">Налог к уплате за <span id="yr">2025</span> год</p>
+            <p class="big" id="tax">0 ₽</p>
+            <p class="fine" id="tax-note">Ставки <span data-k="rate"></span> · пар «покупка → продажа» за год: <span data-k="n"></span></p>
+          </div>
+          <dl class="kv" id="kv"><dt>Результат года</dt><dd data-k="result"></dd><dt>Убыток прошлых лет к зачёту</dt><dd data-k="carry"></dd><dt>Налоговая база</dt><dd data-k="base"></dd><dt data-k="lowL"></dt><dd data-k="low"></dd><dt data-k="highL"></dt><dd data-k="high"></dd><dt>Остаток убытка на будущее</dt><dd data-k="carryAfter"></dd></dl>
+        </div>
+        <div class="two reveal">
+          <div class="chart-box"><h3 class="panel-t">Результат по месяцам, ₽</h3><svg id="chart" class="chart" viewBox="0 0 720 260" data-m="янв фев мар апр май июн июл авг сен окт ноя дек" aria-label="Столбики результата по месяцам: прибыль зелёным, убыток чёрным со штриховкой"><defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><rect width="2.5" height="6" fill="#0A0A0A"/></pattern></defs><g id="bars"></g></svg></div>
+          <div class="assets-box"><h3 class="panel-t">Сводка по активам</h3><div class="scroll"><table class="tbl small" id="assets"><thead><tr><th>Актив</th><th class="num">Пар</th><th class="num">Продано</th><th class="num">Выручка, ₽</th><th class="num">Результат, ₽</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div></div>
+        </div>
+        <div class="warn reveal" id="warn" hidden></div>
+        <template id="tpl-w"><p><b>Не хватает покупок на <span data-k="q"></span></b> (<span data-k="d"></span>) — добавьте выгрузку с другой биржи или начальный остаток. Непокрытая часть учтена по нулевой стоимости.</p></template>
+        <template id="tpl-nom"><p><span data-k="a"></span>: <span data-k="q"></span> без истории покупки учтены по номиналу — 1 USD по курсу ЦБ на дату.</p></template>
+        <div class="pairs reveal">
+          <div class="pairs-head"><h3 class="panel-t">Пары «покупка → продажа» <span class="badge" id="pairs-n">0</span></h3><div class="chips" id="filter" role="group" aria-label="Фильтр по активу"></div></div>
+          <div class="scroll"><table class="tbl" id="pairs"><thead><tr><th>№</th><th>Актив</th><th>Куплено</th><th class="num">Кол-во</th><th class="num">Расходы, ₽</th><th>Продано</th><th class="num">Выручка, ₽</th><th class="num">Результат, ₽</th></tr></thead><tbody></tbody></table></div>
+          <button class="btn btn-line btn-sm" id="more" type="button" hidden>Показать ещё <span data-k="n"></span> строк</button>
+        </div>
+        <div class="exports reveal">
+          <span class="badge" id="plan-badge">Тариф: Бесплатно — предварительный итог</span>
+          <div class="row">
+            <button class="btn" id="dl-csv" type="button" data-head="№;Актив;Дата покупки;Количество;Расходы, руб;Дата продажи;Биржа;Выручка, руб;Результат, руб;Примечание">Скачать приложение к декларации (CSV)</button>
+            <button class="btn btn-line" id="dl-print" type="button">Печатная версия A4</button>
+            <button class="btn btn-line" id="dl-xls" type="button">Экспорт бухгалтеру (CSV для Excel)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Как считаем -->
+<section class="wrap sec" id="method">
+  <div class="sec-head reveal"><p class="kicker">04 — Как считаем</p><h2>Четыре шага от выгрузки до декларации</h2></div>
+  <ol class="ledger four steps">
+    <li class="cell reveal"><span class="num">1</span><h3>Нормализация</h3><p>Каждая строка выгрузки становится сделкой: дата, актив, сторона, количество, цена, комиссия. Пару крипта-крипта (ETH/BTC) раскладываем на продажу одного актива и покупку другого по рублёвой стоимости на дату.</p></li>
+    <li class="cell reveal"><span class="num">2</span><h3>Рублёвая оценка</h3><p>Стоимость = количество × цена в USD (стейблкоины = 1 USD, остальное по таблице цен) × курс ЦБ на дату — берём ближайший предыдущий. Таблицы курсов и цен встроены в сервис и обновляются релизами.</p></li>
+    <li class="cell reveal"><span class="num">3</span><h3>Очередь FIFO</h3><p>По каждому активу — очередь лотов. Покупка ставит лот в хвост вместе с комиссией, продажа снимает с головы, последний лот делится. Результат = выручка − комиссия − стоимость снятых лотов.</p></li>
+    <li class="cell reveal"><span class="num">4</span><h3>Год и ставка</h3><p>Результаты суммируем по датам продаж. Убыток года переносится и уменьшает базу следующих лет. Налог = база до 2,4 млн ₽ × 13 % + превышение × 15 %. Ставки — в конфиге с подписью года.</p></li>
+  </ol>
+</section>
+
+<!-- 05 Приватность -->
+<section class="wrap sec" id="local">
+  <div class="sec-head reveal"><p class="kicker">05 — Файл не покидает браузер</p><h2>Можно отключить интернет и проверить</h2></div>
+  <div class="local-grid">
+    <div class="reveal"><p class="scheme-top"><span class="badge">Сервер · 0 байт · стрелки к нему нет</span></p><svg class="scheme" viewBox="0 0 900 260" role="img" aria-label="Схема: файл → ваш браузер → отчёт. К серверу стрелки нет, на него уходит 0 байт">
+      <g stroke="#0A0A0A" stroke-width="3" fill="#fff">
+        <path d="M40 40h150l40 40v170H40z"/><path d="M190 40v40h40" fill="none"/>
+        <rect x="340" y="40" width="240" height="210"/><path d="M340 76h240" fill="none"/>
+        <path d="M680 40h150l40 40v170H680z"/><path d="M830 40v40h40" fill="none"/>
+      </g>
+      <g stroke="#0A0A0A" stroke-width="2" fill="none"><path d="M64 120h120M64 150h96M64 180h110M64 210h70"/></g>
+      <g fill="#FFE347" stroke="#0A0A0A" stroke-width="2"><rect x="364" y="150" width="34" height="34"/><rect x="408" y="150" width="34" height="34"/><rect x="452" y="150" width="34" height="34"/></g>
+      <rect x="496" y="150" width="34" height="34" fill="#B6FF3B" stroke="#0A0A0A" stroke-width="2"/>
+      <path d="M352 196h216" stroke="#0A0A0A" stroke-width="3"/>
+      <circle cx="356" cy="58" r="5" fill="#0A0A0A"/><circle cx="374" cy="58" r="5" fill="#0A0A0A"/><circle cx="392" cy="58" r="5" fill="#0A0A0A"/>
+      <g stroke="#0A0A0A" stroke-width="2" fill="none"><path d="M704 120h120M704 150h120M704 180h120M704 210h120M764 120v110"/></g>
+      <rect x="730" y="92" width="80" height="22" fill="#B6FF3B" stroke="#0A0A0A" stroke-width="2"/>
+      <g stroke="#0A0A0A" stroke-width="3" fill="none"><path d="M250 150h70M308 138l14 12-14 12"/><path d="M600 150h60M648 138l14 12-14 12"/></g>
+    </svg><div class="scheme-labels"><span>Файл с биржи</span><span>Ваш браузер · расчёт</span><span>Отчёт · 3-НДФЛ</span></div></div>
+    <div class="reveal">
+      <p>Файл не покидает ваш браузер — можете отключить интернет. Парсер, курсы, очередь FIFO и печатная форма — это код на вашем устройстве: файл читается через FileReader и никуда не загружается.</p>
+      <p class="online badge" id="online" data-on="Сейчас вы онлайн — отключите интернет, расчёт продолжит работать" data-off="Вы офлайн — и расчёт работает">Проверяем соединение…</p>
+      <ul class="cubes"><li>Нет аккаунта и серверной базы — нечему утечь</li><li>Данные лежат в localStorage, удаляются одной кнопкой</li><li>Исходники открыты: три файла, без сборки</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 06 Форматы -->
+<section class="wrap sec" id="formats">
+  <div class="sec-head reveal"><p class="kicker">06 — Какие выгрузки понимаем</p><h2>8 форматов: биржи, P2P и свой CSV</h2></div>
+  <div class="formats reveal">
+    <div class="chips" id="fmt-chips" role="group" aria-label="Форматы выгрузок"></div>
+    <p class="cols" id="fmt-cols"><b data-k="name"></b> ожидаемые столбцы: <span data-k="cols"></span><span data-k="q"></span>. Порядок не важен, лишние столбцы пропускаем.</p>
+    <script type="text/csv" id="tpl-csv">date,asset,side,qty,price,quote,fee
+2024-03-12,BTC,buy,0.05,61200,USDT,3.06
+2024-11-08,BTC,sell,0.03,76500,USDT,2.30
+2025-01-09,USDT,buy,1200,101.8,RUB,0
+2025-02-17,TON,sell,400,3.1,USDT,1.24
+</script>
+    <div class="row"><button class="btn" id="dl-template" type="button">Скачать шаблон CSV</button><p class="fine">Шаблон: <code>date, asset, side, qty, price, quote, fee</code>. Заголовки распознаём по синонимам: Date / Дата / Filled Time, Pair / Symbol / Актив, Side / Type / Покупка, Amount / Qty / Executed, Price / Avg Price, Fee.</p></div>
+  </div>
+</section>
+
+<!-- 07 Бухгалтеру -->
+<section class="wrap sec" id="acc">
+  <div class="sec-head reveal"><p class="kicker">07 — Что получит бухгалтер</p><h2>Отчёт, который бухгалтер примет без вопросов</h2></div>
+  <div class="acc-grid">
+    <div class="reveal">
+      <h3 class="panel-t">Приложение: пары «покупка → продажа»</h3>
+      <div class="scroll"><table class="tbl small">
+        <thead><tr><th>№</th><th>Актив</th><th>Куплено</th><th class="num">Кол-во</th><th class="num">Расходы, ₽</th><th>Продано</th><th class="num">Выручка, ₽</th><th class="num">Результат, ₽</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>BTC</td><td>12.03.2024</td><td class="num">0,0300</td><td class="num">172&nbsp;944</td><td class="num">08.11.2024</td><td class="num">221&nbsp;340</td><td class="num pos">+48&nbsp;396</td></tr>
+          <tr><td>2</td><td>BTC</td><td>12.03.2024</td><td class="num">0,0200</td><td class="num">115&nbsp;296</td><td class="num">20.12.2024</td><td class="num">190&nbsp;880</td><td class="num pos">+75&nbsp;584</td></tr>
+          <tr><td>3</td><td>ETH</td><td>03.04.2025</td><td class="num">0,5000</td><td class="num">77&nbsp;412</td><td class="num">14.08.2025</td><td class="num">173&nbsp;600</td><td class="num pos">+96&nbsp;188</td></tr>
+          <tr><td>4</td><td>TON</td><td>22.05.2024</td><td class="num">400</td><td class="num">235&nbsp;680</td><td class="num">17.02.2025</td><td class="num">123&nbsp;440</td><td class="num neg">−112&nbsp;240</td></tr>
+          <tr><td>5</td><td>USDT</td><td>09.01.2025</td><td class="num">1&nbsp;200</td><td class="num">122&nbsp;160</td><td class="num">03.06.2025</td><td class="num">95&nbsp;520</td><td class="num neg">−26&nbsp;640</td></tr>
+        </tbody>
+      </table></div>
+      <p class="fine">Полная таблица формируется из вашей выгрузки: CSV для Excel и печатная форма A4 с нумерацией строк и итогами.</p>
+    </div>
+    <div class="note reveal">
+      <p class="kicker">Пояснительная записка</p>
+      <p>Расчёт подготовлен на основании выгрузок сделок с криптобирж и P2P-площадок. Доход от продажи цифровой валюты определён как сумма выручки по сделкам продажи в рублях по курсу ЦБ РФ на дату сделки. Расходы приняты по стоимости приобретения в порядке очерёдности (FIFO) с учётом комиссий. Убытки прошлых лет учтены при определении базы.</p>
+      <p class="fine">К каждой декларации — список источников, таблицы курсов и цен с датой релиза, параметры ставок года.</p>
+      <div class="row"><button class="btn" id="acc-print" type="button">Открыть печатную версию</button><button class="btn btn-line" id="acc-xls" type="button">CSV для Excel</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 Тарифы -->
+<section class="wrap sec" id="pricing">
+  <div class="sec-head reveal"><p class="kicker">08 — Тарифы</p><h2>Платите за отчёт, а не за подписку на тревогу</h2></div>
+  <div class="ledger plans">
+    <article class="cell plan reveal"><h3>Бесплатно</h3><p class="price">0 ₽</p><ul class="cubes"><li>Загрузка выгрузки</li><li>Предварительный итог налога</li><li>Проверка форматов и столбцов</li></ul><button class="btn btn-line btn-wide" type="button" data-plan="free">Начать бесплатно</button></article>
+    <article class="cell plan hot reveal"><span class="tag">Сезон апрель–июль</span><h3>Отчёт</h3><p class="price">1&nbsp;490 ₽<small>разово</small></p><ul class="cubes"><li>Расчёт по всем сделкам года</li><li>Приложение к 3-НДФЛ: CSV + печать</li><li>Пояснительная записка</li></ul><button class="btn btn-wide" type="button" data-plan="report">Купить отчёт</button></article>
+    <article class="cell plan reveal"><h3>Годовой</h3><p class="price">3&nbsp;990 ₽<small>в год</small></p><ul class="cubes"><li>Неограниченные пересчёты</li><li>Несколько бирж в одном расчёте</li><li>Перенос убытков, экспорт бухгалтеру</li></ul><button class="btn btn-line btn-wide" type="button" data-plan="year">Выбрать годовой</button></article>
+    <article class="cell plan reveal"><h3>Для бухгалтеров</h3><p class="price">9&nbsp;900 ₽<small>в год, 25 клиентов</small></p><ul class="cubes"><li>Папки по клиентам</li><li>Печать пачкой и единый формат</li><li>Таблицы курсов с датой релиза</li></ul><button class="btn btn-line btn-wide" type="button" data-plan="pro">Подключить кабинет</button></article>
+  </div>
+  <div class="ledger six econ reveal">
+    <div class="cell"><b><span data-count="300">300</span>&nbsp;₽</b><span>CAC: Telegram и поиск «налог на криптовалюту 2026»</span></div>
+    <div class="cell"><b><span data-count="8">8</span> %</b><span>конверсия в оплату в сезон апрель–июль</span></div>
+    <div class="cell"><b><span data-count="1800">1&nbsp;800</span>&nbsp;₽</b><span>средний чек</span></div>
+    <div class="cell"><b><span data-count="40">40</span> %</b><span>возвращаются на второй год</span></div>
+    <div class="cell"><b><span data-count="2300">2&nbsp;300</span>&nbsp;₽</b><span>LTV клиента</span></div>
+    <div class="cell"><b><span data-count="85">85</span> %</b><span>маржа: расчёт в браузере, переменных затрат нет, себестоимость — поддержка парсеров 8 форматов</span></div>
+  </div>
+</section>
+
+<!-- 09 FAQ -->
+<section class="wrap sec" id="faq">
+  <div class="sec-head reveal"><p class="kicker">09 — FAQ</p><h2>Вопросы, которые задают перед загрузкой</h2></div>
+  <div class="faq reveal">
+    <details><summary>Что такое FIFO?</summary><p>First in, first out: при продаже сначала списываются самые ранние купленные лоты. Для каждого актива сервис ведёт очередь покупок, продажа снимает лоты с головы очереди, последний лот делится. Так же считают расходы по ценным бумагам, поэтому бухгалтеры принимают такой расчёт без споров.</p></details>
+    <details><summary>Какие биржи поддерживаются?</summary><p>Bybit, OKX, Binance, Bitget, HTX, MEXC, выгрузки P2P-сделок по нашему шаблону и ручной CSV. Заголовки распознаём по синонимам; если уверенность ниже 80 %, покажем экран сопоставления столбцов с превью первых пяти строк.</p></details>
+    <details><summary>Откуда курсы и цены?</summary><p>Курс USD/RUB — таблица ЦБ РФ по датам, цены активов — встроенная таблица в USD; стейблкоины считаются по 1 USD. Таблицы лежат в сервисе и обновляются релизами, для каждой даты берём ближайшее предыдущее значение. В демо-версии таблицы помесячные и помечены как демонстрационные.</p></details>
+    <details><summary>Что если не хватает покупок?</summary><p>Если продажа больше остатка в очереди, расчёт продолжится, а в сводке появится предупреждение вроде «не хватает покупок на 0,03 BTC — добавьте выгрузку с другой биржи или начальный остаток». Непокрытая часть считается по нулевой стоимости, чтобы налог не оказался занижен.</p></details>
+    <details><summary>Как учитываются комиссии?</summary><p>Комиссия покупки увеличивает стоимость лота, комиссия продажи уменьшает выручку. Комиссия в другой валюте пересчитывается в рубли на дату сделки.</p></details>
+    <details><summary>Что с убытком прошлых лет?</summary><p>Отрицательный результат года переносится на следующие годы и уменьшает базу, пока не исчерпается. В сводке по году видно, сколько убытка принято к зачёту и сколько осталось. Возможность переноса проверьте для своей ситуации.</p></details>
+    <details><summary>Безопасно ли это?</summary><p>Файл читается в браузере через FileReader и не отправляется никуда: нет сервера, нет аккаунта, нет базы. Можно отключить интернет и проверить — расчёт работает. Данные хранятся в localStorage и удаляются кнопкой «Очистить данные».</p></details>
+  </div>
+</section>
+
+<section class="wrap cta reveal">
+  <h2>Выгрузка уже есть? <span class="hl">Итог через 2 секунды.</span></h2>
+  <div class="row"><a class="btn btn-lg" href="#demo">Загрузить выгрузку</a><button class="btn btn-line btn-lg" id="demo-btn4" type="button">Демо-выгрузка</button></div>
+</section>
+</main>
+
+<footer class="wrap foot">
+  <p class="disclaimer">Сервис не является налоговой консультацией; проверьте актуальные ставки и правила. Конфиг ставок: 2021–2024 — 13 % до 5 млн ₽ и 15 % сверх; с 2025 — 13 % до 2,4 млн ₽ и 15 % сверх. Таблицы курсов и цен — демонстрационные, помесячные.</p>
+  <div class="foot-row"><span>© 2026 Фифо</span><nav aria-label="Ссылки"><a href="#method">Методика</a><a href="#formats">Форматы</a><a href="#faq">FAQ</a><a href="#pricing">Тарифы</a></nav></div>
+</footer>
+
+<section id="print" class="print-only" aria-hidden="true"></section>
+<template id="tpl-print">
+  <h1>Приложение к декларации 3-НДФЛ за <span data-k="year"></span> год</h1>
+  <p>Расчёт дохода от операций с цифровой валютой. Метод списания расходов — FIFO, курс ЦБ РФ на дату сделки. Сформировано <span data-k="date"></span> в сервисе Фифо. Источники: <span data-k="exs"></span>; сделок в выгрузке: <span data-k="n"></span>.</p>
+  <h2>Итоги года</h2>
+  <table><tbody>
+    <tr><td>Выручка от продаж</td><td class="num" data-k="proceeds"></td></tr>
+    <tr><td>Расходы по FIFO с комиссиями</td><td class="num" data-k="cost"></td></tr>
+    <tr><td>Результат года</td><td class="num" data-k="result"></td></tr>
+    <tr><td>Убыток прошлых лет к зачёту</td><td class="num" data-k="carry"></td></tr>
+    <tr><td>Налоговая база</td><td class="num" data-k="base"></td></tr>
+    <tr class="tot"><td>Налог к уплате, ставки <span data-k="rate"></span></td><td class="num" data-k="tax"></td></tr>
+  </tbody></table>
+  <h2>Пояснительная записка</h2>
+  <p>Расчёт подготовлен на основании выгрузок сделок с криптобирж и P2P-площадок (<span data-k="exs"></span>). Доход от продажи цифровой валюты определён как сумма выручки по сделкам продажи в рублях по курсу ЦБ РФ на дату сделки за вычетом комиссий. Расходы приняты по стоимости приобретения в порядке очерёдности (FIFO) с учётом комиссий покупки. Стейблкоины оценены по номиналу 1 USD. Убытки прошлых лет учтены при определении базы. Сервис не является налоговой консультацией; ставки и правила проверены на дату формирования.</p>
+  <h2>Пары «покупка → продажа»: <span data-k="pairs"></span></h2>
+  <table><thead><tr><th>№</th><th>Актив</th><th>Куплено</th><th class="num">Кол-во</th><th class="num">Расходы, ₽</th><th>Продано</th><th class="num">Выручка, ₽</th><th class="num">Результат, ₽</th></tr></thead><tbody data-k="rows"></tbody></table>
+</template>
+<script src="app.js"></script>
+</body>
+</html>

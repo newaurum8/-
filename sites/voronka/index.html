@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Воронка — сколько лидов нужно, чтобы заработать план</title>
+<meta name="description" content="Воронка превращает план продаж в поток лидов-частиц: двигайте конверсию этапа или число лидов и за секунду видите выручку с разбросом P10–P90. 200 прогонов Монте-Карло, самый выгодный рычаг подсвечен. Калькулятор работает прямо в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0a0a'/><path d='M5 7h22l-7 10v8l-8 3V17z' fill='none' stroke='%23ff2d7a' stroke-width='2.4' stroke-linejoin='round'/><circle cx='16' cy='26' r='2.4' fill='%23f3ff4a'/></svg>">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Воронка — на главную"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 7h22l-7 10v8l-8 3V17z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="16" cy="26.5" r="2.4" fill="#F3FF4A"/></svg>Воронка</a>
+  <nav class="menu" id="menu" aria-label="Разделы">
+    <a href="#demo">Демо</a><a href="#whatif">Что если</a><a href="#who">Для кого</a><a href="#pricing">Тарифы</a><a href="#faq">FAQ</a>
+  </nav>
+  <a class="btn btn-yellow btn-sm nav-cta" href="#demo">Построить воронку</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Открыть меню"><span></span><span></span></button>
+</header>
+
+<main id="top">
+<section class="hero" aria-labelledby="h1">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-stage" aria-hidden="true"></div>
+  <div class="board reveal" id="hero-board">
+    <span class="board-label">Выручка</span>
+    <div class="odo" id="odo" role="img" aria-label="Табло выручки: растёт с каждой сделкой"></div>
+    <span class="board-note"><b id="hero-deals" class="num">0</b> сделок × 150 000 ₽ · с момента открытия страницы</span>
+  </div>
+  <div class="hero-copy reveal">
+    <p class="eyebrow">Планирование продаж · 200 прогонов</p>
+    <h1 id="h1">Сколько <em>лидов</em> нужно, чтобы заработать <span class="y">план</span></h1>
+    <p class="lead">Воронка превращает план продаж в поток из тысяч лидов-частиц. Двигайте конверсию этапа или число лидов — и за секунду видите, сколько денег это даёт, с разбросом вероятностей. Самый выгодный рычаг подсвечен жёлтым: аргумент в рублях на утверждении бюджета.</p>
+    <div class="slider hero-slider">
+      <div class="slider-head"><label for="hero-conv">Конверсия на КП</label><output id="hero-conv-out" for="hero-conv">18%</output></div>
+      <input id="hero-conv" type="range" min="3" max="60" value="18" step="1">
+      <span class="hint">Двиньте — поток и табло отреагируют мгновенно</span>
+    </div>
+    <div class="actions"><a class="btn btn-yellow btn-lg" href="#demo">Построить мою воронку</a><a class="btn btn-ghost btn-lg" href="#whatif">Что такое рычаг</a></div>
+  </div>
+</section>
+
+<section id="why" class="why">
+  <div class="section-head reveal">
+    <p class="kicker">01 · Зачем</p>
+    <h2>План от конверсий, а не от желаний</h2>
+    <p>План — это не желание, а произведение конверсий. Воронка показывает это произведение в рублях и подсвечивает, где именно течёт.</p>
+  </div>
+  <div class="cards3">
+    <article class="card reveal"><span class="card-n">01</span><h3>План ставят от желаемого</h3><p>«В следующем квартале плюс 30%» — а конверсии и число лидов остаются прежними. Воронка умножает лиды на конверсии и показывает, сколько на самом деле придёт денег и с какой вероятностью.</p></article>
+    <article class="card reveal"><span class="card-n">02</span><h3>Что выгоднее: +5% на КП или +200 лидов?</h3><p>Два рычага, два бюджета: один стоит тренинга, другой — рекламы. Воронка считает оба за секунду и подсвечивает жёлтым тот, что приносит больше рублей в месяц.</p></article>
+    <article class="card reveal"><span class="card-n">03</span><h3>Разбор раз в квартал устаревает за неделю</h3><p>Конверсии плавают, менеджеры увольняются, лиды дорожают. Воронка пересчитывает план на каждое движение ползунка: 200 прогонов, P10–P90, 30 секунд до аргумента.</p></article>
+  </div>
+  <ul class="stats reveal">
+    <li><b class="num" data-count="2000">0</b><span>лидов-частиц летят по воронке на первом экране</span></li>
+    <li><b class="num" data-count="200">0</b><span>прогонов Монте-Карло на каждое движение ползунка</span></li>
+    <li><b class="num">P10–P90</b><span>разброс выручки вместо одной «средней» цифры</span></li>
+    <li><b class="num" data-count="30">0</b><span>секунд от ввода плана до аргумента в рублях</span></li>
+  </ul>
+</section>
+
+<section id="demo" class="demo">
+  <div class="section-head reveal">
+    <p class="kicker">02 · Демо</p>
+    <h2>Постройте воронку за 30 секунд</h2>
+    <p>Введите план, чек и конверсии. Числа считаются мгновенно: 200 прогонов Монте-Карло, разброс P10–P90, нужные лиды и загрузка менеджеров. Всё в браузере, ничего никуда не отправляется.</p>
+  </div>
+  <div class="demo-grid">
+    <form class="panel inputs reveal" id="form" aria-label="Параметры воронки">
+      <div class="presets"><span class="label">Пресет</span><div class="chips" id="presets" role="group" aria-label="Пресеты отрасли"></div></div>
+      <div class="fields">
+        <label>Выручка в месяц, ₽<input id="f-target" type="number" min="0" step="100000" value="3000000"></label>
+        <label>Средний чек, ₽<input id="f-check" type="number" min="1" step="1000" value="150000"></label>
+        <label>Лидов в месяц<input id="f-leads" type="number" min="1" step="10" value="500"></label>
+        <label>Цикл сделки, дней<input id="f-cycle" type="number" min="1" step="1" value="30"></label>
+        <label>Менеджеров<input id="f-managers" type="number" min="1" step="1" value="4"></label>
+        <label>Ёмкость, сделок на менеджера<input id="f-cap" type="number" min="1" step="1" value="15"></label>
+      </div>
+      <div class="stages-head"><span class="label">Этапы, конверсии и дни</span><button type="button" class="btn btn-ghost btn-sm" id="add-stage">+ Этап</button></div>
+      <div id="stages" class="stages"></div>
+      <div class="form-actions"><button type="button" class="btn btn-yellow" id="run">Рассчитать</button><button type="button" class="btn btn-ghost" id="reset">Сбросить</button></div>
+    </form>
+
+    <div class="results">
+      <div class="tiles reveal">
+        <div class="tile tile-main"><span class="tile-label">Выручка в месяц · P50</span><b class="tile-num y" id="r-p50">0 ₽</b><span class="tile-sub">P10–P90: <span id="r-range">…</span></span><span class="tile-plan" id="r-plan"></span></div>
+        <div class="tile"><span class="tile-label">Сделок</span><b class="tile-num" id="r-deals">0</b><span class="tile-sub" id="r-deals-sub">…</span></div>
+        <div class="tile"><span class="tile-label">Нужно лидов для плана</span><b class="tile-num" id="r-need">0</b><span class="tile-sub" id="r-need-sub">…</span></div>
+        <div class="tile" id="t-load"><span class="tile-label">Загрузка менеджеров</span><b class="tile-num" id="r-load">0%</b><span class="tile-sub" id="r-load-sub">…</span></div>
+      </div>
+      <div class="stage-canvas reveal">
+        <canvas id="demo-canvas" role="img" aria-label="Анимация воронки: частицы-лиды проходят этапы, потери уходят в стороны, сделки падают монетами"></canvas>
+        <div class="canvas-note" id="cycle-note">20 секунд = месяц · сделок за цикл: 0</div>
+      </div>
+      <div class="panel reveal">
+        <div class="panel-head"><h3>Этапы</h3><span class="muted" id="cycle-warn"></span></div>
+        <div class="tscroll"><table class="stage-table" aria-label="Таблица этапов"><thead><tr><th>Этап</th><th>Вход</th><th>Конверсия</th><th>Выход</th><th>Потери</th><th>В работе</th></tr></thead><tbody id="stage-rows"></tbody></table></div>
+      </div>
+      <div class="panel reveal" id="whatif-panel">
+        <div class="panel-head"><h3>Что если</h3><span class="muted">Δ выручки в месяц по медиане</span></div>
+        <div id="levers" class="levers"></div>
+      </div>
+      <div class="actions-row reveal">
+        <label class="scn-name"><span class="vh">Название сценария</span><input id="scn-name" type="text" maxlength="40" placeholder="Название сценария"></label>
+        <button type="button" class="btn btn-yellow" id="save">Сохранить сценарий</button>
+        <button type="button" class="btn btn-ghost" id="print">Печать плана</button>
+        <button type="button" class="btn btn-ghost" id="share-btn">Поделиться</button>
+        <button type="button" class="btn btn-ghost" id="png">PNG табло</button>
+      </div>
+      <div class="panel reveal" id="scenarios-panel">
+        <div class="panel-head"><h3>Сценарии</h3><span class="muted">хранятся в этом браузере</span></div>
+        <div id="scenarios" class="scenarios"></div>
+        <div id="compare" class="compare"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="whatif" class="whatif">
+  <div class="section-head reveal">
+    <p class="kicker">03 · Рычаги</p>
+    <h2>Что если</h2>
+    <p>Панель рычагов считает, что даст каждый процентный пункт конверсии и каждые 10% лидов. Пример для отдела с 500 лидами, чеком 130 000 ₽ и конверсиями 60 / 50 / 60 / 35.</p>
+  </div>
+  <div class="levers-demo">
+    <div class="lever-ex reveal"><span class="lx-l">+5 п. п. на встрече</span><b class="num">+410 000 ₽/мес</b><span class="lx-s">Тренинг по встречам — около 60 000 ₽ разово</span></div>
+    <div class="lever-ex reveal"><span class="lx-l">+10% лидов</span><b class="num">+410 000 ₽/мес</b><span class="lx-s">Ещё 50 лидов — около 75 000 ₽ рекламы в месяц</span></div>
+    <div class="lever-ex best reveal"><span class="badge">самый выгодный</span><span class="lx-l">+5 п. п. на КП</span><b class="num">+585 000 ₽/мес</b><span class="lx-s">Самая слабая конверсия даёт самый дорогой пункт</span></div>
+  </div>
+  <div class="how3">
+    <div class="how reveal"><b>1</b><p>Берём медиану вашей воронки: лиды × произведение конверсий × чек.</p></div>
+    <div class="how reveal"><b>2</b><p>Двигаем один рычаг — конверсию этапа на 5 п. п. или число лидов на 10% — и считаем новую выручку.</p></div>
+    <div class="how reveal"><b>3</b><p>Разница в рублях — ваш аргумент. Самый выгодный рычаг подсвечен жёлтым. Покажите РОПу, где течёт.</p></div>
+  </div>
+</section>
+
+<section id="who" class="who">
+  <div class="section-head reveal">
+    <p class="kicker">04 · Для кого</p>
+    <h2>Четыре человека, одна цифра</h2>
+  </div>
+  <div class="capsules">
+    <div class="capsule reveal"><span class="cap-role">РОП</span><p>Показывает, где течёт, и обосновывает ещё одного менеджера не словами, а загрузкой по этапам.</p></div>
+    <div class="capsule reveal"><span class="cap-role">Основатель</span><p>Ставит план от произведения конверсий и видит вероятность его выполнить до того, как подписал бюджет.</p></div>
+    <div class="capsule reveal"><span class="cap-role">Маркетолог</span><p>Называет точное число лидов, которое нужно купить, чтобы отдел закрыл план. Цифра для защиты бюджета.</p></div>
+    <div class="capsule reveal"><span class="cap-role">Тренер по продажам</span><p>White-label: ваш логотип, ваши клиенты, наш расчёт. Продаёте тренинг с цифрой «+410 000 ₽ в месяц».</p></div>
+  </div>
+</section>
+
+<section id="share" class="share">
+  <div class="share-grid">
+    <div class="share-copy reveal">
+      <p class="kicker">05 · Поделиться</p>
+      <h2>Расчёт, который покажут руководителю</h2>
+      <p>Каждый второй расчёт пересылают наверх. Поэтому у Воронки есть страница «План продаж»: чёрным по белому, на одном листе A4, с разбросом и рычагами. Ссылка хранит все параметры — получатель двигает ползунки сам.</p>
+      <div class="actions"><button type="button" class="btn btn-yellow" id="print2">Открыть для печати</button><button type="button" class="btn btn-ghost" id="share-btn2">Скопировать ссылку</button></div>
+      <label class="share-link"><span class="vh">Ссылка на расчёт</span><input id="share-link" type="text" readonly placeholder="Ссылка появится здесь"></label>
+    </div>
+    <div class="sheet-wrap reveal"><div class="sheet" id="sheet" role="region" aria-label="Превью страницы «План продаж»"></div></div>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="section-head reveal">
+    <p class="kicker">06 · Тарифы</p>
+    <h2>Дешевле одного потерянного лида</h2>
+    <div class="billing" role="group" aria-label="Период оплаты"><button type="button" class="chip" id="bill-month" aria-pressed="true">В месяц</button><button type="button" class="chip" id="bill-year" aria-pressed="false">В год <small>−36%</small></button></div>
+  </div>
+  <div class="plans">
+    <article class="plan reveal"><h3>Бесплатно</h3><p class="price"><span>0 ₽</span></p><ul><li>Калькулятор и анимация</li><li>200 прогонов, P10–P90</li><li>Ссылка на расчёт</li><li>Без сохранения сценариев</li></ul><a class="btn btn-ghost btn-wide" href="#demo" data-plan="Бесплатно">Начать расчёт</a></article>
+    <article class="plan plan-hot reveal"><span class="tag">Для РОПа</span><h3>Про</h3><p class="price"><span data-month="1 290 ₽" data-year="825 ₽">1 290 ₽</span><small>/мес</small></p><p class="price-note" data-month="или 9 900 ₽ в год" data-year="9 900 ₽ при оплате за год">или 9 900 ₽ в год</p><ul><li>Сохранённые сценарии</li><li>Сравнение «было / стало»</li><li>Печать плана продаж</li><li>Разбивка по менеджерам</li></ul><a class="btn btn-yellow btn-wide" href="#demo" data-plan="Про">Попробовать 14 дней</a></article>
+    <article class="plan reveal"><h3>Отдел</h3><p class="price"><span data-month="3 990 ₽" data-year="3 325 ₽">3 990 ₽</span><small>/мес</small></p><p class="price-note" data-month="до 10 пользователей" data-year="39 900 ₽ в год, до 10 пользователей">до 10 пользователей</p><ul><li>Всё из «Про»</li><li>Еженедельный ввод факта</li><li>Трекинг отклонения от плана</li><li>Общие сценарии команды</li></ul><a class="btn btn-ghost btn-wide" href="#demo" data-plan="Отдел">Подключить отдел</a></article>
+  </div>
+  <div class="wl reveal"><div><h3>White-label для тренеров и консультантов</h3><p>Ваш логотип и домен, расчёты для ваших клиентов, экспорт плана с вашей подписью. Один white-label равен десяти обычным клиентам.</p></div><div class="wl-price"><b>от 14 900 ₽/мес</b><a class="btn btn-yellow" href="#demo" data-plan="White-label">Обсудить</a></div></div>
+  <ul class="econ reveal">
+    <li><b class="num">~15 ₽</b><span>стоит нам аккаунт в месяц: симуляция считается у вас в браузере</span></li>
+    <li><b class="num">94%</b><span>маржа при среднем чеке ~1 600 ₽</span></li>
+    <li><b class="num">×17</b><span>LTV / CAC: LTV ≈ 25 000 ₽ при CAC ~1 500 ₽ через vc.ru и Telegram о продажах</span></li>
+    <li><b class="num">6%</b><span>отток в месяц на годовых тарифах, 9% — на месячных</span></li>
+  </ul>
+</section>
+
+<section id="faq" class="faq">
+  <div class="section-head reveal"><p class="kicker">07 · FAQ</p><h2>Вопросы</h2></div>
+  <details class="reveal"><summary>Откуда разброс P10–P90?</summary><p>Конверсии и число лидов никогда не точны. На каждое движение ползунка мы делаем 200 прогонов: конверсии дрожат на ±20%, лиды — на ±10%, а переходы между этапами считаются как случайные события. P10 — результат, хуже которого будет только в одном месяце из десяти, P90 — лучше которого тоже только в одном. P50 — медиана, её и ставьте в план.</p></details>
+  <details class="reveal"><summary>Что такое ёмкость менеджера?</summary><p>Сколько сделок один человек может вести одновременно. По формуле Литтла мы считаем, сколько сделок висит на каждом этапе в один момент: лиды на этапе × дни на этапе / 30. Если на каком-то этапе висит больше, чем менеджеры × ёмкость, этап мигает красным, частицы встают в очередь, а в отчёте появляется «нужен ещё один менеджер».</p></details>
+  <details class="reveal"><summary>Можно ли добавить свои этапы?</summary><p>Да. Этапы добавляются, удаляются и переименовываются прямо в калькуляторе: «показ», «пилот», «бронь» — что угодно. У каждого перехода свой ползунок конверсии и среднее время на этапе. Пресеты «B2B-услуги», «Недвижимость» и «Онлайн-школа» — просто отправные точки.</p></details>
+  <details class="reveal"><summary>Чем отличается от отчёта в amoCRM?</summary><p>CRM показывает прошлое: сколько было лидов и сделок. Воронка показывает будущее: что будет с выручкой, если поднять конверсию встречи на 5 пунктов или купить ещё 200 лидов. Это разные вопросы. Данные из CRM удобно взять как стартовые конверсии.</p></details>
+  <details class="reveal"><summary>Как поделиться с руководителем?</summary><p>Кнопка «Поделиться» кладёт все параметры в ссылку — получатель открывает тот же расчёт и двигает ползунки сам. «Печать плана» делает страницу A4 чёрным по белому, «PNG табло» — картинку для презентации.</p></details>
+  <details class="reveal"><summary>Что входит в white-label?</summary><p>Ваш логотип и цвета, ваш домен, неограниченное число расчётов для клиентов, экспорт плана с вашей подписью и отдельная страница «Рычаги», которую вы показываете на тренинге. От 14 900 ₽ в месяц, подключение за один день.</p></details>
+</section>
+
+<section class="cta reveal">
+  <h2>План — это не желание, а <span class="y">произведение конверсий</span></h2>
+  <p>30 секунд до аргумента в рублях. Без регистрации, прямо в браузере.</p>
+  <a class="btn btn-yellow btn-lg" href="#demo">Построить мою воронку</a>
+</section>
+</main>
+
+<footer class="footer">
+  <span>© 2026 Воронка · расчёты не покидают ваш браузер</span>
+  <nav aria-label="Документы"><a href="#faq">Оферта</a><a href="#faq">Конфиденциальность</a><a href="#pricing">White-label</a></nav>
+</footer>
+
+<output id="toast" class="toast" aria-live="polite"></output>
+<div id="print-page" aria-hidden="true"></div>
+<script src="app.js"></script>
+</body>
+</html>
